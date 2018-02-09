@@ -1,0 +1,103 @@
+# CLI for administration of macOS applications distributed as binaries
+# https://github.com/caskroom/homebrew-cask
+brew 'brew-cask'
+
+# Cask install location
+cask_args appdir: '/Applications'
+
+# Cask repositories
+tap 'caskroom/cask'
+tap 'caskroom/versions'
+
+# Application Casks
+cask '1password'
+cask 'appcleaner'
+cask 'arduino'
+cask 'arq'
+cask 'betterzip'
+cask 'carbon-copy-cloner'
+cask 'chronosync'
+cask 'cocktail'
+cask 'color-picker-pro'
+cask 'colorpicker-developer'
+cask 'colorpicker-hex'
+cask 'colorpicker-propicker'
+cask 'colorschemer-studio'
+cask 'daisydisk'
+cask 'dash'
+cask 'dropbox'
+cask 'forklift'
+cask 'fritzing'
+cask 'gephi'
+cask 'gitup'
+cask 'google-chrome'
+cask 'gpg-suite'
+cask 'hex-fiend'
+cask 'kaleidoscope'
+cask 'mysqlworkbench'
+cask 'nvalt'
+cask 'openrefine'
+cask 'processing'
+cask 'renamer'
+cask 'sequel-pro'
+cask 'shimo'
+cask 'sketch'
+cask 'ssh-tunnel-manager'
+cask 'sublime-text'
+cask 'superduper'
+cask 'synergy'
+cask 'taskpaper'
+cask 'tower'
+cask 'transmit'
+cask 'vlc'
+
+# QuickLook Plugins
+cask 'jupyter-notebook-ql'
+cask 'provisionql'    # iOS / macOS app and provision information
+cask 'qlcolorcode'    # source code files with syntax highlighting
+cask 'qlimagesize'
+cask 'qlmarkdown'
+cask 'qlprettypatch'
+cask 'qlstephen'      # plain text files with/without an unknown file extension
+cask 'qlvideo'
+cask 'quicklook-csv'
+cask 'quicklook-json'
+cask 'quicklook-pat'  # Adobe Photoshop pattern files
+cask 'quicklookapk'   # Android APK files
+cask 'quicklookase'   # Adobe ASE Color Swatches
+cask 'suspicious-package'
+cask 'webpquicklook'
+
+
+# CLI for administration apps distributed through the Mac App Store
+# See https://github.com/mas-cli/mas
+brew 'mas'
+
+# Mac App Store applications
+mas "Cookie 5", id: 1048338802
+mas "Disk Map", id: 715464874
+mas "Goban", id: 646372172
+mas "iMovie", id: 408981434
+mas "Keynote", id: 409183694
+mas "Mactracker", id: 430255192
+mas "Magnet", id: 441258766
+mas "Moom", id: 419330170
+mas "Numbers", id: 409203825
+mas "OmniGraffle", id: 1142578753
+mas "OmniPlan", id: 1040002810
+mas "Pages", id: 409201541
+mas "Patterns", id: 429449079
+mas "Paw", id: 584653203
+mas "PCalc", id: 403504866
+mas "Purple Tree", id: 764936294
+mas "RegExRX", id: 498370702
+mas "Rested", id: 421879749
+mas "Soulver", id: 413965349
+mas "Sparrow", id: 417250177
+mas "SSH Proxy", id: 597790822
+mas "SSH Tunnel", id: 734418810
+mas "The Unarchiver", id: 425424353
+mas "Tomatoes", id: 545957564
+mas "Xcode", id: 497799835
+mas "WhiteList", id: 412034673
+mas "Wizard", id: 495152161

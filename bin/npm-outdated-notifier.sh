@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+# Display outdated NPM global packages in Notification Center on Mac OS X
+#
+# Requires: terminal-notifier (available via Homebrew)
+#
+export PATH=/usr/local/bin:$PATH
+
+sleep 10 # give the network a chance to connect on wake from sleep
+
+# Remove pinned package from the list of outdated packages
+outdated=`npm -g outdated | awk '{if (NR!=1) {print $1}}'`
+
+if [ ! -z "$outdated" ]; then
+	terminal-notifier \
+		-group npm-g-outdated-notifier \
+		-title "NPM global packages are outdated" \
+		-message "$outdated" \
+		-sender com.apple.Terminal > /dev/null 2>&1
+fi
