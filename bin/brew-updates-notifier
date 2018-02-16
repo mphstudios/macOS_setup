@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 # Display Homebrew updates in Notification Center on Mac OS X
 # Author: Matt Stevens, codeworkshop.net

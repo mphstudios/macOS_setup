@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 # Display outdated NPM global packages in Notification Center on Mac OS X
 #
@@ -13,7 +13,7 @@ outdated=`npm -g outdated | awk '{if (NR!=1) {print $1}}'`
 
 if [ ! -z "$outdated" ]; then
     terminal-notifier \
-        -group npm-g-outdated-notifier \
+        -group npm-global-outdated-notifier \
         -title "NPM global packages are outdated" \
         -message "$outdated" \
         -sender com.apple.Terminal > /dev/null 2>&1

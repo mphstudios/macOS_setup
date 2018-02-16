@@ -4,6 +4,8 @@
 <dict>
     <key>Disabled</key>
     <false/>
+    <key>ExitTimeOut</key>
+    <integer>60</integer>
     <key>Label</key>
     <string>homebrew-updates-notifier</string>
     <key>Program</key>
@@ -13,9 +15,9 @@
     <key>ServiceDescription</key>
     <string>brew-updates-notifier</string>
     <key>StandardErrorPath</key>
-    <string>/usr/local/var/log/homebrew-updates-notifier.log</string>
+    <string>/tmp/homebrew-updates-notifier.stderr</string>
     <key>StandardOutPath</key>
-    <string>/usr/local/var/log/homebrew-updates-notifier.log</string>
+    <string>/tmp/homebrew-updates-notifier.stdout</string>
     <key>StartCalendarInterval</key>
     <array>
         <dict>
