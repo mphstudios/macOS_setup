@@ -22,87 +22,112 @@
 tap 'homebrew/bundle'
 tap 'homebrew/core'
 tap 'homebrew/services'
+tap 'jawshooah/pyenv'
+tap 'osgeo/osgeo4mac'
 tap 'thoughtbot/formulae'
 
 ## Update GNU Bourne Again SHell
 brew 'bash'
 brew 'bash-completion@2'
 
-# Bash completion for Ruby commands
+## Bash completion for Ruby commands
 brew 'bundler-completion'
 brew 'gem-completion'
 brew 'rails-completion'
 brew 'rake-completion'
 brew 'ruby-completion'
 
-brew 'openssl && brew link --force openssl'
-
-# GNU utils
-brew 'coreutils'#, args: [ 'with-default-names' ]
-brew 'findutils'#, args: [ 'with-default-names' ]
+## GNU utils
+brew 'coreutils' # GNU File, Shell, and Text utilities
+brew 'findutils' # GNU find, xargs, and locate
+brew 'parallel' # Shell command parallelization utility
 
 ## newer versions of macOS installed tools
-brew 'curl', args: [ 'with-openssl', 'with-ssh' ]
-brew 'grep', args: [ 'with-default-names' ]
-brew 'rsync'
+brew 'curl', args: ['with-openssl', 'with-ssh']
+brew 'grep', args: ['with-default-names']
+brew 'rsync' # fast incremental file transfer utility
+#brew 'vim', args: ['with-override-system-vi']
 
 ## Update Git, add support for versioning large files and using GitHub commands
-brew 'git', args: [ 'with-curl', 'with-openssl' ]
-brew 'git-lfs'
-brew 'hub'
+brew 'git', args: ['with-curl', 'with-openssl']
+brew 'git-lfs' # git large file storage
+brew 'hub' # command-line interface for GitHub
 
-# Python
+## Node
+# brew 'nodenv' # Node version management
+
+## Python
 brew 'python'
 brew 'python3'
-brew 'pipenv' # Python packaging tool
+brew 'pyenv' # Python version management
+brew 'pyenv-default-packages' # automatically install packages after install a new version of Python or create a new virtualenv
+brew 'pyenv-virtualenv' # manage virtualenvs with pyenv
+brew 'pyenv-which-ext' # automatically lookup system command if the specified command has not been installed in pyenv
+brew 'pipenv' # dependency management tool
 
-# Ruby
-# brew 'rbenv'
-# brew 'rbenv-bundle-exec'
-# brew 'rbenv-gemset'
-# brew 'rbenv-use'
-# brew 'rbenv-vars'
-# brew 'ruby-build'
+## Ruby version manager
+brew 'rbenv'
+brew 'rbenv-binstubs' # makes rbenv transparently aware of project-specific binstubs created by bundler. This means you do not have to type bundle exec ${command} ever again!
+brew 'rbenv-bundle-exec' # makes rbenv run ruby executables using `bundle exec`
+brew 'rbenv-bundler-ruby-version' # use Ruby version from Gemfile
+brew 'rbenv-default-gems' # automatically install specific gems after installing a new Ruby
+brew 'rbenv-use' # RVM-style `use` command to switch between Ruby versions
 
 ## more useful binaries
-brew 'ack'
-brew 'dnsmasq', link: false
-brew 'dockutil'
-brew 'duti'
-brew 'exa'
-brew 'fzy'
-brew 'gpg2', args: [ 'with-readline' ]
-brew 'heroku'
-brew 'imagemagick', args: [ 'with-webp' ]
-brew 'libyaml'
-brew 'macvim', args: [ 'with-python3' ]
-brew 'most'
-brew 'ngrok'
-brew 'node'
-brew 'passenger'
+brew 'ack' # Search tool like grep, but optimized for programmers
+brew 'csvkit' # Suite of command-line tools for working with csv data
+brew 'dnsmasq', link: false # Lightweight DNS forwarder and DHCP server
+brew 'dockutil' # Tool for managing dock items
+brew 'duti' # Select default apps for documents and URL schemes on macOS
+brew 'exa'  # Modern replacement for shell `ls` command
+brew 'exiftool' # PERL lib for reading and writing EXIF metadata
+brew 'fish' # User-friendly command-line shell for UNIX-like operating systems
+brew 'fzy' # Fast, simple fuzzy text selector with an advanced scoring algorithm
+brew 'gpg2', args: ['with-readline'] # GNU Pretty Good Privacy (PGP) package
+#brew 'graphviz', args: ['with-app', 'with-bindings', 'with-librsvg', 'with-freetype']
+brew 'heroku/brew/heroku' # Command-line client for the cloud PaaS
+brew 'imagemagick', args: ['without-modules', 'with-zero-configuration'] # manipulate images in many formats
+brew 'libyaml' # YAML Parser
+brew 'jp2a' # utility that converts JPG images to ASCII
+brew 'jupyter' # Interactive environments for writing and running code
+brew 'macvim', args: ['with-override-system-vim'] # GUI for vim made for macOS
+brew 'most' # Powerful paging program
+brew 'neofetch' # command-line system information tool
+brew 'neovim' # drop-in replacement for Vim with built-in terminal emulation
+brew 'node' # Platform built on V8 to build network applications
+brew 'passenger' # Application server for Ruby, Python, and Node.js
+brew 'ranger' # a console file manager with VI key bindings
 brew 'rcm'  # thoughtbot management suite for dotfiles
-brew 'rename'
-brew 'ssh-copy-id'
-brew 'sshuttle'
-brew 'terminal-notifier'
-brew 'the_silver_searcher'
-brew 'thefuck'
-brew 'tmux'
-brew 'trash'
-brew 'tree'
-brew 'vcprompt'
-brew 'watchman'
-brew 'webkit2png'
-brew 'wget'
-brew 'yarn'
+brew 'rename' # Perl-powered file rename script with many helpful built-ins
+brew 'ripgrep' # tool to recursively search directories for a regex pattern
+brew 'smartmontools' # SMART hard drive monitoring
+brew 'ssh-copy-id' # Add a public key to a remote machine's authorized_keys file
+brew 'sshuttle' # Proxy server that works as a poor man's VPN
+brew 'terminal-notifier' # Send macOS User Notifications from the command-line
+brew 'the_silver_searcher' # Code-search similar to ack! with a focus on speed.
+brew 'thefuck' # Programatically correct mistyped console commands
+brew 'tmux' # Terminal multiplexer
+brew 'trash' # CLI tool that moves files or folder to the trash
+brew 'tree' # Display directories as trees (with optional color/HTML output)
+brew 'vcprompt' # Provide version control info in shell prompts
+brew 'w3m' # text-based web browser and pager like `more' or `less'
+brew 'watchman' # Watch files and take action when they change
+brew 'webkit2png' # Create screenshots of webpages from the terminal
+brew 'wget' # non-interactive tool to retrieve files using HTTP/HTTPS/FTP/FTPS
+brew 'yarn' # JavaScript dependency package manager
+
+# Z Shell
 brew 'zsh'
+brew 'zsh=autosuggestions'
+brew 'zsh-completions'
+brew 'zplug'
 
 ## Databases
-brew 'jena', restart_service: :changed
-brew 'mongodb', args: [ 'with-openssl' ], restart_service: :changed
-brew 'mysql', restart_service: :changed
-brew 'orientdb', restart_service: :changed
-brew 'postgres', args: [ 'with-python', 'without-perl', 'without-tcl' ], restart_service: :changed
+brew 'jena'
+brew 'mongodb', args: ['with-openssl'], restart_service: :changed, start_service: false
+brew 'mysql', restart_service: :changed, start_service: false
+brew 'postgres', args: ['with-python', 'without-perl', 'without-tcl'], restart_service: :changed, start_service: false
 brew 'postgis'
-brew 'redis', restart_service: :changed
-brew 'sqlite', restart_service: :changed
+brew 'pgcli' # Postgres CLI with auto-completion and syntax highlighting
+brew 'redis', restart_service: :changed, start_service: false
+brew 'sqlite'
