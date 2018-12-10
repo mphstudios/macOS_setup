@@ -55,7 +55,7 @@ brew 'gitsh' # thoughtbot's interactive shell for git
 brew 'hub' # command-line interface for GitHub
 
 ## Node
-# brew 'nodenv' # Node version management
+brew 'nodenv' # Node version management
 
 ## Python
 brew 'python'
@@ -82,21 +82,25 @@ brew 'dnsmasq', link: false # Lightweight DNS forwarder and DHCP server
 brew 'dockutil' # Tool for managing dock items
 brew 'duti' # Select default apps for documents and URL schemes on macOS
 brew 'exa'  # Modern replacement for shell `ls` command
+brew 'fd' # a simple, fast, and user-friendly alternative to `find`
 brew 'fish' # User-friendly command-line shell for UNIX-like operating systems
+brew 'fzf'  # a general-purpose command-line fuzzy finder
 brew 'fzy' # Fast, simple fuzzy text selector with an advanced scoring algorithm
 brew 'gpg2', args: ['with-readline'] # GNU Pretty Good Privacy (PGP) package
 #brew 'graphviz', args: ['with-app', 'with-bindings', 'with-librsvg', 'with-freetype']
 brew 'heroku/brew/heroku' # Command-line client for the cloud PaaS
-brew 'libyaml' # YAML Parser
+brew 'highlight' # convert source code to formatted text with syntax highlighting
 brew 'jupyter' # Interactive environments for writing and running code
+brew 'libyaml' # YAML Parser
 brew 'macvim', args: ['with-override-system-vim'] # GUI for vim made for macOS
+brew 'mosh' # A mobile shell replacement for interactive SSH terminals
 brew 'most' # Powerful paging program
 brew 'neofetch' # command-line system information tool
 brew 'neovim' # drop-in replacement for Vim with built-in terminal emulation
 brew 'node' # Platform built on V8 to build network applications
 brew 'passenger' # Application server for Ruby, Python, and Node.js
-brew 'puma/puma/puma-dev' # development server for rack applications
 brew 'pick' # thoughtbot's fuzzy search tool to select an entry from a list
+brew 'puma/puma/puma-dev' # development server for rack applications
 brew 'ranger' # a console file manager with VI key bindings
 brew 'rcm'  # thoughtbot's management suite for dotfiles
 brew 'rename' # Perl-powered file rename script with many helpful built-ins
@@ -107,13 +111,16 @@ brew 'sshuttle' # Proxy server that works as a poor man's VPN
 brew 'terminal-notifier' # Send macOS User Notifications from the command-line
 brew 'the_silver_searcher' # Code-search similar to ack! with a focus on speed.
 brew 'thefuck' # Programatically correct mistyped console commands
+brew 'tmate' # Tmux fork for instant terminal sharing
 brew 'tmux' # Terminal multiplexer
+brew 'tmuxinator-completion' # Shell completion for Tmuxinator
 brew 'trash' # CLI tool that moves files or folder to the trash
 brew 'tree' # Display directories as trees (with optional color/HTML output)
 brew 'vcprompt' # Provide version control info in shell prompts
 brew 'w3m' # text-based web browser and pager like `more' or `less'
 brew 'watchman' # Watch files and take action when they change
 brew 'webkit2png' # Create screenshots of webpages from the terminal
+brew 'wemux' # Enhances tmux to provide multiuser terminal multiplexing
 brew 'wget' # non-interactive tool to retrieve files using HTTP/HTTPS/FTP/FTPS
 brew 'yarn' # JavaScript dependency package manager
 

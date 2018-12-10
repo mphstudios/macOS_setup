@@ -29,9 +29,11 @@ cask 'dropbox'              # finder intergration for cloud file storage
 cask 'forklift'             # file transfer application and sftp client
 cask 'fritzing'             # electronics prototyping
 cask 'gephi'                # network analysis and visualization
+cask 'gimp'                 # GNU Image Manipulation Program
 cask 'gitup'                # git interface
 cask 'google-chrome'        # web browser
 cask 'gpg-suite'            # OpenPGP tools
+cask 'graphicconverter'     # raster graphics tools
 cask 'graphiql'             # GraphQL query interface
 cask 'handbrake'            # open source video transcoder
 cask 'hex-fiend'            # open source hex editor
@@ -44,7 +46,9 @@ cask 'karabiner-elements'   # keyboard customization utility
 cask 'keycue'               # display menu shortcut commands
 cask 'macvim'               # macOS GUI for Vim
 cask 'mysqlworkbench'       # unified visual tool for mysql databases
-cask 'ngrok'                #
+cask 'nightowl'             # macOS menu bar tool to toggle dark mode
+cask 'ngrok'                # secure introspectable tunnels to localhost
+cask 'nteract'              # Desktop application for interactive notebooks
 cask 'nvalt'                # fork of original Notational Velocity
 cask 'openrefine'           # data cleanup and transformation interface
 cask 'osculator'            # MIDI link between controllers and software
@@ -67,22 +71,26 @@ cask 'transmit'             # file transfer application
 cask 'vlc'                  # media player
 cask 'vimr'                 # Neovim GUI for macOS
 
+# pre-release web browser builds
+cask 'google-chrome-canary'
+cask 'safari-technology-preview'
+
 # QuickLook Plugins
+cask 'gislook'        # preview GIS files and show metadata in the Finder
 cask 'jupyter-notebook-ql'
 cask 'provisionql'    # iOS / macOS app and provision information
 cask 'qlcolorcode'    # source code files with syntax highlighting
-cask 'qlimagesize'
-cask 'qlmarkdown'
-cask 'qlprettypatch'
+cask 'qlimagesize'    # display image size and resolution
+cask 'qlmarkdown'     # preview Markdown formatted text
+cask 'qlprettypatch'  # preview patch files
 cask 'qlstephen'      # plain text files with/without an unknown file extension
-cask 'qlvideo'
-cask 'quicklook-csv'
-cask 'quicklook-json'
+cask 'qlvideo'        # thumbnails, previews and metadata for most video files
+cask 'quicklook-csv'  # preview CSV data
+cask 'quicklook-json' # preview JSON data
 cask 'quicklook-pat'  # Adobe Photoshop pattern files
 cask 'quicklookapk'   # Android APK files
 cask 'quicklookase'   # Adobe ASE Color Swatches
 cask 'suspicious-package'
-cask 'webpquicklook'
 
 
 # Install Mac App Store command line interface
