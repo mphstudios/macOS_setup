@@ -23,6 +23,7 @@ tap 'homebrew/bundle'
 tap 'homebrew/core'
 tap 'homebrew/services'
 tap 'jawshooah/pyenv'
+tap 'nodenv/nodenv'
 tap 'osgeo/osgeo4mac'
 tap 'thoughtbot/formulae'
 
@@ -54,8 +55,11 @@ brew 'git-lfs' # git large file storage
 brew 'gitsh' # thoughtbot's interactive shell for git
 brew 'hub' # command-line interface for GitHub
 
-## Node
+## Node version manager
 brew 'nodenv' # Node version management
+brew 'nodenv-default-packages'
+brew 'nodenv-npm-migrate'
+brew 'nodenv-package-json-engine'
 
 ## Python
 brew 'python'
