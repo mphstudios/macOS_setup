@@ -95,6 +95,9 @@ brew 'gpg2', args: ['with-readline'] # GNU Pretty Good Privacy (PGP) package
 brew 'heroku/brew/heroku' # Command-line client for the cloud PaaS
 brew 'highlight' # convert source code to formatted text with syntax highlighting
 brew 'jupyter' # Interactive environments for writing and running code
+brew 'jq' # Lightweight and flexible command-line JSON processor
+brew 'jsonlint' # JSON parser and validator with a CLI
+brew 'librsvg' # Library to render SVG files using Cairo
 brew 'libyaml' # YAML Parser
 brew 'macvim', args: ['with-override-system-vim'] # GUI for vim made for macOS
 brew 'mosh' # A mobile shell replacement for interactive SSH terminals
@@ -133,6 +136,7 @@ brew 'exiftool' # PERL library for reading and writing EXIF metadata
 brew 'graphicsmagick', args: ['with-webp']
 brew 'imagemagick', args: ['without-modules', 'with-zero-configuration']
 brew 'jp2a' # utility that converts JPG images to ASCII
+brew 'vips' # Image processing library
 
 # code linting tools
 brew 'shellcheck' # shell script static analysis tool
