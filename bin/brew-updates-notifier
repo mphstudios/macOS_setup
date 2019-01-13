@@ -10,8 +10,17 @@ export PATH=/usr/local/bin:$PATH
 
 sleep 10 # give the network a chance to connect on wake from sleep
 
+# Fetch the newest version of Homebrew and all formulae from GitHub
+# and perform any necessary migrations.
 brew update > /dev/null 2>&1
+
+# Show formulae that have an updated version available.
+# By default, version information is only displayed in interactive shells.
 outdated=`brew outdated | sort`
+
+# Remove stale lock files, outdated downloads for formulae and casks,
+# and old versions of installed formulae.
+brew cleanup > /dev/null 2>&1
 
 if [ ! -z "$outdated" ]; then
     terminal-notifier \
