@@ -55,11 +55,18 @@ brew 'git-lfs' # git large file storage
 brew 'gitsh' # thoughtbot's interactive shell for git
 brew 'hub' # command-line interface for GitHub
 
+## asdf
+brew 'asdf' # extendable version manager
+
 ## Node version manager
 brew 'nodenv' # Node version management
 brew 'nodenv-default-packages'
 brew 'nodenv-npm-migrate'
 brew 'nodenv-package-json-engine'
+
+## PHP
+brew 'php' # General-purpose scripting language
+brew 'composer' # Dependency Manager for PHP
 
 ## Python
 brew 'python'
@@ -72,7 +79,6 @@ brew 'pipenv' # dependency management tool
 
 ## Ruby version manager
 brew 'rbenv'
-brew 'rbenv-binstubs' # makes rbenv transparently aware of project-specific binstubs created by bundler. This means you do not have to type bundle exec ${command} ever again!
 brew 'rbenv-bundle-exec' # makes rbenv run ruby executables using `bundle exec`
 brew 'rbenv-bundler-ruby-version' # use Ruby version from Gemfile
 brew 'rbenv-default-gems' # automatically install specific gems after installing a new Ruby
@@ -100,6 +106,7 @@ brew 'jsonlint' # JSON parser and validator with a CLI
 brew 'librsvg' # Library to render SVG files using Cairo
 brew 'libyaml' # YAML Parser
 brew 'macvim', args: ['with-override-system-vim'] # GUI for vim made for macOS
+brew 'mkcert' # Simple tool to make locally trusted development certificates
 brew 'mosh' # A mobile shell replacement for interactive SSH terminals
 brew 'most' # Powerful paging program
 brew 'neofetch' # command-line system information tool

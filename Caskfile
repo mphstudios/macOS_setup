@@ -12,6 +12,7 @@ tap 'caskroom/versions'
 # Install macOS applications distributed as binaries
 cask '0xed'                 # hex editor
 cask '1password'            # password manager
+cask 'altair-graphql-client'# GraphQL IDE
 cask 'ammonite'             # tag visualizer and search utility
 cask 'appcleaner'           # thoroughly uninstall unwanted apps
 cask 'arduino'              # Arduino IDE
@@ -24,6 +25,7 @@ cask 'cocktail'             # macOS maintenance tools
 cask 'coderunner'           # programming editor
 cask 'daisydisk'            # disk usage analyzer
 cask 'dash'                 # API documentation browser and code snippet manager
+cask 'dictunifier'          # macOS dictionary conversion tools
 cask 'divvy'                # window arrangement utility
 cask 'dropbox'              # finder intergration for cloud file storage
 cask 'forklift'             # file transfer application and sftp client
@@ -34,8 +36,9 @@ cask 'gitup'                # git interface
 cask 'google-chrome'        # web browser
 cask 'gpg-suite'            # OpenPGP tools
 cask 'graphicconverter'     # raster graphics tools
-cask 'graphiql'             # GraphQL query interface
+cask 'graphiql'             # GraphQL IDE
 cask 'handbrake'            # open source video transcoder
+cask 'hazel'                # automated file organization tool
 cask 'hex-fiend'            # open source hex editor
 cask 'hyper'                # terminal emulator
 cask 'iterm2'               # terminal emulator
@@ -71,11 +74,7 @@ cask 'transmit'             # file transfer application
 cask 'vimr'                 # Neovim GUI for macOS
 cask 'vlc'                  # media player
 cask 'vuescan'              # scanning software
-casl 'tableplus'            # GUI for relational databases
-
-# pre-release web browser builds
-cask 'google-chrome-canary'
-cask 'safari-technology-preview'
+cask 'tableplus'            # GUI for relational databases
 
 # QuickLook Plugins
 cask 'gislook'        # preview GIS files and show metadata in the Finder
@@ -136,3 +135,4 @@ mas "Tomatoes", id: 545957564
 mas "Xcode", id: 497799835
 mas "WhiteList", id: 412034673
 mas "Wizard", id: 495152161
+mas "WordService", id: 899972312
