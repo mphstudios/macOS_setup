@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
+set -Eeoux pipefail
 
 COMPUTER=$1
 SRC_DIR=$(cd "$(dirname "$0")"; pwd)
@@ -58,9 +59,20 @@ brew bundle --file=$SRC_DIR/Brewfile --require-sha
 # remove cached downloads
 brew cleanup
 
+# Install asdf plugins
+# if [ -f "$HOME/.asdf" ]; then
+#   fancy_echo "Installing asdf plugins ..."
+#   PLUGINS_DIR = $(asdf root)/plugins
+#   mkdir -p $PLUGINS_DIR # create the plugins dir if it does not exist
+#   asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+#   asdf plugin-add python https://github.com/danhper/asdf-python.git
+#   asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
+#   unset $PLUGINS_DIR
+# fi
+
 # Install nodenv plugins that are not available as Homebrew packages
 if [ -f "$HOME/.nodenv" ]; then
-  fancy_echo "Installing additional nodenv plugins ..."
+  fancy_echo "Installing nodenv plugins ..."
   PLUGINS_DIR = $(nodenv root)/plugins
   mkdir -p $PLUGINS_DIR # create the plugins dir if it does not exist
   git clone https://github.com/nodenv/nodenv-package-rehash.git "$PLUGINS_DIR/nodenv-package-rehash"
@@ -71,17 +83,14 @@ fi
 
 # Install pyenv plugins that are not available as Homebrew packages
 if [ -f "$HOME/.pyenv" ]; then
-  fancy_echo "Installing additional pyenv plugins ..."
+  fancy_echo "Installing pyenv plugins ..."
   PLUGINS_DIR = $(pyenv root)/plugins
   mkdir -p $PLUGINS_DIR # create the plugins dir if it does not exist
-
   # makes pyenv transparently aware of project-specific venv binaries created by pipenv
   # removing the need to execute these binaries with `pipenv run ${command}`
   git clone https://github.com/madumlao/pyenv-binstubs.git "$PLUGINS_DIR/pyenv-binstubs"
-
   # pyenv-doctor provides a command to verify pyenv installation and tools to build pythons
   git clone git://github.com/yyuu/pyenv-doctor.git "$PLUGINS_DIR/pyenv-doctor"
-
   # pyenv-update provides a command to update pyenv and its plugins
   git clone git://github.com/pyenv/pyenv-update.git "$PLUGINS_DIR/pyenv-update"
   unset $PLUGINS_DIR
@@ -89,12 +98,25 @@ fi
 
 # Install rbenv plugins that are not available as Homebrew packages
 if [ -f "$HOME/.rbenv" ]; then
-  fancy_echo "Installing additional rbenv plugins ..."
-  PLUGINS_DIR = $HOME/.rbenv/plugins/
+  fancy_echo "Installing rbenv plugins ..."
+  PLUGINS_DIR = $(rbenv root)/plugins/
   mkdir -p $PLUGINS_DIR # create the plugins dir if it does not exist
+  # aids in removing gems from your ruby environment
   git clone https://github.com/jbernsie/rbenv-clean $PLUGINS_DIR/rbenv-clean
+  # makes rbenv run ruby executables using `bundle exec`
+  git clone https://github.com/maljub01/rbenv-bundle-exec.git $PLUGINS_DIR/rbenv-bundle-exec
+  # use Ruby version from Gemfile
+  git clone https://github.com/aripollak/rbenv-bundler-ruby-version.git $PLUGINS_DIR/rbenv-bundler-ruby-version
+  # automatically install specific gems after installing a new Ruby
+  git clone https://github.com/rbenv/rbenv-default-gems.git $PLUGINS_DIR/rbenv-default-gems
+  # provides a `rbenv rails` command to create a rails project with the version
   git clone https://github.com/alfa-jpn/rbenv-rails.git $PLUGINS_DIR/rbenv-rails
+  # make rbenv `bundle exec` ruby executables
+  git clone https://github.com/rkh/rbenv-whatis.git $PLUGINS_DIR/rbenv-whatis
+  # installs updated versions for installed rubies
   git clone https://github.com/toy/rbenv-update-rubies.git $PLUGINS_DIR/update-rubies
+  # RVM-style `use` command to switch between Ruby versions
+  git clone https://github.com/rkh/rbenv-use.git $PLUGINS_DIR/rbenv-use
   unset $PLUGINS_DIR
 fi
 
@@ -102,9 +124,6 @@ fi
 if [ ! fgrep -q '/usr/local/bin/bash' /etc/shells ]; then
   fancy_echo "Adding Homebrew installed Bash to /etc/shells ..."
   sudo bash -c 'echo /usr/local/bin/bash >> /etc/shells';
-
-  fancy_echo "Setting default shell to Homebrew installed Bash ..."
-  chsh -s /usr/local/bin/bash;
 fi
 
 if [ ! fgrep -q '/usr/local/bin/fish' /etc/shells ]; then
@@ -115,12 +134,9 @@ fi
 if [ ! fgrep -q '/usr/local/bin/zsh' /etc/shells ]; then
   fancy_echo "Adding Homebrew installed Zsh to /etc/shells ..."
   sudo bash -c 'echo /usr/local/bin/zsh >> /etc/shells';
+  fancy_echo "Setting default shell to /usr/local/bin/zsh ..."
+  chsh -s /usr/local/bin/zsh;
 fi
-
-# if [ -x '/bin/zsh' || '/usr/local/bin/zsh'  ]; then
-#   fancy_echo "Installing 'Oh My Zsh' configuration framework ..."
-#   curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh
-# fi
 
 # if [ ! -e "$HOME/.vim/autoload/plug.vim" ]; then
 #   fancy_echo "Installing Vim plugin manager vim-plug ..."
@@ -148,8 +164,7 @@ cp -fX $SRC_DIR/LaunchAgents/*.plist ~/Library/LaunchAgents/
 
 # User LaunchAgents must be readable by the user
 # and must NOT be writable by the group or other
-chmod 644 ~/Library/LaunchAgents/homebrew-updates-notifier.plist
-chmod 644 ~/Library/LaunchAgents/npm-outdated-notifier.plist
+chmod 644 ~/Library/LaunchAgents/*.plist
 
 fancy_echo "Installing applications from Homebrew Caskfile ..."
 if [ ! -f "$SRC_DIR/Caskfile" ]; then
@@ -206,5 +221,5 @@ if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]];
 then
   shutdown -r now "Restarting $HOSTNAME" ;
 else
-  fancy_echo "goodbye"; exit;
+  fancy_echo "Salut!"; exit;
 fi
