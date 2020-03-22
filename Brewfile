@@ -44,13 +44,12 @@ brew 'findutils' # GNU find, xargs, and locate
 brew 'parallel' # Shell command parallelization utility
 
 ## newer versions of macOS installed tools
-brew 'curl', args: ['with-openssl', 'with-ssh']
-brew 'grep', args: ['with-default-names']
+brew 'curl'
+brew 'grep'
 brew 'rsync' # fast incremental file transfer utility
-#brew 'vim', args: ['with-override-system-vi']
 
 ## Update Git, add support for versioning large files and using GitHub commands
-brew 'git', args: ['with-curl', 'with-openssl']
+brew 'git'
 brew 'git-lfs' # git large file storage
 brew 'gitsh' # thoughtbot's interactive shell for git
 brew 'hub' # command-line interface for GitHub
@@ -65,14 +64,14 @@ brew 'nodenv-npm-migrate'
 brew 'nodenv-package-json-engine'
 
 ## PHP
-brew 'php' # General-purpose scripting language
-brew 'composer' # Dependency Manager for PHP
+#brew 'php' # General-purpose scripting language
+#brew 'composer' # Dependency Manager for PHP
 
 ## Python
 brew 'python'
 brew 'python3'
 brew 'pyenv' # Python version management
-brew 'pyenv-default-packages' # automatically install packages after install a new version of Python or create a new virtualenv
+#brew 'pyenv-default-packages' # automatically install packages after install a new version of Python or create a new virtualenv
 brew 'pyenv-virtualenv' # manage virtualenvs with pyenv
 brew 'pyenv-which-ext' # automatically lookup system command if the specified command has not been installed in pyenv
 brew 'pipenv' # dependency management tool
@@ -86,6 +85,8 @@ brew 'rbenv-use' # RVM-style `use` command to switch between Ruby versions
 
 ## more useful binaries
 brew 'ack' # Search tool like grep, but optimized for programmers
+brew 'brightness' # Change macOS display brightness from the command-line
+brew 'circleci'
 brew 'csvkit' # Suite of command-line tools for working with csv data
 brew 'direnv' # Load/unload environment variables based on $PWD
 brew 'dnsmasq', link: false # Lightweight DNS forwarder and DHCP server
@@ -96,8 +97,8 @@ brew 'fd' # a simple, fast, and user-friendly alternative to `find`
 brew 'fish' # User-friendly command-line shell for UNIX-like operating systems
 brew 'fzf'  # a general-purpose command-line fuzzy finder
 brew 'fzy' # Fast, simple fuzzy text selector with an advanced scoring algorithm
-brew 'gpg2', args: ['with-readline'] # GNU Pretty Good Privacy (PGP) package
-#brew 'graphviz', args: ['with-app', 'with-bindings', 'with-librsvg', 'with-freetype']
+brew 'gpg2' # GNU Pretty Good Privacy (PGP) package
+brew 'graphviz' # Graph visualization software from AT&T and Bell Labs
 brew 'heroku/brew/heroku' # Command-line client for the cloud PaaS
 brew 'highlight' # convert source code to formatted text with syntax highlighting
 brew 'jupyter' # Interactive environments for writing and running code
@@ -105,13 +106,16 @@ brew 'jq' # Lightweight and flexible command-line JSON processor
 brew 'jsonlint' # JSON parser and validator with a CLI
 brew 'librsvg' # Library to render SVG files using Cairo
 brew 'libyaml' # YAML Parser
-brew 'macvim', args: ['with-override-system-vim'] # GUI for vim made for macOS
+brew 'lynx' # Text-based web browser
+brew 'macvim' # GUI for vim made for macOS
 brew 'mkcert' # Simple tool to make locally trusted development certificates
 brew 'mosh' # A mobile shell replacement for interactive SSH terminals
 brew 'most' # Powerful paging program
 brew 'neofetch' # command-line system information tool
 brew 'neovim' # drop-in replacement for Vim with built-in terminal emulation
 brew 'node' # Platform built on V8 to build network applications
+brew 'pandoc' # Swiss-army knife of markup format conversion
+brew 'pandoc-citeproc' # Library and executable for using citeproc with pandoc
 brew 'passenger' # Application server for Ruby, Python, and Node.js
 brew 'pick' # thoughtbot's fuzzy search tool to select an entry from a list
 brew 'puma/puma/puma-dev' # development server for rack applications
@@ -130,6 +134,7 @@ brew 'tmux' # Terminal multiplexer
 brew 'tmuxinator-completion' # Shell completion for Tmuxinator
 brew 'trash' # CLI tool that moves files or folder to the trash
 brew 'tree' # Display directories as trees (with optional color/HTML output)
+brew 'vault' # Secures, stores, and tightly controls access to secrets
 brew 'vcprompt' # Provide version control info in shell prompts
 brew 'w3m' # text-based web browser and pager like `more' or `less'
 brew 'watchman' # Watch files and take action when they change
@@ -140,8 +145,8 @@ brew 'yarn' # JavaScript dependency package manager
 
 # image processing tools
 brew 'exiftool' # PERL library for reading and writing EXIF metadata
-brew 'graphicsmagick', args: ['with-webp']
-brew 'imagemagick', args: ['without-modules', 'with-zero-configuration']
+brew 'graphicsmagick'
+brew 'imagemagick'
 brew 'jp2a' # utility that converts JPG images to ASCII
 brew 'vips' # Image processing library
 
@@ -150,15 +155,14 @@ brew 'shellcheck' # shell script static analysis tool
 
 # Z Shell
 brew 'zsh'
-brew 'zsh=autosuggestions'
+brew 'zsh-autosuggestions'
 brew 'zsh-completions'
 brew 'zplug'
 
 ## Databases
-brew 'jena' # triple store for semantic web and linked data applications
-brew 'mongodb', args: ['with-openssl'], restart_service: :changed, start_service: false
+brew 'mongodb', restart_service: :changed, start_service: false
 brew 'mysql', restart_service: :changed, start_service: false
-brew 'postgres', args: ['with-python', 'without-perl', 'without-tcl'], restart_service: :changed, start_service: false
+brew 'postgres', restart_service: :changed, start_service: false
 brew 'postgis' # spatial and geographic objects for PostgreSQL
 brew 'pgcli' # Postgres CLI with auto-completion and syntax highlighting
 brew 'redis', restart_service: :changed, start_service: false
