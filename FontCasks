@@ -1,0 +1,20 @@
+# Homebrew bundle file for macOS fonts
+# https://github.com/Homebrew/homebrew-bundle
+# https://github.com/Homebrew/homebrew-cask-fonts
+
+# Font repositories
+tap 'homebrew/cask-fonts'
+
+# Fonts
+cask 'font-anonymous-pro'
+cask 'font-dejavu-sans'
+cask 'font-fira-code'
+cask 'font-fira-mono'
+cask 'font-fira-sans'
+cask 'font-hack'
+cask 'font-hasklig'
+cask 'font-inconsolata'
+cask 'font-monoid'
+cask 'font-office-code-pro'
+cask 'font-source-code-pro'
+
