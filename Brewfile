@@ -22,8 +22,8 @@
 tap 'homebrew/bundle'
 tap 'homebrew/core'
 tap 'homebrew/services'
-tap 'jawshooah/pyenv'
-tap 'nodenv/nodenv'
+
+tap 'browsh-org/homebrew-browsh'
 tap 'osgeo/osgeo4mac'
 tap 'thoughtbot/formulae'
 
@@ -31,62 +31,31 @@ tap 'thoughtbot/formulae'
 brew 'bash'
 brew 'bash-completion@2'
 
-## Bash completion for Ruby commands
-brew 'bundler-completion'
-brew 'gem-completion'
-brew 'rails-completion'
-brew 'rake-completion'
-brew 'ruby-completion'
-
 ## GNU utils
 brew 'coreutils' # GNU File, Shell, and Text utilities
 brew 'findutils' # GNU find, xargs, and locate
-brew 'parallel' # Shell command parallelization utility
+brew 'parallel'  # Shell command parallelization utility
 
-## newer versions of macOS installed tools
+## Install newer versions of macOS installed tools
 brew 'curl'
 brew 'grep'
 brew 'rsync' # fast incremental file transfer utility
 
-## Update Git, add support for versioning large files and using GitHub commands
+## Update Git and add git large files support
 brew 'git'
 brew 'git-lfs' # git large file storage
 brew 'gitsh' # thoughtbot's interactive shell for git
-brew 'hub' # command-line interface for GitHub
-
-## asdf
-brew 'asdf' # extendable version manager
-
-## Node version manager
-brew 'nodenv' # Node version management
-brew 'nodenv-default-packages'
-brew 'nodenv-npm-migrate'
-brew 'nodenv-package-json-engine'
-
-## PHP
-#brew 'php' # General-purpose scripting language
-#brew 'composer' # Dependency Manager for PHP
-
-## Python
-brew 'python'
-brew 'python3'
-brew 'pyenv' # Python version management
-#brew 'pyenv-default-packages' # automatically install packages after install a new version of Python or create a new virtualenv
-brew 'pyenv-virtualenv' # manage virtualenvs with pyenv
-brew 'pyenv-which-ext' # automatically lookup system command if the specified command has not been installed in pyenv
-brew 'pipenv' # dependency management tool
-
-## Ruby version manager
-brew 'rbenv'
-brew 'rbenv-bundle-exec' # makes rbenv run ruby executables using `bundle exec`
-brew 'rbenv-bundler-ruby-version' # use Ruby version from Gemfile
-brew 'rbenv-default-gems' # automatically install specific gems after installing a new Ruby
-brew 'rbenv-use' # RVM-style `use` command to switch between Ruby versions
+brew 'gh' # GitHub command-line tool
 
 ## more useful binaries
 brew 'ack' # Search tool like grep, but optimized for programmers
+brew 'agg' # Asciicast to GIF converter
+brew 'asciinema' # Record Asciicast terminal sessions
+brew 'asdf' # runtime tool version manager
+brew 'awscli' # Official Amazon AWS command-line interface
 brew 'brightness' # Change macOS display brightness from the command-line
-brew 'circleci'
+brew 'brosh' # The modern, text-based browser
+brew 'circleci' # Reproduce the CircleCI environment locally
 brew 'csvkit' # Suite of command-line tools for working with csv data
 brew 'direnv' # Load/unload environment variables based on $PWD
 brew 'dnsmasq', link: false # Lightweight DNS forwarder and DHCP server
@@ -94,31 +63,25 @@ brew 'dockutil' # Tool for managing dock items
 brew 'duti' # Select default apps for documents and URL schemes on macOS
 brew 'exa'  # Modern replacement for shell `ls` command
 brew 'fd' # a simple, fast, and user-friendly alternative to `find`
-brew 'fish' # User-friendly command-line shell for UNIX-like operating systems
 brew 'fzf'  # a general-purpose command-line fuzzy finder
 brew 'fzy' # Fast, simple fuzzy text selector with an advanced scoring algorithm
-brew 'gpg2' # GNU Pretty Good Privacy (PGP) package
 brew 'graphviz' # Graph visualization software from AT&T and Bell Labs
-brew 'heroku/brew/heroku' # Command-line client for the cloud PaaS
+brew 'gron' # transform JSON into discrete assignments to make it easier to grep
 brew 'highlight' # convert source code to formatted text with syntax highlighting
-brew 'jupyter' # Interactive environments for writing and running code
 brew 'jq' # Lightweight and flexible command-line JSON processor
 brew 'jsonlint' # JSON parser and validator with a CLI
+brew 'jupyter' # Interactive environments for writing and running code
 brew 'librsvg' # Library to render SVG files using Cairo
 brew 'libyaml' # YAML Parser
 brew 'lynx' # Text-based web browser
-brew 'macvim' # GUI for vim made for macOS
+brew 'marp-cli' # Convert markdown to slides
 brew 'mkcert' # Simple tool to make locally trusted development certificates
 brew 'mosh' # A mobile shell replacement for interactive SSH terminals
 brew 'most' # Powerful paging program
 brew 'neofetch' # command-line system information tool
-brew 'neovim' # drop-in replacement for Vim with built-in terminal emulation
 brew 'node' # Platform built on V8 to build network applications
 brew 'pandoc' # Swiss-army knife of markup format conversion
-brew 'pandoc-citeproc' # Library and executable for using citeproc with pandoc
-brew 'passenger' # Application server for Ruby, Python, and Node.js
 brew 'pick' # thoughtbot's fuzzy search tool to select an entry from a list
-brew 'puma/puma/puma-dev' # development server for rack applications
 brew 'ranger' # a console file manager with VI key bindings
 brew 'rcm'  # thoughtbot's management suite for dotfiles
 brew 'rename' # Perl-powered file rename script with many helpful built-ins
@@ -129,19 +92,13 @@ brew 'sshuttle' # Proxy server that works as a poor man's VPN
 brew 'terminal-notifier' # Send macOS User Notifications from the command-line
 brew 'the_silver_searcher' # Code-search similar to ack! with a focus on speed.
 brew 'thefuck' # Programatically correct mistyped console commands
-brew 'tmate' # Tmux fork for instant terminal sharing
-brew 'tmux' # Terminal multiplexer
-brew 'tmuxinator-completion' # Shell completion for Tmuxinator
 brew 'trash' # CLI tool that moves files or folder to the trash
 brew 'tree' # Display directories as trees (with optional color/HTML output)
 brew 'vault' # Secures, stores, and tightly controls access to secrets
 brew 'vcprompt' # Provide version control info in shell prompts
 brew 'w3m' # text-based web browser and pager like `more' or `less'
-brew 'watchman' # Watch files and take action when they change
 brew 'webkit2png' # Create screenshots of webpages from the terminal
-brew 'wemux' # Enhances tmux to provide multiuser terminal multiplexing
 brew 'wget' # non-interactive tool to retrieve files using HTTP/HTTPS/FTP/FTPS
-brew 'yarn' # JavaScript dependency package manager
 
 # image processing tools
 brew 'exiftool' # PERL library for reading and writing EXIF metadata
@@ -153,17 +110,11 @@ brew 'vips' # Image processing library
 # code linting tools
 brew 'shellcheck' # shell script static analysis tool
 
+# Shell
+brew 'starship' # cross-shell prompt
+
 # Z Shell
 brew 'zsh'
 brew 'zsh-autosuggestions'
 brew 'zsh-completions'
 brew 'zplug'
-
-## Databases
-brew 'mongodb', restart_service: :changed, start_service: false
-brew 'mysql', restart_service: :changed, start_service: false
-brew 'postgres', restart_service: :changed, start_service: false
-brew 'postgis' # spatial and geographic objects for PostgreSQL
-brew 'pgcli' # Postgres CLI with auto-completion and syntax highlighting
-brew 'redis', restart_service: :changed, start_service: false
-brew 'sqlite'
