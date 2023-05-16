@@ -2,18 +2,24 @@
 
 # Install packages from a Homebrew bundle file
 function homebrew_install_bundles {
-  install_bundle 'Brewfile'
+  install_bundle 'brewfiles/bundle'
 
-  read -r -p "Install Fonts? [Yn]"
+  read -r -p "Install cask applications bundle? [Yn]"
   if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]];
   then
-    install_bundle 'Caskfile'
+    install_bundle 'brewfiles/casks'
   fi
 
-  read -r -p "Install Fonts? [Yn]"
+  read -r -p "Install cask fonts bundle? [Yn]"
   if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]];
   then
-    install_bundle 'CaskFonts'
+    install_bundle 'brewfiles/fonts'
+  fi
+
+  read -r -p "Install Mac App Store bundle? [Yn]"
+  if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]];
+  then
+    install_bundle 'brewfiles/mas'
   fi
 }
 
