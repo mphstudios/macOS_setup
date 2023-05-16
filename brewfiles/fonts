@@ -5,7 +5,7 @@
 # Font repositories
 tap 'homebrew/cask-fonts'
 
-# Fonts
+# Monospace and programming fonts
 cask 'font-anonymous-pro'
 cask 'font-dejavu-sans'
 cask 'font-fira-code'
