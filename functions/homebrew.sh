@@ -1,8 +1,9 @@
 #!/bin/sh
 
-# Install packages from a Homebrew bundle file
+# Install packages from brewfiles
 function homebrew_install_bundles {
-  install_bundle 'brewfiles/bundle'
+  # install packages from base bundle
+  install_bundle 'brewfiles/base'
 
   read -r -p "Install cask applications bundle? [Yn]"
   if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]];
@@ -52,7 +53,7 @@ function homebrew_install_package {
 }
 
 function install_bundle {
-  local bundle_file=$1
+  local brewfile=$1
 
   if test ! $(which brew); then
     install_homebrew
@@ -61,14 +62,14 @@ function install_bundle {
   # ensure that node and npm install properly via Homebrew
   unset -v NODE_PATH
 
-  message "Installing Homebrew packages from $bundle_file"
+  message "Installing Homebrew packages from $brewfile"
 
   brew update
   brew upgrade
 
-  download bundle_file
+  download brewfile
 
-  brew bundle --file=$SRC_DIR/$bundle_file --require-sha
+  brew bundle --file=$brewfile --require-sha
 
   message "Removing cached Homebrew downloads..."
   brew cleanup
