@@ -2,7 +2,7 @@
 
 # Based on the work of Mathias Bynens http://mths.be/macos
 function write_defaults {
-  message "Writing defaults for operating system, services, and applications..."
+  message "Writing defaults for operating system, services, and applications…"
 
   PlistBuddy="/usr/libexec/PlistBuddy"
 

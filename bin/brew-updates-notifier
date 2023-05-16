@@ -22,10 +22,11 @@ outdated=`brew outdated | sort`
 # and old versions of installed formulae.
 brew cleanup > /dev/null 2>&1
 
-if [ ! -z "$outdated" ]; then
-    terminal-notifier \
-        -group homebrew-updates-notifier \
-        -title "Homebrew Updates Available" \
-        -message "$outdated" \
-        -sender com.apple.Terminal > /dev/null 2>&1
+if [ ! -z "$outdated" ]
+then
+  terminal-notifier \
+    -group homebrew-updates-notifier \
+    -title "Homebrew Updates Available" \
+    -message "$outdated" \
+    -sender com.apple.Terminal > /dev/null 2>&1
 fi

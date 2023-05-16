@@ -1,0 +1,29 @@
+# Homebrew bundle file for macOS applications
+# https://github.com/Homebrew/homebrew-bundle
+
+# Install Mac App Store command line interface
+# https://github.com/mas-cli/mas
+brew 'mas'
+
+# Install applications distributed through the Mac App Store
+mas "Base", id: 402383384
+mas "Cookie", id: 1473091386
+mas "Core Tunnel", id: 1354318707
+mas "Disk Map", id: 715464874
+mas "Divvy", id: 413857545
+mas "Goban", id: 646372172
+mas "Keynote", id: 409183694
+mas "Magnet", id: 441258766
+mas "Marked", id: 890031187
+mas "Moom", id: 419330170
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "Patterns", id: 429449079
+mas "PCalc", id: 403504866
+mas "Peek", id: 1554235898
+mas "Quick View Calendar", id: 1087080039
+mas "RegExRX", id: 498370702
+mas "Soulver", id: 413965349
+mas "SSH Proxy", id: 597790822
+mas "Tabs Saver", id: 1440006971
+mas "The Unarchiver", id: 425424353

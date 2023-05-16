@@ -1,30 +1,46 @@
 #!/bin/sh
 
 # Setup script for a development machine running macOS
-set -Eeu -o pipefail
+set -Ee -o pipefail
 
-source functions/asdf.sh
-source functions/defaults.sh
-source functions/download.sh
-source functions/dropbox.sh
-source functions/git.sh
-source functions/homebrew.sh
-source functions/message.sh
-source functions/notifiers.sh
-source functions/shells.sh
-source functions/xcode.sh
-
-COMPUTER=$1
-REPOSITORY='https://raw.githubusercontent.com/mphstudios/macOS_setup/main'
-SRC_DIR=$(cd "$(dirname "$0")"; pwd)
+COMPUTER=${1:-$(scutil --get ComputerName)}
+SRC_DIR=$(cd $(dirname $0); pwd)
 STARTTIME=$(date +%s)
 
 # Abort script if not run on macOS
-if [ "$(uname -s)" != "Darwin" ];
+if [[ $(uname -s) != "Darwin" ]]
 then
-  message "This script can only be run on macOS."
+  echo "This script can only be run on macOS."
   exit 1
 fi
+
+source functions/asdf.sh
+source functions/confirm.sh
+source functions/defaults.sh
+source functions/dotfiles.sh
+source functions/git.sh
+source functions/homebrew.sh
+source functions/notifiers.sh
+source functions/output.sh
+source functions/shells.sh
+source functions/ssh_keys.sh
+source functions/sublime_text.sh
+source functions/xcode.sh
+
+# Prompt for computer name
+read -p "Enter computer name [$COMPUTER]: " response
+if [[ $response ]]
+then
+  # Set computer name (as done via System Preferences > Sharing)
+  COMPUTER="$response"
+  sudo scutil --set ComputerName $COMPUTER
+  sudo scutil --set HostName $COMPUTER
+  sudo scutil --set LocalHostName $COMPUTER
+  sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $COMPUTER
+  dscacheutil -flushcache
+fi
+
+message "Setting up $COMPUTER"
 
 # Prompt for an administrator password upfront
 sudo -v
@@ -32,49 +48,51 @@ sudo -v
 # Keep-alive: update the existing `sudo` time stamp until script has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-install_xcode
+# Check chip architecture
+if [[ $(uname -m) == "arm64" ]]
+then
+  # Install Rosetta 2 is already installed
+  if ! pkgutil --pkg-info=com.apple.pkg.RosettaUpdateAuto > /dev/null 2>&1
+  then
+    message "Installing Rosetta 2…"
+    softwareupdate --install-rosetta --agree-to-license
+  else
+    message "\xE2\x9C\x94 Rosetta 2"
+  fi
+fi
 
-homebrew_install_bundles
+install_command_line_tools
 
-install_asdf
+install_homebrew_bundles
 
 install_shells
 
-message "Creating .private file"
-touch $HOME/.private
+install_asdf
 
-read -r -p "Install package update notifiers? [Yn]"
-if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]];
+if confirm "Install dotfiles?" "Y"
 then
-  install_notifiers
+  install_dotfiles
+  touch $HOME/.private
+else
+  skip "installing dotfiles"
 fi
 
-# Configure git
-read -r -p "Configure git now? [yN]" response
-if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]];
-then
-  configure_git
-fi
+confirm "Configure git?" "Y" && configure_git || skip "git configuration"
 
-ln -fs /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
+confirm "Install update notifiers?" "Y" && install_notifiers || skip "update notifiers"
 
-symlink_to_dropbox
+confirm "Symlink Sublime Text settings to Dropbox?" "Y" && symlink_sublime_settings || skip "symnlinks to Dropbox"
 
-read -r -p "Write system defaults? [yN]"
-if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]];
-  write_defaults
-fi
+confirm "Write system defaults?" "N" && write_defaults || skip "writing system defaults"
 
 ENDTIME=$(date +%s)
 
-message "Setup of $HOSTNAME completed.\n
-  elapsed time $((ENDTIME - STARTTIME))"
+message "Setup of $COMPUTER completed.\n
+  Elapsed time $((ENDTIME - STARTTIME))"
 
 # Ask for confirmation before restarting the computer
-read -r -p "Would you like to restart the system now? [yN]" response
-if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]];
-then
-  shutdown -r now "Restarting $HOSTNAME" ;
+if confirm "Would you like to restart the system now?" "N"
+  shutdown -r now "Restarting $COMPUTER"
 else
-  message "Salut!"; exit;
+  message "Salut!" && exit
 fi

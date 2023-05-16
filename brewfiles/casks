@@ -1,4 +1,4 @@
-# Homebrew Caskfile for macOS applications
+# Homebrew bundle file for macOS applications
 # https://github.com/Homebrew/homebrew-bundle
 # https://github.com/caskroom/homebrew-cask
 
@@ -6,12 +6,12 @@
 cask_args appdir: '/Applications'
 
 # Cask repositories
-tap 'caskroom/cask'
-tap 'caskroom/versions'
+tap 'homebrew/cask'
+tap 'homebrew/cask-versions'
 tap 'dracula/install'
 
 # Install macOS applications distributed as binaries
-cask '1password'            # password manager
+cask '1password7'           # password manager
 cask 'appcleaner'           # thoroughly uninstall unwanted apps
 cask 'arq'                  # encrypted online backup utility
 cask 'basictex'             # a much smaller alternate TeX distribution
@@ -27,7 +27,6 @@ cask 'dropbox'              # finder intergration for cloud file storage
 cask 'forklift'             # file transfer application and sftp client
 cask 'gephi'                # network analysis and visualization
 cask 'hazel'                # automated file organization tool
-cask 'hyper'                # terminal emulator
 cask 'kaleidoscope'         # diff tool for code and images
 cask 'ngrok'                # secure introspectable tunnels to localhost
 cask 'nightowl'             # macOS menu bar tool to toggle dark mode
@@ -37,61 +36,22 @@ cask 'protonvpn'            # ProtonVPN client
 cask 'rapidapi'             # HTTP client that helps testing and describing APIs
 cask 'renamer'              # file renaming utility
 cask 'sequel-pro'           # MySQL database gui
-cask 'slack'		            # team communication
 cask 'sketch'               # digital design application
+cask 'slack'                # team communication
 cask 'spectacle'            # window arrangement utility
 cask 'stay'                 # multi-dsiplay window management utility
 cask 'sublime-text'         # text editor
+cask 'tableplus'            # GUI for relational databases
 cask 'taskpaper'            # plain text to-do lists interface
 cask 'tower'                # Git client and gui
 cask 'transmit'             # file transfer application
-cask 'tableplus'            # GUI for relational databases
 
 # QuickLook Plugins
 cask 'jupyter-notebook-ql'
-cask 'provisionql'    # iOS / macOS app and provision information
-cask 'qlcolorcode'    # source code files with syntax highlighting
-cask 'qlimagesize'    # display image size and resolution
-cask 'qlprettypatch'  # preview patch files
-cask 'qlstephen'      # plain text files with/without an unknown file extension
-cask 'qlvideo'        # thumbnails, previews and metadata for most video files
-cask 'quicklook-csv'  # preview CSV data
-cask 'quicklook-json' # preview JSON data
-cask 'suspicious-package'
-
-# Install Mac App Store command line interface
-# https://github.com/mas-cli/mas
-brew 'mas'
-
-# Install macOS applications distributed through the Mac App Store
-mas "Base", id: 402383384
-mas "Cookie 5", id: 1048338802
-mas "Core Tunnel", id: 1354318707
-mas "Disk Map", id: 715464874
-mas "Divvy", id: 413857545
-mas "Goban", id: 646372172
-mas "Goban", id: 646372172
-mas "JSONViewer", id: 1438520258
-mas "Keynote", id: 409183694
-mas "Magnet", id: 441258766
-mas "Marked", id: 890031187
-mas "Mini Calendar", id: 1088779979
-mas "Moom", id: 419330170
-mas "Numbers", id: 409203825
-mas "Octotree", id: 1457450145
-mas "OmniGraffle", id: 1142578753
-mas "OmniPlan", id: 1040002810
-mas "Pages", id: 409201541
-mas "Patterns", id: 429449079
-mas "PCalc", id: 403504866
-mas "Peek", id: 1554235898
-mas "Quick View Calendar", id: 1087080039
-mas "Refined GitHub", id: 1519867270
-mas "RegExRX", id: 498370702
-mas "Rested", id: 421879749
-mas "Soulver", id: 413965349
-mas "SSH Proxy", id: 597790822
-mas "Tabs Saver", id: 1440006971
-mas "The Unarchiver", id: 425424353
-mas "Workspaces", id: 1219826448
-mas "Xcode", id: 497799835
+cask 'qlimagesize'        # display image size and resolution
+cask 'qlprettypatch'      # preview patch files
+cask 'qlstephen'          # plain text files with an unknown file extension
+cask 'qlvideo'            # thumbnails, previews, and metadata for video files
+cask 'quicklook-csv'      # preview CSV data
+cask 'quicklook-json'     # preview JSON data
+cask 'suspicious-package' # Application for inspecting installer packages
