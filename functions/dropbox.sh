@@ -2,7 +2,7 @@
 
 function symlink_to_dropbox {
   read -r -p "Symlink ssh config to Dropbox? [yN]"
-  if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]];
+  if [[ $response =~ ^([Yy]|yes)$ ]];
   then
     message "Symlinking ssh config to Dropbox"
     mkdir -p $HOME/.ssh
@@ -16,7 +16,7 @@ function symlink_to_dropbox {
   eval "$(ssh-agent -s)"
 
   read -r -p "Symlink Sublime Text settings to Dropbox? [yN]"
-  if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]];
+  if [[ $response =~ ^([Yy]|yes)$ ]];
   then
     message "Symlinking Sublime Text settings to Dropbox"
     DROPBOX_DIR="$HOME/Dropbox/Application\ Support/"
@@ -30,7 +30,7 @@ function symlink_to_dropbox {
   message "Creating symlink for Sublime Text CLI tool"
 
   read -r -p "Symlink Sketch app plugins and templates to Dropbox? [yN]"
-  if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]];
+  if [[ $response =~ ^([Yy]|yes)$ ]];
   then
     message "Symlinking Sketch app plugins and templates to Dropbox"
     DROPBOX_DIR="$HOME/Dropbox/Application\ Support/"

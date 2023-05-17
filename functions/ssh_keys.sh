@@ -25,12 +25,19 @@ EOF
   message "Starting ssh-agent in the background"
   eval "$(ssh-agent -s)"
 
-  # See https://cli.github.com/manual/gh
-  message "Authenticating with GitHub"
-  gh auth login
-
-  message "Adding SSH key to your account on GitHub"
-  gh ssh-key add $identity_file.pub --title "$COMPUTER"
+  case $response in
+  [Yy]|yes)
+    # See https://cli.github.com/manual/gh
+    message "Authenticating with GitHub"
+    gh auth login
+    message "Adding SSH key to your account on GitHub"
+    gh ssh-key add $identity_file.pub --title "$COMPUTER"
+    ssh -T git@github.com
+    ;;
+  [Nn]|no)
+    message "See \"[Adding a new SSH key to your account](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account#about-addition-of-ssh-keys-to-your-account)\""
+    ;;
+  esac
 }
 
 export -f generate_ssh_keys

@@ -14,8 +14,8 @@ function add_shell {
 
 # Install Homebrew version of GNU Bourne Again SHell
 function install_bash {
-  homebrew_install_package 'bash'
-  homebrew_install_package 'bash-completion@2'
+  install_homebrew_package 'bash'
+  install_homebrew_package 'bash-completion@2'
   add_shell 'bash'
 }
 
@@ -32,11 +32,21 @@ function install_colorls {
 
 # Install Homebrew version of Z shell as the default shell
 function install_zshell {
-  homebrew_install_package 'zsh'
-  homebrew_install_package 'zsh-autosuggestions'
-  homebrew_install_package 'zsh-completions'
-  homebrew_install_package 'zplug'
+  install_homebrew_package 'zsh'
+  install_homebrew_package 'zsh-autosuggestions'
+  install_homebrew_package 'zsh-completions'
+  install_homebrew_package 'zplug'
   add_shell 'zsh' 'default'
+}
+
+# Install zsdoc to default path-prefix /usr/local
+# @see https://github.com/z-shell/zsdoc
+function install_zsdoc {
+  git clone https://github.com/z-shell/zsdoc $HOME/Code/zsdoc
+  cd zsdoc
+  make
+  sudo make install
+  ln -s $(which zsd) "$(dirname $(which zsd))/zsdoc"
 }
 
 function install_shells {
