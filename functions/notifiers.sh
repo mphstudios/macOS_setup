@@ -20,6 +20,9 @@ function install_notifiers {
   # User LaunchAgents must be readable by the user
   # and must NOT be writable by the group or other
   chmod 644 ~/Library/LaunchAgents/*.plist
+
+  message "adding alias 'notify' for terminal-notifier"
+  echo -e "\n# Terminal-notifier\nalias notify='$(which terminal-notifier)'" >> ~/.aliases
 }
 
 export -f install_notifiers

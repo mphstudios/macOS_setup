@@ -39,12 +39,15 @@ function install_asdf {
 
   # Install asdf for Bash
   message "adding asdf to bash..."
-  echo -e "\n. \"$(brew --prefix asdf)/libexec/asdf.sh\"" >> ~/.bash_profile
-  echo -e "\n. \"$(brew --prefix asdf)/etc/bash_completion.d/asdf.bash\"" >> ~/.bash_profile
+  echo -e "\n\"$(brew --prefix asdf)/libexec/asdf.sh\"" >> ~/.bash_profile
+  echo -e "\n\"$(brew --prefix asdf)/etc/bash_completion.d/asdf.bash\"" >> ~/.bash_profile
 
   # Install asdf for ZSH
   message "adding asdf to zsh..."
-  echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
+  echo -e "\n$(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
+
+  message "adding alias 'tools' for asdf"
+  echo -e "\n# asdf\nalias tools='$(which asdf)'" >> ~/.aliases
 }
 
 export -f install_asdf
