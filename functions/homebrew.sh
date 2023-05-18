@@ -47,6 +47,3 @@ function install_homebrew {
     /usr/bin/ruby -e "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
 }
-
-export -f install_homebrew_bundles
-export -f install_homebrew_package

@@ -10,5 +10,3 @@ function install_dotfiles {
   git clone https://github.com/mphstudios/dotfiles.git $HOME/Code/dotfiles
   rcup -d $HOME/Code/dotfiles
 }
-
-export -f install_dotfiles

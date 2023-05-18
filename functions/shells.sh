@@ -54,5 +54,3 @@ function install_shells {
   install_bash
   install_colorls
 }
-
-export -f install_shells

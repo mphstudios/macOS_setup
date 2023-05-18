@@ -39,5 +39,3 @@ EOF
     ;;
   esac
 }
-
-export -f generate_ssh_keys

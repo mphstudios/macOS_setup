@@ -10,5 +10,3 @@ function configure_git {
   read -p "git email:" email
   git config --global user.email $email
 }
-
-export -f configure_git

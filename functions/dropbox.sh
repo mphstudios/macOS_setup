@@ -35,5 +35,3 @@ function symlink_to_dropbox {
     ln -sfn DROPBOX_DIR/Sketch/Templates SETTINGS_DIR
   }
 }
-
-export -f symlink_to_dropbox

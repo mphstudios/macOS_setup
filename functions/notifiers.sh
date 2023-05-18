@@ -24,5 +24,3 @@ function install_notifiers {
   message "adding alias 'notify' for terminal-notifier"
   echo -e "\n# Terminal-notifier\nalias notify='$(which terminal-notifier)'" >> ~/.aliases
 }
-
-export -f install_notifiers

@@ -49,5 +49,3 @@ function install_asdf {
   message "adding alias 'tools' for asdf"
   echo -e "\n# asdf\nalias tools='$(which asdf)'" >> ~/.aliases
 }
-
-export -f install_asdf

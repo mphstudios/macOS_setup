@@ -9,5 +9,3 @@ function install_xcode {
     xcode-select --install
   fi
 }
-
-export -f install_xcode
