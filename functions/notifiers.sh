@@ -3,7 +3,7 @@
 function install_notifiers {
   message "Installing package update notifiers for Homebrew and NPM..."
 
-  homebrew_install terminal-notifier
+  install_homebrew_package terminal-notifier
 
   cp -fX $SRC_DIR/bin/*-notifier /usr/local/bin/
 

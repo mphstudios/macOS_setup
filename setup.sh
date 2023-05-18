@@ -11,6 +11,7 @@ source functions/git.sh
 source functions/homebrew.sh
 source functions/message.sh
 source functions/notifiers.sh
+source functions/prompt.sh
 source functions/shells.sh
 source functions/ssh_keys.sh
 source functions/xcode.sh
@@ -68,29 +69,10 @@ install_dotfiles
 message "Creating .private file"
 touch $HOME/.private
 
-read -p "Install package update notifiers? [Yn]" response
-if [[ $response =~ ^([Yy]|yes)$ ]];
-then
-  install_notifiers
-fi
-
-# Configure git
-read -p "Configure git now? [yN]" response
-if [[ $response =~ ^([Yy]|yes)$ ]];
-then
-  configure_git
-fi
-
-read -p "Generate SSH keys now? [Yn]" response
-if [[ $response =~ ^([Yy]|yes)$ ]];
-then
-  generate_ssh_keys
-fi
-
-read -p "Write system defaults? [yN]" response
-if [[ $response =~ ^([Yy]|yes)$ ]];
-  write_defaults
-fi
+prompt "Install update notifiers?" "Y" && install_notifiers
+prompt "Configure git?" "N" && configure_git
+prompt "Generate SSH keys?" "Y" && generate_ssh_keys
+prompt "Write system defaults?" "N" && write_defaults
 
 ENDTIME=$(date +%s)
 
