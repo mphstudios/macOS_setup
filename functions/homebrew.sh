@@ -29,20 +29,29 @@ function install_bundle {
 
   message "Installing Homebrew packages from $brewfile"
 
-  download brewfile
-
   # ensure that node and npm install properly via Homebrew
   unset -v NODE_PATH
 
-  brew bundle --file=$brewfile --require-sha
+  brew bundle --file=$brewfile
 
-  message "Removing cached Homebrew downloads\u2026"
+  message "Removing cached Homebrew downloads…"
   brew cleanup
 }
 
 function install_homebrew {
   if test ! $(which brew); then
     message "Installing Homebrew package manager…"
-    /usr/bin/ruby -e "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
+
+  # Set Homebrew environment variables and add brew command to PATH
+  echo "$(/opt/homebrew/bin/brew shellenv)" >> ~/.bash_profile
+  echo "$(/opt/homebrew/bin/brew shellenv)" >> ~/.zprofile
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+
+  export HOMEBREW_CASK_OPTS="--require-sha"
+  export HOMEBREW_COLOR=1
+
+  # Disable analytics @see docs.brew.sh/Analytics
+  brew analytics off
 }

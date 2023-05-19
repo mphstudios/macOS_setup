@@ -26,7 +26,6 @@ fi
 source functions/asdf.sh
 source functions/defaults.sh
 source functions/dotfiles.sh
-source functions/download.sh
 source functions/git.sh
 source functions/homebrew.sh
 source functions/message.sh
@@ -60,7 +59,7 @@ then
     message "Installing Rosetta 2…"
     softwareupdate --install-rosetta --agree-to-license
   else
-    message "\xE2\x9C\x94 Rosetta 2 is installed."
+    message "\xE2\x9C\x94 Rosetta 2"
   fi
 fi
 
