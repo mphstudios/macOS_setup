@@ -2,7 +2,8 @@ function confirm {
   local message=$1
   local default=$2
 
-  if [[ $default =~ ^[yY]$ ]]; then
+  if [[ $default =~ ^[yY]$ ]]
+  then
     default="Y"
     options="[Yn]"
   else
@@ -13,7 +14,8 @@ function confirm {
   read -p "$message" -n 1 response
   response=${response:-${default}}
 
-  if [[ $response =~ ^([Yy]|yes)$ ]];
+  if [[ $response =~ ^([Yy]|yes)$ ]]
+  then
     return true
   else
     return false
