@@ -36,7 +36,7 @@ source functions/shells.sh
 source functions/ssh_keys.sh
 source functions/xcode.sh
 
-Prompt for computer name
+# Prompt for computer name
 read -p "Enter computer name [$COMPUTER]: " response
 if [[ $response ]]; then
   COMPUTER="$response"
