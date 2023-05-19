@@ -3,9 +3,9 @@
 # Setup script for a development machine running macOS
 set -Ee -o pipefail
 
-HOSTNAME=${1:-$(scutil --get HostName)}
+COMPUTER=${1:-$(scutil --get ComputerName)}
 REPOSITORY='https://raw.githubusercontent.com/mphstudios/macOS_setup/main'
-SRC_DIR=$(cd "$(dirname "$0")"; pwd)
+SRC_DIR=$(cd $(dirname $0); pwd)
 STARTTIME=$(date +%s)
 
 # Abort script if not run on macOS
@@ -14,6 +14,14 @@ then
   echo "This script can only be run on macOS."
   exit 1
 fi
+
+# if [ ! -f "$SRC_DIR/functions" ]
+# then
+#   echo "Downloading setup functions…"
+#   for f in $(curl --fail --show-error --silent $REPOSITORY/functions)
+#     curl --fail --remote-name --show-error --silent $REPOSITORY/functions/$f
+#   done
+# fi
 
 source functions/asdf.sh
 source functions/defaults.sh
@@ -28,13 +36,14 @@ source functions/shells.sh
 source functions/ssh_keys.sh
 source functions/xcode.sh
 
-# Prompt for computer name
-read -p "Enter computer name or ENTER to leave name unchanged: " response
+Prompt for computer name
+read -p "Enter computer name [$COMPUTER]: " response
 if [[ $response ]]; then
-  HOSTNAME=$response
+  COMPUTER="$response"
+  sudo scutil --set ComputerName "$COMPUTER"
 fi
 
-message "Setting up $HOSTNAME…"
+message "Setting up $COMPUTER"
 
 # Prompt for an administrator password upfront
 sudo -v
@@ -65,7 +74,8 @@ install_asdf
 
 install_dotfiles
 
-if [ ! -f $HOME/.private ]; then
+if [ ! -f $HOME/.private ]
+then
   message "Creating ~/.private file"
   touch $HOME/.private
 fi
@@ -80,14 +90,14 @@ prompt "Write system defaults?" "N" && write_defaults
 
 ENDTIME=$(date +%s)
 
-message "Setup of $HOSTNAME completed.\n
+message "Setup of $COMPUTER completed.\n
   Elapsed time $((ENDTIME - STARTTIME))"
 
-# Ask for confirmation before restarting the HOSTNAME
+# Ask for confirmation before restarting the computer
 read -p "Would you like to restart the system now? [yN]" response
-if [[ $response =~ ^([Yy]|yes)$ ]];
-then
-  shutdown -r now "Restarting $HOSTNAME" ;
+if [[ $response =~ ^([Yy]|yes)$ ]]; then
+  shutdown -r now "Restarting $COMPUTER"
 else
-  message "Salut!"; exit;
+  message "Salut!"
+  exit
 fi

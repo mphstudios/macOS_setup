@@ -31,7 +31,7 @@ EOF
     message "Authenticating with GitHub"
     gh auth login
     message "Adding SSH key to your account on GitHub"
-    gh ssh-key add $identity_file.pub --title "$HOSTNAME"
+    gh ssh-key add $identity_file.pub --title "$COMPUTER"
     ssh -T git@github.com
     ;;
   [Nn]|no)
