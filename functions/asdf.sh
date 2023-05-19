@@ -1,7 +1,7 @@
 #!/bin/sh
 
 function install_asdf {
-  message "Installing asdf..."
+  message "Installing asdf…"
 
   install_homebrew_package asdf
 
@@ -12,7 +12,7 @@ function install_asdf {
     echo "legacy_version_file = yes"  >> $rc_file
   fi
 
-  message "installing plugins..."
+  message "installing plugins…"
 
   local plugins_dir = $(asdf root)/plugins
 
@@ -38,14 +38,14 @@ function install_asdf {
   asdf install ruby latest
 
   # Install asdf for Bash
-  message "adding asdf to bash..."
+  message "adding asdf to bash"
   echo -e "\n\"$(brew --prefix asdf)/libexec/asdf.sh\"" >> ~/.bash_profile
   echo -e "\n\"$(brew --prefix asdf)/etc/bash_completion.d/asdf.bash\"" >> ~/.bash_profile
 
   # Install asdf for ZSH
-  message "adding asdf to zsh..."
+  message "adding asdf to zsh"
   echo -e "\n$(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
 
-  message "adding alias 'tools' for asdf"
+  message "aliasing 'tools' to asdf"
   echo -e "\n# asdf\nalias tools='$(which asdf)'" >> ~/.aliases
 }

@@ -14,13 +14,12 @@ function install_homebrew_package {
 
   test ! $(which brew) && install_homebrew
 
-  # if ! command package || ! brew ls --versions package > /dev/null;
-  # then
-  #   brew install package
-  # else
-  #   message "Homebrew $package is already installed in PATH"
-  # fi
-  brew ls --versions $package || brew install $package
+  if ! command package || ! brew ls --versions package > /dev/null;
+  then
+    brew install package
+  else
+    message "\xE2\x9C\x94 $package is installed in PATH"
+  fi
 }
 
 function install_bundle {
@@ -37,13 +36,13 @@ function install_bundle {
 
   brew bundle --file=$brewfile --require-sha
 
-  message "Removing cached Homebrew downloads..."
+  message "Removing cached Homebrew downloads\u2026"
   brew cleanup
 }
 
 function install_homebrew {
   if test ! $(which brew); then
-    message "Installing Homebrew package manager..."
+    message "Installing Homebrew package manager…"
     /usr/bin/ruby -e "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
 }

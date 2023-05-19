@@ -1,7 +1,7 @@
 #!/bin/sh
 
 function install_notifiers {
-  message "Installing package update notifiers for Homebrew and NPM..."
+  message "Installing package update notifiers for Homebrew and NPM…"
 
   install_homebrew_package terminal-notifier
 

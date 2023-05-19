@@ -1,7 +1,19 @@
 #!/bin/sh
 
 # Setup script for a development machine running macOS
-set -Eeu -o pipefail
+set -Ee -o pipefail
+
+HOSTNAME=${1:-$(scutil --get HostName)}
+REPOSITORY='https://raw.githubusercontent.com/mphstudios/macOS_setup/main'
+SRC_DIR=$(cd "$(dirname "$0")"; pwd)
+STARTTIME=$(date +%s)
+
+# Abort script if not run on macOS
+if [[ $(uname -s) != "Darwin" ]]
+then
+  echo "This script can only be run on macOS."
+  exit 1
+fi
 
 source functions/asdf.sh
 source functions/defaults.sh
@@ -16,26 +28,13 @@ source functions/shells.sh
 source functions/ssh_keys.sh
 source functions/xcode.sh
 
-COMPUTER=$1
-REPOSITORY='https://raw.githubusercontent.com/mphstudios/macOS_setup/main'
-SRC_DIR=$(cd "$(dirname "$0")"; pwd)
-STARTTIME=$(date +%s)
-
-# Abort script if not run on macOS
-if [[ $(uname -s) != "Darwin" ]]
-then
-  message "This script can only be run on macOS."
-  exit 1
+# Prompt for computer name
+read -p "Enter computer name or ENTER to leave name unchanged: " response
+if [[ $response ]]; then
+  HOSTNAME=$response
 fi
 
-# When this setup script is invoked without arguments
-if [ ! -n $COMPUTER ]; then
-  # prompt user for computer name
-  read -p "Computer Name (Return to leave computer name unchanged):" response
-  if [[ $response ]]; then
-    COMPUTER=$response;
-  fi
-fi
+message "Setting up $HOSTNAME…"
 
 # Prompt for an administrator password upfront
 sudo -v
@@ -49,10 +48,10 @@ then
   # Install Rosetta 2 is already installed
   if ! pkgutil --pkg-info=com.apple.pkg.RosettaUpdateAuto > /dev/null 2>&1
   then
-    message "Installing Rosetta 2..."
+    message "Installing Rosetta 2…"
     softwareupdate --install-rosetta --agree-to-license
   else
-    message "Rosetta 2 is installed."
+    message "\xE2\x9C\x94 Rosetta 2 is installed."
   fi
 fi
 
@@ -66,20 +65,25 @@ install_asdf
 
 install_dotfiles
 
-message "Creating .private file"
-touch $HOME/.private
+if [ ! -f $HOME/.private ]; then
+  message "Creating ~/.private file"
+  touch $HOME/.private
+fi
 
 prompt "Install update notifiers?" "Y" && install_notifiers
+
 prompt "Configure git?" "N" && configure_git
+
 prompt "Generate SSH keys?" "Y" && generate_ssh_keys
+
 prompt "Write system defaults?" "N" && write_defaults
 
 ENDTIME=$(date +%s)
 
 message "Setup of $HOSTNAME completed.\n
-  elapsed time $((ENDTIME - STARTTIME))"
+  Elapsed time $((ENDTIME - STARTTIME))"
 
-# Ask for confirmation before restarting the computer
+# Ask for confirmation before restarting the HOSTNAME
 read -p "Would you like to restart the system now? [yN]" response
 if [[ $response =~ ^([Yy]|yes)$ ]];
 then
