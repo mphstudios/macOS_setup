@@ -52,7 +52,6 @@ cask 'tableplus'            # GUI for relational databases
 cask 'chromium'             # Free and open-source web browser
 cask 'duckduckgo'           # web browser focusing on privacy
 cask 'firefox'              # Mozilla Firefox web browser
-cask 'firefox-developer-edition'
 cask 'tor-browser'          # web browser focusing on security
 
 # QuickLook Plugins
