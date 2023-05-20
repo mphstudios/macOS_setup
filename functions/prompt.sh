@@ -11,13 +11,8 @@ function confirm {
     options="[yN]"
   fi
 
-  read -p "$message" -n 1 response
-  response=${response:-${default}}
+  read -p "$message " response
+  response=${response:-default}
 
-  if [[ $response =~ ^([Yy]|yes)$ ]]
-  then
-    return true
-  else
-    return false
-  fi
+  [[ $response =~ ^([Yy]|yes)$ ]] && true || false
 }
