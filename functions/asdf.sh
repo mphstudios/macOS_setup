@@ -5,7 +5,7 @@ function install_asdf {
 
   install_homebrew_package 'asdf'
 
-  local rc_file = $HOME/.asdfrc
+  local rc_file=$HOME/.asdfrc
 
   if [ ! -f $rc_file ]; then
     message "creating $rc_file"
@@ -14,7 +14,7 @@ function install_asdf {
 
   message "installing plugins…"
 
-  local plugins_dir = $(asdf root)/plugins
+  local plugins_dir=$(asdf root)/plugins
 
   # create the plugins directory if it does not exist
   mkdir -p $plugins_dir

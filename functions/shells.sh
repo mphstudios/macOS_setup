@@ -1,8 +1,8 @@
 #!/bin/sh
 
 function add_shell {
-  local shell_path = "$(command -v $1)"
-  local as_default = $2 || false
+  local shell_path="$(command -v $1)"
+  local as_default=$2 || false
 
   if [ ! fgrep -q "$shell_path" /etc/shells ]
   then

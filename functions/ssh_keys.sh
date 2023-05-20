@@ -1,8 +1,8 @@
 #!/bin/sh
 
 function generate_ssh_keys {
-  local config_file = $HOME/.ssh/config
-  local identity_file = github_ed25519
+  local config_file=$HOME/.ssh/config
+  local identity_file='github_ed25519'
 
   read -p "GitHub email address:" $identity
   read -sp "SSH key passphrase:" $passphrase
