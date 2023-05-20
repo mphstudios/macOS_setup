@@ -58,7 +58,7 @@ brew 'duti' # Select default apps for documents and URL schemes on macOS
 brew 'exa'  # Modern replacement for shell `ls` command
 brew 'graphviz' # Graph visualization software from AT&T and Bell Labs
 brew 'highlight' # convert source code to formatted text with syntax highlighting
-brew 'jupyter' # Interactive environments for writing and running code
+brew 'jupyterlab' # Interactive environments for writing and running code
 brew 'librsvg' # Library to render SVG files using Cairo
 brew 'libyaml' # YAML Parser
 brew 'marp-cli' # Convert markdown to slides
@@ -118,7 +118,7 @@ brew 'zsh-completions'
 brew 'zplug'
 
 # Web browsing
-brew 'brosh' # The modern, text-based browser
+brew 'browsh' # The modern, text-based browser
 brew 'lynx' # Text-based web browser
 brew 'w3m' # text-based web browser and pager like `more' or `less'
 brew 'webkit2png' # Create screenshots of webpages from the terminal

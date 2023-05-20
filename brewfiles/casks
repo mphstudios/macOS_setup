@@ -27,6 +27,7 @@ cask 'dropbox'              # finder intergration for cloud file storage
 cask 'forklift'             # file transfer application and sftp client
 cask 'gephi'                # network analysis and visualization
 cask 'hazel'                # automated file organization tool
+cask 'iterm2'               # alternative to Apple's Terminal app
 cask 'hyper'                # terminal emulator
 cask 'kaleidoscope'         # diff tool for code and images
 cask 'ngrok'                # secure introspectable tunnels to localhost
@@ -46,6 +47,13 @@ cask 'taskpaper'            # plain text to-do lists interface
 cask 'tower'                # Git client and gui
 cask 'transmit'             # file transfer application
 cask 'tableplus'            # GUI for relational databases
+
+# Web browsers
+cask 'chromium'             # Free and open-source web browser
+cask 'duckduckgo'           # web browser focusing on privacy
+cask 'firefox'              # Mozilla Firefox web browser
+cask 'firefox-developer-edition'
+cask 'tor-browser'          # web browser focusing on security
 
 # QuickLook Plugins
 cask 'jupyter-notebook-ql'
