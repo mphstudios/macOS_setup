@@ -8,12 +8,11 @@ function install_homebrew_bundles {
   confirm "Install from App Store?" "Y" && install_bundle 'brewfiles/mas' || echo "Skipped"
 }
 
-# Install a package if it is not already installed
 function install_homebrew_package {
   local package=$1
 
   if [[ -z package ]]; then
-    echo "package is required"
+    echo "package argument is required"
     return 0
   fi
 
@@ -29,6 +28,11 @@ function install_homebrew_package {
 
 function install_bundle {
   local brewfile=$1
+
+  if [[ -z brewfile ]]; then
+    echo "brewfile argument is required"
+    return 0
+  fi
 
   # Ensure that node and npm install properly via Homebrew
   unset -v NODE_PATH
