@@ -12,7 +12,7 @@ function confirm {
   fi
 
   read -p "$message $options " response
-  response=${response:-default}
+  response=${response:-$default}
 
   [[ $response =~ ^([Yy]|yes)$ ]] && true || false
 }
