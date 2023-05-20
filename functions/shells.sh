@@ -1,16 +1,22 @@
 #!/bin/sh
 
 function add_shell {
-  local shell_path="$(command -v $1)"
-  local as_default=$2 || false
+  local shell="$(command -v $1)"
+  local default=${2:-false}
 
-  if [ ! fgrep -q "$shell_path" /etc/shells ]
+  if [[ -z $shell ]]
   then
-    message "Adding '$shell_path' to /etc/shells"
+    echo "shell is a required argument"
+    return 0
+  fi
+
+  if [ ! grep -w "$shell" /etc/shells ]
+  then
+    message "Adding '$shell' to /etc/shells"
     sudo zsh -c 'echo /usr/local/bin/bash >> /etc/shells'
   fi
 
-  as_default && sudo chsh -s "$shell_path" "$USER"
+  [ "$default" = true ] && sudo chsh -s $shell $USER
 }
 
 # Install Bourne-Again SHell, UNIX command interpreter

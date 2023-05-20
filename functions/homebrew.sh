@@ -12,7 +12,7 @@ function install_homebrew_package {
   local package=$1
 
   if [[ -z $package ]]; then
-    echo "package argument is required"
+    echo "package is a required argument"
     return 0
   fi
 
@@ -30,7 +30,7 @@ function install_bundle {
   local brewfile=$1
 
   if [[ -z $brewfile ]]; then
-    echo "brewfile argument is required"
+    echo "brewfile is a required argument"
     return 0
   fi
 
