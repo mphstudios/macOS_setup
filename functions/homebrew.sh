@@ -3,9 +3,9 @@
 # Install packages from brewfiles
 function install_homebrew_bundles {
   install_bundle 'brewfiles/base'
-  prompt "Install cask applications?" "Y" && install_bundle 'brewfiles/casks'
-  prompt "Install cask fonts?" "Y" && install_bundle 'brewfiles/fonts'
-  prompt "Install from App Store?" "Y" && install_bundle 'brewfiles/mas'
+  confirm "Install cask applications?" "Y" && install_bundle 'brewfiles/casks'
+  confirm "Install cask fonts?" "Y" && install_bundle 'brewfiles/fonts'
+  confirm "Install from App Store?" "Y" && install_bundle 'brewfiles/mas'
 }
 
 # Install a package if it is not already installed

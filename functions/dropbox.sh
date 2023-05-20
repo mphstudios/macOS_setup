@@ -1,7 +1,7 @@
 #!/bin/sh
 
 function symlink_to_dropbox {
-  prompt "Symlink ssh config to Dropbox?" "N" && {
+  confirm "Symlink ssh config to Dropbox?" "N" && {
     message "Symlinking ssh config to Dropbox"
     mkdir -p $HOME/.ssh
     if [ -f "~/.ssh/config" ]; then
@@ -13,7 +13,7 @@ function symlink_to_dropbox {
   message "Starting ssh-agent in the background"
   eval "$(ssh-agent -s)"
 
-  prompt "Symlink Sublime Text settings to Dropbox?" "N" && {
+  confirm "Symlink Sublime Text settings to Dropbox?" "N" && {
     message "Symlinking Sublime Text settings to Dropbox"
     DROPBOX_DIR="$HOME/Dropbox/Application\ Support/"
     SETTINGS_DIR="$HOME/Library/Application Support/Sublime Text 3/Packages/User"
@@ -23,7 +23,7 @@ function symlink_to_dropbox {
     ln -sfn DROPBOX_DIR/Sublime\ Text/User SETTINGS_DIR
   }
 
-  prompt "Symlink Sketch app plugins and templates to Dropbox?" "N" && {
+  confirm "Symlink Sketch app plugins and templates to Dropbox?" "N" && {
     message "Symlinking Sketch app plugins and templates to Dropbox"
     DROPBOX_DIR="$HOME/Dropbox/Application\ Support/"
     SETTINGS_DIR="$HOME/Library/Application Support/com.bohemiancoding.sketch3"

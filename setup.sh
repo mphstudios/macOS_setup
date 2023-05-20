@@ -24,13 +24,13 @@ fi
 # fi
 
 source functions/asdf.sh
+source functions/confirm.sh
 source functions/defaults.sh
 source functions/dotfiles.sh
 source functions/git.sh
 source functions/homebrew.sh
 source functions/message.sh
 source functions/notifiers.sh
-source functions/prompt.sh
 source functions/shells.sh
 source functions/ssh_keys.sh
 source functions/xcode.sh
@@ -71,21 +71,18 @@ install_shells
 
 install_asdf
 
-install_dotfiles
-
-if [ ! -f $HOME/.private ]
-then
-  message "Creating ~/.private file"
+confirm "Install dotfiles?" "Y" && {
+  install_dotfiles
   touch $HOME/.private
-fi
+}
 
-prompt "Install update notifiers?" "Y" && install_notifiers
+confirm "Install update notifiers?" "Y" && install_notifiers
 
-prompt "Configure git?" "N" && configure_git
+confirm "Configure git?" "Y" && configure_git
 
-prompt "Generate SSH keys?" "Y" && generate_ssh_keys
+confirm "Generate SSH keys?" "Y" && generate_ssh_keys
 
-prompt "Write system defaults?" "N" && write_defaults
+confirm "Write system defaults?" "N" && write_defaults
 
 ENDTIME=$(date +%s)
 
