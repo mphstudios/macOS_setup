@@ -107,12 +107,12 @@ brew 'shellcheck' # shell script static analysis tool
 brew 'starship' # cross-shell prompt
 
 ## GNU Bourne Again SHell
-brew 'bash'
+brew 'bash' # Bourne-Again SHell, a UNIX command interpreter
 brew 'bash-completion@2'
 brew 'vcprompt' # Provide version control info in shell prompts
 
 ## Z Shell
-brew 'zsh'
+brew 'zsh' # UNIX shell (command interpreter)
 brew 'zsh-autosuggestions'
 brew 'zsh-completions'
 brew 'zplug'

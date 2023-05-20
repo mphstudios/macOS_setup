@@ -13,7 +13,7 @@ function add_shell {
   as_default && sudo chsh -s "$shell_path" "$USER"
 }
 
-# Install Homebrew version of GNU Bourne Again SHell
+# Install Bourne-Again SHell, UNIX command interpreter
 function install_bash {
   install_homebrew_package 'bash'
   install_homebrew_package 'bash-completion@2'
@@ -31,7 +31,7 @@ function install_colorls {
   [ -f $HOME/.zshrc ] && echo "source $(completions)" >> $HOME/.zshrc
 }
 
-# Install Homebrew version of Z shell as the default shell
+# Install Z-shell UNIX shell (command interpreter)
 function install_zshell {
   install_homebrew_package 'zsh'
   install_homebrew_package 'zsh-autosuggestions'
