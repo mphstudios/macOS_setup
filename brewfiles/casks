@@ -56,8 +56,6 @@ cask 'tor-browser'          # web browser focusing on security
 
 # QuickLook Plugins
 cask 'jupyter-notebook-ql'
-cask 'provisionql'    # iOS / macOS app and provision information
-cask 'qlcolorcode'    # source code files with syntax highlighting
 cask 'qlimagesize'    # display image size and resolution
 cask 'qlprettypatch'  # preview patch files
 cask 'qlstephen'      # plain text files with/without an unknown file extension
