@@ -6,7 +6,7 @@
 # @see http://thoughtbot.github.io/rcm/rcup.1.html
 #
 function install_dotfiles {
-  install_homebrew_package rcm
+  install_homebrew_package 'rcm'
   git clone https://github.com/mphstudios/dotfiles.git $HOME/Code/dotfiles
   rcup -d $HOME/Code/dotfiles
 }

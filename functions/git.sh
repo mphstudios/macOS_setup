@@ -1,8 +1,8 @@
 #!/bin/sh
 
 function configure_git {
-  install_homebrew_package git
-  install_homebrew_package git-lfs
+  install_homebrew_package 'git'
+  install_homebrew_package 'git-lfs'
 
   read -p "git username:" username
   git config --global user.name $username

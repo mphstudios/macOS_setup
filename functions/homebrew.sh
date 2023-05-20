@@ -12,6 +12,11 @@ function install_homebrew_bundles {
 function install_homebrew_package {
   local package=$1
 
+  if [[ -z package ]]; then
+    echo "package is required"
+    return 0
+  fi
+
   command -v brew >& /dev/null || install_homebrew
 
   if brew ls --versions package >& /dev/null
@@ -31,7 +36,7 @@ function install_bundle {
   command -v brew >& /dev/null || install_homebrew
 
   message "Installing Homebrew packages from $brewfile"
-  brew bundle --file=$brewfile 2>&1
+  brew bundle --file=$brewfile
 
   message "Removing cached Homebrew downloads…"
   brew cleanup

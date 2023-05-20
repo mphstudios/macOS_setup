@@ -3,7 +3,7 @@
 function install_asdf {
   message "Installing asdf…"
 
-  install_homebrew_package asdf
+  install_homebrew_package 'asdf'
 
   local rc_file = $HOME/.asdfrc
 
@@ -20,7 +20,7 @@ function install_asdf {
   mkdir -p $plugins_dir
 
   # GPG is required to verify plugins
-  install_homebrew_package gpg
+  install_homebrew_package 'gpg'
 
   asdf plugin-add direnv https://github.com/asdf-vm/asdf-direnv.git
   asdf install direnv latest
