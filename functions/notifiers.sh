@@ -22,5 +22,6 @@ function install_notifiers {
   chmod 644 ~/Library/LaunchAgents/*.plist
 
   message "adding alias 'notify' for terminal-notifier"
-  echo -e "\n# Terminal-notifier\nalias notify='$(which terminal-notifier)'" >> ~/.aliases
+  local xpath=$(command -v terminal-notifier)
+  echo -e "\n# Terminal-notifier\nalias notify='$xpath'" >> ~/.aliases
 }

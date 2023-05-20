@@ -37,15 +37,17 @@ function install_asdf {
   asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
   asdf install ruby latest
 
+  local brew_prefix=$(brew --prefix asdf)
+
   # Install asdf for Bash
   message "adding asdf to bash"
-  echo -e "\n\"$(brew --prefix asdf)/libexec/asdf.sh\"" >> ~/.bash_profile
-  echo -e "\n\"$(brew --prefix asdf)/etc/bash_completion.d/asdf.bash\"" >> ~/.bash_profile
+  echo -e "\n\"$brew_prefix/libexec/asdf.sh\"" >> ~/.bash_profile
+  echo -e "\n\"$brew_prefix/etc/bash_completion.d/asdf.bash\"" >> ~/.bash_profile
 
   # Install asdf for ZSH
   message "adding asdf to zsh"
-  echo -e "\n$(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
+  echo -e "\n$brew_prefix/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
 
   message "aliasing 'tools' to asdf"
-  echo -e "\n# asdf\nalias tools='$(which asdf)'" >> ~/.aliases
+  echo -e "\n# asdf\nalias tools='$(command -v asdf)'" >> ~/.aliases
 }

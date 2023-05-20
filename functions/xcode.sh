@@ -1,7 +1,8 @@
 #!/bin/sh
 
 function install_xcode {
-  if type xcode-select >&- && xpath=$(xcode-select --print-path) && test -d "${xpath}" && test -x "${xpath}"
+  local xpath=$(type xcode-select >& /dev/null && xcode-select --print-path)
+  if test -d "${xpath}" && test -x "${xpath}"
   then
     message "\xE2\x9C\x94 Xcode Command Line Tools"
   else

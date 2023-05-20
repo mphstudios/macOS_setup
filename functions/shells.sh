@@ -25,8 +25,9 @@ function install_bash {
 function install_colorls {
   message "Installing colorls ruby gem…"
   gem install colorls
+  local xpath=$(command -v colorls)
   message "Adding colorls completions to shell profiles"
-  local completions = "$(dirname $(gem which colorls))/tab_complete.sh"
+  local completions = "$(dirname $(gem $xpath))/tab_complete.sh"
   [ -f $HOME/.bashrc ] && echo "source $(completions)" >> $HOME/.bashrc
   [ -f $HOME/.zshrc ] && echo "source $(completions)" >> $HOME/.zshrc
 }
@@ -47,7 +48,8 @@ function install_zsdoc {
   cd zsdoc
   make
   sudo make install
-  ln -s $(which zsd) "$(dirname $(which zsd))/zsdoc"
+  local xpath=$(command -v zsd)
+  ln -s xpath "$(dirname xpath)/zsdoc"
 }
 
 function install_shells {

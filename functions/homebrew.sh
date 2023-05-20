@@ -12,7 +12,7 @@ function install_homebrew_bundles {
 function install_homebrew_package {
   local package=$1
 
-  test ! $(which brew) && install_homebrew
+  test ! $(command -v brew >& /dev/null) && install_homebrew
 
   if ! command package || ! brew ls --versions package > /dev/null;
   then
@@ -25,7 +25,7 @@ function install_homebrew_package {
 function install_bundle {
   local brewfile=$1
 
-  test ! $(which brew) && install_homebrew
+  test ! $(command -v brew >& /dev/null) && install_homebrew
 
   message "Installing Homebrew packages from $brewfile"
 
@@ -39,7 +39,8 @@ function install_bundle {
 }
 
 function install_homebrew {
-  if test ! $(which brew); then
+  if test ! $(command -v brew >& /dev/null)
+  then
     message "Installing Homebrew package manager…"
     /bin/bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi
