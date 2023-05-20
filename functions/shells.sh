@@ -25,9 +25,8 @@ function install_bash {
 function install_colorls {
   message "Installing colorls ruby gem…"
   gem install colorls
-  local xpath=$(command -v colorls)
-  message "Adding colorls completions to shell profiles"
-  local completions = "$(dirname $(gem $xpath))/tab_complete.sh"
+  message "adding colorls completions to shell profiles"
+  local completions = "$(dirname $(gem $(command -v colorls)))/tab_complete.sh"
   [ -f $HOME/.bashrc ] && echo "source $(completions)" >> $HOME/.bashrc
   [ -f $HOME/.zshrc ] && echo "source $(completions)" >> $HOME/.zshrc
 }
