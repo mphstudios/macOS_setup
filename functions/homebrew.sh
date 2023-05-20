@@ -14,9 +14,9 @@ function install_homebrew_package {
 
   test ! $(command -v brew >& /dev/null) && install_homebrew
 
-  if ! command package || ! brew ls --versions package > /dev/null;
+  if ! command -v package || ! brew ls --versions package >& /dev/null
   then
-    brew install package
+    brew install package 2>&1
   else
     message "\xE2\x9C\x94 $package is installed in PATH"
   fi
@@ -32,7 +32,7 @@ function install_bundle {
   # ensure that node and npm install properly via Homebrew
   unset -v NODE_PATH
 
-  brew bundle --file=$brewfile
+  brew bundle --file=$brewfile 2>&1
 
   message "Removing cached Homebrew downloads…"
   brew cleanup
