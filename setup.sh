@@ -71,10 +71,13 @@ install_shells
 
 install_asdf
 
-confirm "Install dotfiles?" "Y" && {
+if confirm "Install dotfiles?" "Y"
+then
   install_dotfiles
   touch $HOME/.private
-}
+else
+  echo "Skipped"
+fi
 
 confirm "Install update notifiers?" "Y" && install_notifiers
 
