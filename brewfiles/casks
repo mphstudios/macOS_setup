@@ -6,8 +6,8 @@
 cask_args appdir: '/Applications'
 
 # Cask repositories
-tap 'caskroom/cask'
-tap 'caskroom/versions'
+tap 'homebrew/cask'
+tap 'homebrew/cask-versions'
 tap 'dracula/install'
 
 # Install macOS applications distributed as binaries
