@@ -11,7 +11,7 @@ tap 'homebrew/cask-versions'
 tap 'dracula/install'
 
 # Install macOS applications distributed as binaries
-cask '1password'            # password manager
+cask '1password7'           # password manager
 cask 'appcleaner'           # thoroughly uninstall unwanted apps
 cask 'arq'                  # encrypted online backup utility
 cask 'basictex'             # a much smaller alternate TeX distribution
@@ -20,15 +20,11 @@ cask 'cocktail'             # macOS maintenance tools
 cask 'coderunner'           # programming editor
 cask 'daisydisk'            # disk usage analyzer
 cask 'dash'                 # API documentation browser and code snippet manager
-cask 'divvy'                # window arrangement utility
 cask 'docker'               # OS virtualization using containers
-cask 'dracula-terminal'     # Dark theme for Terminal.app
 cask 'dropbox'              # finder intergration for cloud file storage
 cask 'forklift'             # file transfer application and sftp client
 cask 'gephi'                # network analysis and visualization
 cask 'hazel'                # automated file organization tool
-cask 'iterm2'               # alternative to Apple's Terminal app
-cask 'hyper'                # terminal emulator
 cask 'kaleidoscope'         # diff tool for code and images
 cask 'ngrok'                # secure introspectable tunnels to localhost
 cask 'nightowl'             # macOS menu bar tool to toggle dark mode
@@ -40,19 +36,11 @@ cask 'renamer'              # file renaming utility
 cask 'sequel-pro'           # MySQL database gui
 cask 'slack'		            # team communication
 cask 'sketch'               # digital design application
-cask 'spectacle'            # window arrangement utility
-cask 'stay'                 # multi-dsiplay window management utility
 cask 'sublime-text'         # text editor
 cask 'taskpaper'            # plain text to-do lists interface
 cask 'tower'                # Git client and gui
 cask 'transmit'             # file transfer application
 cask 'tableplus'            # GUI for relational databases
-
-# Web browsers
-cask 'chromium'             # Free and open-source web browser
-cask 'duckduckgo'           # web browser focusing on privacy
-cask 'firefox'              # Mozilla Firefox web browser
-cask 'tor-browser'          # web browser focusing on security
 
 # QuickLook Plugins
 cask 'jupyter-notebook-ql'
@@ -63,3 +51,20 @@ cask 'qlvideo'            # thumbnails, previews, and metadata for video files
 cask 'quicklook-csv'      # preview CSV data
 cask 'quicklook-json'     # preview JSON data
 cask 'suspicious-package' # Application for inspecting installer packages
+
+# Terminal
+cask 'dracula-terminal'     # Dark theme for Terminal.app
+cask 'iterm2'               # alternative to Apple's Terminal app
+cask 'hyper'                # terminal emulator
+cask 'warp'                 # Rust-based terminal
+
+# Web browsers
+cask 'chromium'             # Free and open-source web browser
+cask 'duckduckgo'           # web browser focusing on privacy
+cask 'firefox'              # Mozilla Firefox web browser
+cask 'tor-browser'          # web browser focusing on security
+
+# Window management utilities
+cask 'divvy'                # window arrangement utility
+cask 'spectacle'            # window arrangement utility
+cask 'stay'                 # multi-dsiplay window management utility
