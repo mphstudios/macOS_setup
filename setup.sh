@@ -68,8 +68,6 @@ install_homebrew_bundles
 
 install_shells
 
-install_subl_command
-
 install_asdf
 
 if confirm "Install dotfiles?" "Y"
@@ -77,14 +75,14 @@ then
   install_dotfiles
   touch $HOME/.private
 else
-  skip "Skipped installing dotfiles"
+  skip "installing dotfiles"
 fi
 
 confirm "Configure git?" "Y" && configure_git || skip "git configuration"
 
-confirm "Install update notifiers?" "Y" && install_notifiers || skip "installing update notifiers"
+confirm "Install update notifiers?" "Y" && install_notifiers || skip "update notifiers"
 
-confirm "Symlink Sublime Text settings to Dropbox?" "Y" && symlink_sublime_settings || skip "symnlinking Sublime Text settings to Dropbox"
+confirm "Symlink Sublime Text settings to Dropbox?" "Y" && symlink_sublime_settings || skip "symnlinks to Dropbox"
 
 confirm "Write system defaults?" "N" && write_defaults || skip "writing system defaults"
 

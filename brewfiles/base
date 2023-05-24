@@ -23,7 +23,6 @@ tap 'homebrew/bundle'
 tap 'homebrew/core'
 tap 'homebrew/services'
 
-tap 'browsh-org/homebrew-browsh'
 tap 'osgeo/osgeo4mac'
 tap 'thoughtbot/formulae'
 
@@ -32,9 +31,9 @@ brew 'coreutils' # GNU File, Shell, and Text utilities
 brew 'findutils' # GNU find, xargs, and locate
 brew 'parallel'  # Shell command parallelization utility
 
-## Install newer versions of macOS installed tools
-brew 'curl'
-brew 'grep'
+## Homebrew versions of macOS installed tools
+brew 'curl' # Get a file from an HTTP, HTTPS or FTP server
+brew 'grep' # GNU grep, egrep and fgrep
 brew 'rsync' # fast incremental file transfer utility
 
 ## Update Git and add git large files support
@@ -62,23 +61,20 @@ brew 'jupyterlab' # Interactive environments for writing and running code
 brew 'librsvg' # Library to render SVG files using Cairo
 brew 'libyaml' # YAML Parser
 brew 'marp-cli' # Convert markdown to slides
-brew 'mkcert' # Simple tool to make locally trusted development certificates
 brew 'mosh' # A mobile shell replacement for interactive SSH terminals
 brew 'most' # Powerful paging program
 brew 'neofetch' # command-line system information tool
 brew 'node' # Platform built on V8 to build network applications
 brew 'pandoc' # Swiss-army knife of markup format conversion
-brew 'ranger' # a console file manager with VI key bindings
 brew 'rcm'  # thoughtbot's management suite for dotfiles
 brew 'rename' # Perl-powered file rename script with many helpful built-ins
-brew 'smartmontools' # SMART hard drive monitoring
 brew 'ssh-copy-id' # Add a public key to a remote machine's authorized_keys file
-brew 'sshuttle' # Proxy server that works as a poor man's VPN
 brew 'terminal-notifier' # Send macOS User Notifications from the command-line
 brew 'thefuck' # Programatically correct mistyped console commands
 brew 'trash' # CLI tool that moves files or folder to the trash
 brew 'tree' # Display directories as trees (with optional color/HTML output)
 brew 'vault' # Secures, stores, and tightly controls access to secrets
+brew 'webkit2png' # Create screenshots of webpages from the terminal
 brew 'wget' # non-interactive tool to retrieve files using HTTP/HTTPS/FTP/FTPS
 
 # image processing
@@ -116,9 +112,3 @@ brew 'zsh' # UNIX shell (command interpreter)
 brew 'zsh-autosuggestions'
 brew 'zsh-completions'
 brew 'zplug'
-
-# Web browsing
-brew 'browsh' # The modern, text-based browser
-brew 'lynx' # Text-based web browser
-brew 'w3m' # text-based web browser and pager like `more' or `less'
-brew 'webkit2png' # Create screenshots of webpages from the terminal
