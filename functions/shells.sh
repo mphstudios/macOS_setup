@@ -10,13 +10,16 @@ function add_shell {
     return 0
   fi
 
-  if [ ! grep -w "$shell" /etc/shells ]
+  if ! grep "$shell" /etc/shells >& /dev/null 2>&1 
   then
-    message "Adding '$shell' to /etc/shells"
-    sudo zsh -c 'echo /usr/local/bin/bash >> /etc/shells'
+    message "Adding $shell to /etc/shells"
+    sudo sh -c "echo $shell >> /etc/shells"
   fi
 
-  [ "$default" = true ] && sudo chsh -s $shell $USER
+  if [ "$default" = true ]
+  then
+    sudo chsh -s $shell $USER
+  fi
 }
 
 # Install Bourne-Again SHell, UNIX command interpreter
@@ -26,24 +29,13 @@ function install_bash {
   add_shell 'bash'
 }
 
-# Install Color LS to colorize the `ls` output
-# See https://github.com/athityakumar/colorls
-function install_colorls {
-  message "Installing colorls ruby gem…"
-  gem install colorls
-  message "adding colorls completions to shell profiles"
-  local completions = "$(dirname $(gem $(command -v colorls)))/tab_complete.sh"
-  [ -f $HOME/.bashrc ] && echo "source $(completions)" >> $HOME/.bashrc
-  [ -f $HOME/.zshrc ] && echo "source $(completions)" >> $HOME/.zshrc
-}
-
 # Install Z-shell UNIX shell (command interpreter)
 function install_zshell {
   install_homebrew_package 'zsh'
   install_homebrew_package 'zsh-autosuggestions'
   install_homebrew_package 'zsh-completions'
   install_homebrew_package 'zplug'
-  add_shell 'zsh' 'default'
+  add_shell 'zsh' true
 }
 
 # Install zsdoc to default path-prefix /usr/local
@@ -58,7 +50,6 @@ function install_zsdoc {
 }
 
 function install_shells {
-  install_zshell
   install_bash
-  install_colorls
+  install_zshell
 }

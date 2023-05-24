@@ -15,14 +15,6 @@ then
   exit 1
 fi
 
-# if [ ! -f "$SRC_DIR/functions" ]
-# then
-#   echo "Downloading setup functions…"
-#   for f in $(curl --fail --show-error --silent $REPOSITORY/functions)
-#     curl --fail --remote-name --show-error --silent $REPOSITORY/functions/$f
-#   done
-# fi
-
 source functions/asdf.sh
 source functions/confirm.sh
 source functions/defaults.sh
@@ -33,13 +25,20 @@ source functions/message.sh
 source functions/notifiers.sh
 source functions/shells.sh
 source functions/ssh_keys.sh
+source functions/sublime_text.sh
 source functions/xcode.sh
 
 # Prompt for computer name
 read -p "Enter computer name [$COMPUTER]: " response
-if [[ $response ]]; then
+if [[ $response ]]
+then
+  # Set computer name (as done via System Preferences > Sharing)
   COMPUTER="$response"
-  sudo scutil --set ComputerName "$COMPUTER"
+  sudo scutil --set ComputerName $COMPUTER
+  sudo scutil --set HostName $COMPUTER
+  sudo scutil --set LocalHostName $COMPUTER
+  sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string $COMPUTER
+  dscacheutil -flushcache
 fi
 
 message "Setting up $COMPUTER"
@@ -63,11 +62,13 @@ then
   fi
 fi
 
-install_xcode
+install_command_line_tools
 
 install_homebrew_bundles
 
 install_shells
+
+install_subl_command
 
 install_asdf
 
@@ -76,16 +77,16 @@ then
   install_dotfiles
   touch $HOME/.private
 else
-  echo "Skipped"
+  overwrite "Skipped installing dotfiles"
 fi
 
-confirm "Install update notifiers?" "Y" && install_notifiers
+confirm "Configure git?" "Y" && configure_git || overwrite "Skipped git configuration"
 
-confirm "Configure git?" "Y" && configure_git
+confirm "Install update notifiers?" "Y" && install_notifiers || overwrite "Skipped installing update notifiers"
 
-confirm "Generate SSH keys?" "Y" && generate_ssh_keys
+confirm "Symlink Sublime Text settings to Dropbox?" "Y" && symlink_sublime_settings || overwrite "Skipped symnlinking Sublime Text settings to Dropbox"
 
-confirm "Write system defaults?" "N" && write_defaults
+confirm "Write system defaults?" "N" && write_defaults || overwrite "Skipped writing system defaults"
 
 ENDTIME=$(date +%s)
 
@@ -93,10 +94,8 @@ message "Setup of $COMPUTER completed.\n
   Elapsed time $((ENDTIME - STARTTIME))"
 
 # Ask for confirmation before restarting the computer
-read -p "Would you like to restart the system now? [yN]" response
-if [[ $response =~ ^([Yy]|yes)$ ]]; then
+if confirm "Would you like to restart the system now?" "N"
   shutdown -r now "Restarting $COMPUTER"
 else
-  message "Salut!"
-  exit
+  message "Salut!" && exit
 fi

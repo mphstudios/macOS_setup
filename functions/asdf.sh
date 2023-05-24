@@ -14,24 +14,21 @@ function install_asdf {
 
   message "installing plugins…"
 
-  local plugins_dir=$(asdf root)/plugins
-
-  # create the plugins directory if it does not exist
-  mkdir -p $plugins_dir
-
   # GPG is required to verify plugins
   install_homebrew_package 'gpg'
 
   asdf plugin-add direnv https://github.com/asdf-vm/asdf-direnv.git
-  asdf install direnv latest
-  asdf global direnv latest
+  asdf direnv setup --shell bash --version latest
+  asdf direnv setup --shell zsh --version latest
 
   asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
   asdf install nodejs latest
+  asdf global nodejs latest
   asdf reshim nodejs
 
   asdf plugin-add python https://github.com/danhper/asdf-python.git
   asdf install python latest:3
+  asdf global python latest:3
   asdf reshim python
 
   asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git

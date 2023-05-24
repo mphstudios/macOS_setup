@@ -20,7 +20,9 @@ cask 'cocktail'             # macOS maintenance tools
 cask 'coderunner'           # programming editor
 cask 'daisydisk'            # disk usage analyzer
 cask 'dash'                 # API documentation browser and code snippet manager
+cask 'divvy'                # window arrangement utility
 cask 'docker'               # OS virtualization using containers
+cask 'dracula-terminal'     # Dark theme for Terminal.app
 cask 'dropbox'              # finder intergration for cloud file storage
 cask 'forklift'             # file transfer application and sftp client
 cask 'gephi'                # network analysis and visualization
@@ -34,13 +36,15 @@ cask 'protonvpn'            # ProtonVPN client
 cask 'rapidapi'             # HTTP client that helps testing and describing APIs
 cask 'renamer'              # file renaming utility
 cask 'sequel-pro'           # MySQL database gui
-cask 'slack'		            # team communication
 cask 'sketch'               # digital design application
+cask 'slack'                # team communication
+cask 'spectacle'            # window arrangement utility
+cask 'stay'                 # multi-dsiplay window management utility
 cask 'sublime-text'         # text editor
+cask 'tableplus'            # GUI for relational databases
 cask 'taskpaper'            # plain text to-do lists interface
 cask 'tower'                # Git client and gui
 cask 'transmit'             # file transfer application
-cask 'tableplus'            # GUI for relational databases
 
 # QuickLook Plugins
 cask 'jupyter-notebook-ql'
@@ -51,20 +55,3 @@ cask 'qlvideo'            # thumbnails, previews, and metadata for video files
 cask 'quicklook-csv'      # preview CSV data
 cask 'quicklook-json'     # preview JSON data
 cask 'suspicious-package' # Application for inspecting installer packages
-
-# Terminal
-cask 'dracula-terminal'     # Dark theme for Terminal.app
-cask 'iterm2'               # alternative to Apple's Terminal app
-cask 'hyper'                # terminal emulator
-cask 'warp'                 # Rust-based terminal
-
-# Web browsers
-cask 'chromium'             # Free and open-source web browser
-cask 'duckduckgo'           # web browser focusing on privacy
-cask 'firefox'              # Mozilla Firefox web browser
-cask 'tor-browser'          # web browser focusing on security
-
-# Window management utilities
-cask 'divvy'                # window arrangement utility
-cask 'spectacle'            # window arrangement utility
-cask 'stay'                 # multi-dsiplay window management utility
