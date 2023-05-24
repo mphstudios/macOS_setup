@@ -4,7 +4,6 @@
 set -Ee -o pipefail
 
 COMPUTER=${1:-$(scutil --get ComputerName)}
-REPOSITORY='https://raw.githubusercontent.com/mphstudios/macOS_setup/main'
 SRC_DIR=$(cd $(dirname $0); pwd)
 STARTTIME=$(date +%s)
 
