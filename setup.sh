@@ -21,8 +21,8 @@ source functions/defaults.sh
 source functions/dotfiles.sh
 source functions/git.sh
 source functions/homebrew.sh
-source functions/message.sh
 source functions/notifiers.sh
+source functions/output.sh
 source functions/shells.sh
 source functions/ssh_keys.sh
 source functions/sublime_text.sh
