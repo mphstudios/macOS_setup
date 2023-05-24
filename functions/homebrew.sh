@@ -4,9 +4,9 @@
 # @see https://docs.brew.sh/Manpage#bundle-subcommand
 function install_homebrew_bundles {
   install_bundle 'brewfiles/base'
-  confirm "Install cask applications?" "Y" && install_bundle 'brewfiles/casks' || overwrite "Skipped cask applications"
-  confirm "Install cask fonts?" "Y" && install_bundle 'brewfiles/fonts' || overwrite "Skipped cask fonts"
-  confirm "Install from App Store?" "Y" && install_bundle 'brewfiles/mas' || overwrite "Skipped Mac App Store applications"
+  confirm "Install cask applications?" "Y" && install_bundle 'brewfiles/casks' || skip "Skipped cask applications"
+  confirm "Install cask fonts?" "Y" && install_bundle 'brewfiles/fonts' || skip "cask fonts"
+  confirm "Install from App Store?" "Y" && install_bundle 'brewfiles/mas' || skip "Mac App Store applications"
 }
 
 # Install a package using Homebrew

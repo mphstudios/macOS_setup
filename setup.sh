@@ -77,16 +77,16 @@ then
   install_dotfiles
   touch $HOME/.private
 else
-  overwrite "Skipped installing dotfiles"
+  skip "Skipped installing dotfiles"
 fi
 
-confirm "Configure git?" "Y" && configure_git || overwrite "Skipped git configuration"
+confirm "Configure git?" "Y" && configure_git || skip "git configuration"
 
-confirm "Install update notifiers?" "Y" && install_notifiers || overwrite "Skipped installing update notifiers"
+confirm "Install update notifiers?" "Y" && install_notifiers || skip "installing update notifiers"
 
-confirm "Symlink Sublime Text settings to Dropbox?" "Y" && symlink_sublime_settings || overwrite "Skipped symnlinking Sublime Text settings to Dropbox"
+confirm "Symlink Sublime Text settings to Dropbox?" "Y" && symlink_sublime_settings || skip "symnlinking Sublime Text settings to Dropbox"
 
-confirm "Write system defaults?" "N" && write_defaults || overwrite "Skipped writing system defaults"
+confirm "Write system defaults?" "N" && write_defaults || skip "writing system defaults"
 
 ENDTIME=$(date +%s)
 
