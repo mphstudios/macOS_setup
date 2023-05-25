@@ -49,6 +49,5 @@ function install_asdf {
   echo -e "\n$brew_prefix/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
 
   message "adding asdf aliases"
-  echo -e "\n# asdf\nalias tool='$(command -v asdf)'" >> ~/.aliases
-  echo -e "alias tools='asdf current'" >> ~/.aliases
+  (echo; echo "alias tools='$(command -v asdf)'") >> ~/.aliases
 }
