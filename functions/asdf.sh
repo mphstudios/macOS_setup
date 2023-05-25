@@ -17,22 +17,25 @@ function install_asdf {
   # GPG is required to verify plugins
   install_homebrew_package 'gpg'
 
-  asdf plugin-add direnv https://github.com/asdf-vm/asdf-direnv.git
-  asdf direnv setup --shell bash --version latest
-  asdf direnv setup --shell zsh --version latest
+  asdf plugin-add direnv https://github.com/asdf-community/asdf-direnv
+  # Use Homebrew installed version of direnv
+  asdf direnv setup --shell bash --version system
+  asdf direnv setup --shell zsh --version system
+  asdf global direnv system
 
-  asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+  asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
   asdf install nodejs latest
   asdf global nodejs latest
   asdf reshim nodejs
 
-  asdf plugin-add python https://github.com/danhper/asdf-python.git
-  asdf install python latest:3
-  asdf global python latest:3
+  asdf plugin-add python https://github.com/asdf-community/asdf-python
+  asdf install python latest
+  asdf global python latest
   asdf reshim python
 
   asdf plugin-add ruby https://github.com/asdf-vm/asdf-ruby.git
   asdf install ruby latest
+  asdf global ruby latest
 
   local brew_prefix=$(brew --prefix asdf)
 
@@ -45,6 +48,7 @@ function install_asdf {
   message "adding asdf to zsh"
   echo -e "\n$brew_prefix/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
 
-  message "aliasing 'tools' to asdf"
-  echo -e "\n# asdf\nalias tools='$(command -v asdf)'" >> ~/.aliases
+  message "adding asdf aliases"
+  echo -e "\n# asdf\nalias tool='$(command -v asdf)'" >> ~/.aliases
+  echo -e "alias tools='asdf current'" >> ~/.aliases
 }
