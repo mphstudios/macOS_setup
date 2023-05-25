@@ -68,7 +68,7 @@ brew 'rcm'  # thoughtbot's management suite for dotfiles
 brew 'rename' # Perl-powered file rename script with many helpful built-ins
 brew 'ssh-copy-id' # Add a public key to a remote machine's authorized_keys file
 brew 'terminal-notifier' # Send macOS User Notifications from the command-line
-brew 'thefuck' # Programatically correct mistyped console commands
+brew 'thefuck' # Programmatically correct mistyped console commands
 brew 'trash' # CLI tool that moves files or folder to the trash
 brew 'tree' # Display directories as trees (with optional color/HTML output)
 brew 'vault' # Secures, stores, and tightly controls access to secrets
