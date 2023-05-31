@@ -72,7 +72,9 @@ install_asdf
 if confirm "Install dotfiles?" "Y"
 then
   install_dotfiles
+  message "Private environment variables, such as your NPM access token, should be set in ~/.private"
   touch $HOME/.private
+  echo "export NPM_TOKEN=$token" >> $HOME/.private
 else
   skip "installing dotfiles"
 fi
