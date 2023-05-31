@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# Display outdated application installed through Mac App Store
+#
+# Requires: terminal-notifier (available via Homebrew)
+#
+export PATH=/usr/local/bin:$PATH
+
+sleep 10 # give the network a chance to connect on wake from sleep
+
+# Remove pinned package from the list of outdated packages
+outdated=`mas outdated | awk '{if (NR!=1) {print $1}}'`
+
+if [ ! -z "$outdated" ]; then
+  terminal-notifier \
+    -group mas-outdated-notifier \
+    -title "Mac App Store application updates available" \
+    -message "$outdated" \
+    -sender com.apple.Terminal > /dev/null 2>&1
+fi

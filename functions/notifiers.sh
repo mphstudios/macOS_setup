@@ -9,6 +9,7 @@ function install_notifiers {
 
   # Set permissions on notifier scripts
   sudo chmod 755 /usr/local/bin/brew-updates-notifier
+  sudo chmod 755 /usr/local/bin/mas-updates-notifier
   sudo chmod 755 /usr/local/bin/npm-outdated-notifier
 
   if [ ! -d ~/Library/LaunchAgents ]
