@@ -23,9 +23,6 @@ tap 'homebrew/bundle'
 tap 'homebrew/core'
 tap 'homebrew/services'
 
-tap 'osgeo/osgeo4mac'
-tap 'thoughtbot/formulae'
-
 ## GNU utils
 brew 'coreutils' # GNU File, Shell, and Text utilities
 brew 'findutils' # GNU find, xargs, and locate
@@ -39,7 +36,6 @@ brew 'rsync' # fast incremental file transfer utility
 ## Update Git and add git large files support
 brew 'git'
 brew 'git-lfs' # git large file storage
-brew 'gitsh' # thoughtbot's interactive shell for git
 brew 'gh' # GitHub command-line tool
 
 ## more useful binaries
@@ -65,8 +61,8 @@ brew 'mosh' # A mobile shell replacement for interactive SSH terminals
 brew 'most' # Powerful paging program
 brew 'neofetch' # command-line system information tool
 brew 'node' # Platform built on V8 to build network applications
+brew 'obsidian' # Knowledge base app from local plain text Markdown files
 brew 'pandoc' # Swiss-army knife of markup format conversion
-brew 'rcm'  # thoughtbot's management suite for dotfiles
 brew 'rename' # Perl-powered file rename script with many helpful built-ins
 brew 'ssh-copy-id' # Add a public key to a remote machine's authorized_keys file
 brew 'terminal-notifier' # Send macOS User Notifications from the command-line
@@ -76,6 +72,11 @@ brew 'tree' # Display directories as trees (with optional color/HTML output)
 brew 'vault' # Secures, stores, and tightly controls access to secrets
 brew 'webkit2png' # Create screenshots of webpages from the terminal
 brew 'wget' # non-interactive tool to retrieve files using HTTP/HTTPS/FTP/FTPS
+
+brew 'thoughtbot/formulae/gitsh' # thoughtbot's interactive shell for git
+brew 'thoughtbot/formulae/rcm'  # thoughtbot's management suite for dotfiles
+
+brew 'vldmrkl/formulae/airdrop-cli' # a command-line interface for AirDrop
 
 # image processing
 brew 'exiftool' # PERL library for reading and writing EXIF metadata

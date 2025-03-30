@@ -29,7 +29,6 @@ cask 'gephi'                # network analysis and visualization
 cask 'hazel'                # automated file organization tool
 cask 'kaleidoscope'         # diff tool for code and images
 cask 'ngrok'                # secure introspectable tunnels to localhost
-cask 'nightowl'             # macOS menu bar tool to toggle dark mode
 cask 'nordvpn'              # NordVPN client
 cask 'openrefine'           # data cleanup and transformation interface
 cask 'protonvpn'            # ProtonVPN client
@@ -55,3 +54,7 @@ cask 'qlvideo'            # thumbnails, previews, and metadata for video files
 cask 'quicklook-csv'      # preview CSV data
 cask 'quicklook-json'     # preview JSON data
 cask 'suspicious-package' # Application for inspecting installer packages
+cask 'syntax-highlight'   # render source code with syntax highlighting
+
+# Nota bene: syntax-highlight may require the `--no-quarantine` flag
+# xattr -r -d com.apple.quarantine "/Applications/Syntax Highlight.app"
