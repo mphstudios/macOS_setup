@@ -41,12 +41,10 @@ brew 'gh' # GitHub command-line tool
 ## more useful binaries
 brew 'agg' # Asciicast to GIF converter
 brew 'asciinema' # Record Asciicast terminal sessions
-brew 'asdf' # runtime tool version manager
 brew 'awscli' # Official Amazon AWS command-line interface
 brew 'brightness' # Change macOS display brightness from the command-line
 brew 'circleci' # Reproduce the CircleCI environment locally
 brew 'csvkit' # Suite of command-line tools for working with csv data
-brew 'direnv' # Load/unload environment variables based on $PWD
 brew 'dnsmasq', link: false # Lightweight DNS forwarder and DHCP server
 brew 'dockutil' # Tool for managing dock items
 brew 'duti' # Select default apps for documents and URL schemes on macOS
@@ -66,7 +64,7 @@ brew 'pandoc' # Swiss-army knife of markup format conversion
 brew 'rename' # Perl-powered file rename script with many helpful built-ins
 brew 'ssh-copy-id' # Add a public key to a remote machine's authorized_keys file
 brew 'terminal-notifier' # Send macOS User Notifications from the command-line
-brew 'thefuck' # Programatically correct mistyped console commands
+brew 'thefuck' # Programmatically correct mistyped console commands
 brew 'trash' # CLI tool that moves files or folder to the trash
 brew 'tree' # Display directories as trees (with optional color/HTML output)
 brew 'vault' # Secures, stores, and tightly controls access to secrets
@@ -77,6 +75,11 @@ brew 'thoughtbot/formulae/gitsh' # thoughtbot's interactive shell for git
 brew 'thoughtbot/formulae/rcm'  # thoughtbot's management suite for dotfiles
 
 brew 'vldmrkl/formulae/airdrop-cli' # a command-line interface for AirDrop
+
+# Runtime tools version management
+brew 'asdf' # Manage multiple runtime versions with a single CLI tool
+brew 'direnv' # Load/unload environment variables based on $PWD
+brew 'pyenv' # Python version management (required for Zsh Spaceship Prompt)
 
 # image processing
 brew 'exiftool' # PERL library for reading and writing EXIF metadata

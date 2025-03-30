@@ -9,6 +9,7 @@ function install_notifiers {
 
   # Set permissions on notifier scripts
   sudo chmod 755 /usr/local/bin/brew-updates-notifier
+  sudo chmod 755 /usr/local/bin/mas-updates-notifier
   sudo chmod 755 /usr/local/bin/npm-outdated-notifier
 
   if [ ! -d ~/Library/LaunchAgents ]
@@ -22,7 +23,6 @@ function install_notifiers {
   # and must NOT be writable by the group or other
   sudo chmod 644 ~/Library/LaunchAgents/*.plist
 
-  message "adding alias 'notify' for terminal-notifier"
-  local xpath=$(command -v terminal-notifier)
-  echo -e "\n# Terminal-notifier\nalias notify='$xpath'" >> ~/.aliases
+  message "adding alias for terminal-notifier"
+  (echo; echo "alias notify='$(command -v terminal-notifier)'") >> ~/.aliases
 }

@@ -16,7 +16,7 @@ function install_homebrew_package {
   local package=$1
 
   if [[ -z $package ]]; then
-    echo "package is a required argument"
+    message "package is a required argument"
     return 0
   fi
 
@@ -63,12 +63,12 @@ function install_homebrew {
     /bin/bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
     # Set Homebrew environment variables and add brew command to PATH
-    (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.bash_profile
-    (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+    (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.profile
 
-    export HOMEBREW_CASK_OPTS="--require-sha"
-    export HOMEBREW_COLOR=1
+    echo 'export HOMEBREW_CASK_OPTS="--appdir=/Applications --require-sha"' >> ~/.profile
+    echo 'export HOMEBREW_COLOR=1' >> ~/.profile
+
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 
     # Disable analytics @see docs.brew.sh/Analytics
     brew analytics off
