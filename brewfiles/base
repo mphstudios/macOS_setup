@@ -74,11 +74,6 @@ brew 'tree' # Display directories as trees (with optional color/HTML output)
 brew 'webkit2png' # Create screenshots of webpages from the terminal
 brew 'wget' # non-interactive tool to retrieve files using HTTP/HTTPS/FTP/FTPS
 
-# Runtime tools version management
-brew 'asdf' # Manage multiple runtime versions with a single CLI tool
-brew 'direnv' # Load/unload environment variables based on $PWD
-brew 'pyenv' # Python version management (required for Zsh Spaceship Prompt)
-
 # image processing
 brew 'exiftool' # PERL library for reading and writing EXIF metadata
 brew 'graphicsmagick'
@@ -98,11 +93,15 @@ brew 'fzf'  # a general-purpose command-line fuzzy finder
 brew 'fzy' # Fast, simple fuzzy text selector with an advanced scoring algorithm
 brew 'pick' # thoughtbot's fuzzy search tool to select an entry from a list
 brew 'ripgrep' # tool to recursively search directories for a regex pattern
-brew 'the_silver_searcher' # Code-search similar to ack! with a focus on speed.
+brew 'the_silver_searcher' # Code-search similar to ack! with a focus on speed
 
 # Shell tools
 brew 'shellcheck' # shell script static analysis tool
 brew 'starship' # cross-shell prompt
+
+# tool version management
+brew 'mise' # Polyglot runtime manager (asdf rust clone)
+brew 'pyenv' # Python version management (required for Zsh Spaceship Prompt)
 
 ## GNU Bourne Again SHell
 brew 'bash' # Bourne-Again SHell, a UNIX command interpreter

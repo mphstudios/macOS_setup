@@ -14,7 +14,6 @@ then
   exit 1
 fi
 
-source functions/asdf.sh
 source functions/confirm.sh
 source functions/defaults.sh
 source functions/dotfiles.sh
@@ -66,8 +65,6 @@ install_command_line_tools
 install_homebrew_bundles
 
 install_shells
-
-install_asdf
 
 if confirm "Install dotfiles?" "Y"
 then
