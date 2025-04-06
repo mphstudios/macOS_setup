@@ -1,6 +1,6 @@
 ## Homebrew bundles
 
-[Homebrew Bundle](https://github.com/Homebrew/homebrew-bundle) files for Homebrew packages, Homebrew Cask applications, and Mac App Store applications.
+[Homebrew Bundle](https://docs.brew.sh/Brew-Bundle-and-Brewfile) files for Homebrew packages, Homebrew Cask applications, and Mac App Store applications.
 
 Bundle files are read by the macOS setup [`install_homebrew_bundles`](/functions/homebrew.sh) function.
 
