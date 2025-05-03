@@ -1,0 +1,10 @@
+[task_config]
+includes = ["tasks"]
+
+[tools]
+# allow mise to verify tools automatically
+cosign = "latest"
+slsa-verifier = "latest"
+
+# completion and parsing support for tasks
+usage = "latest"
