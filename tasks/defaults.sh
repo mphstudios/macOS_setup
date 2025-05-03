@@ -727,56 +727,11 @@ function write_defaults {
   defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false
 
   ###############################################################################
-  # Google Chrome & Google Chrome Canary                                        #
-  ###############################################################################
-
-  # Disable the all too sensitive backswipe on trackpads
-  defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
-  defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
-
-  # Disable the all too sensitive backswipe on Magic Mouse
-  defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false
-  defaults write com.google.Chrome.canary AppleEnableMouseSwipeNavigateWithScrolls -bool false
-
-  # Use the system-native print preview dialog
-  defaults write com.google.Chrome DisablePrintPreview -bool true
-  defaults write com.google.Chrome.canary DisablePrintPreview -bool true
-
-  # Expand the print dialog by default
-  defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true
-  defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool true
-
-  ###############################################################################
   # GPGMail 2                                                                   #
   ###############################################################################
 
   # Disable signing emails by default
   defaults write ~/Library/Preferences/org.gpgtools.gpgmail SignNewEmailsByDefault -bool false
-
-  ###############################################################################
-  # Twitter.app                                                                 #
-  ###############################################################################
-
-  # Disable smart quotes as it’s annoying for code tweets
-  defaults write com.twitter.twitter-mac AutomaticQuoteSubstitutionEnabled -bool false
-
-  # Show the app window when clicking the menu bar icon
-  defaults write com.twitter.twitter-mac MenuItemBehavior -int 1
-
-  # Enable the hidden ‘Develop’ menu
-  defaults write com.twitter.twitter-mac ShowDevelopMenu -bool true
-
-  # Open links in the background
-  defaults write com.twitter.twitter-mac openLinksInBackground -bool true
-
-  # Allow closing the ‘new tweet’ window by pressing `Esc`
-  defaults write com.twitter.twitter-mac ESCClosesComposeWindow -bool true
-
-  # Show full names rather than Twitter handles
-  defaults write com.twitter.twitter-mac ShowFullNames -bool true
-
-  # Hide the app in the background if it’s not the front-most window
-  defaults write com.twitter.twitter-mac HideInBackground -bool true
 
   ###############################################################################
   # Kill affected applications                                                  #
