@@ -2,114 +2,69 @@
 # Homebrew Bundle
 # https://github.com/Homebrew/homebrew-bundle
 #
-# Running `brew leaves` will show installed formulae that are not dependencies
-# of another installed formula.
-#
-# To generate a base Brewfile run the following commands:
-#
-#   `brew tap | sed "s/^.*/tap '&'/" > Brewfile`
-#   `brew leaves | sed "s/^.*/brew '&'/" >> Brewfile`
-#
-# To generate a Brewfile listing all installed packages, casks, and dependecies,
-# run the command `brew bundle dump -f > Brewfile`
-#
-# This Brewfile can also be used as a whitelist and uninstall all Homebrew
-# formulae not listed in Brewfile by using the command `brew bundle cleanup`
-#
+# `brew leaves` shows installed formulae that are not dependencies of another.
+# `brew bundle dump -f > Brewfile` generates a complete Brewfile.
+# `brew bundle cleanup` removes formulae not listed in the Brewfile.
 ##
 
-## Additional Homebrew repositories
-tap 'homebrew/bundle'
-tap 'homebrew/core'
-tap 'homebrew/services'
+## Shells
+brew 'bash'    # GNU Bourne-Again SHell
+brew 'nushell' # Modern shell for the GitHub era
+brew 'zsh'     # UNIX shell
 
-tap 'osgeo/osgeo4mac'
-tap 'thoughtbot/formulae'
+## Shell tools
+brew 'atuin'      # Improved shell history for bash, zsh, fish, and nushell
+brew 'carapace'   # Multi-shell multi-command argument completer
+brew 'sheldon'    # Cross-shell plugin manager
+brew 'shellcheck' # Static analysis tool for shell scripts
+brew 'starship'   # Cross-shell prompt
+brew 'zellij'     # Terminal workspace and multiplexer
+brew 'zoxide'     # Shell extension to navigate the filesystem faster
 
-## GNU utils
-brew 'coreutils' # GNU File, Shell, and Text utilities
-brew 'findutils' # GNU find, xargs, and locate
-brew 'parallel'  # Shell command parallelization utility
+## Core utils (newer than macOS-bundled versions)
+brew 'curl'  # Get a file from an HTTP, HTTPS or FTP server
+brew 'grep'  # GNU grep, egrep and fgrep
+brew 'rsync' # Fast incremental file transfer utility
 
-## Homebrew versions of macOS installed tools
-brew 'curl' # Get a file from an HTTP, HTTPS or FTP server
-brew 'grep' # GNU grep, egrep and fgrep
-brew 'rsync' # fast incremental file transfer utility
+## Git
+brew 'git'     # Distributed version control system
+brew 'git-lfs' # Git large file storage
+brew 'gh'      # GitHub command-line tool
 
-## Update Git and add git large files support
-brew 'git'
-brew 'git-lfs' # git large file storage
-brew 'gitsh' # thoughtbot's interactive shell for git
-brew 'gh' # GitHub command-line tool
+## Files and search
+brew 'bat'     # cat with syntax highlighting and Git integration
+brew 'eza'     # Modern replacement for ls
+brew 'fd'      # Simple, fast alternative to find
+brew 'fzf'     # General-purpose command-line fuzzy finder
+brew 'ripgrep' # Recursively search directories for a regex pattern
+brew 'tlrc'    # Official tldr client written in Rust
+brew 'trash'   # Move files to the Trash via the CLI
+brew 'tree'    # Display directories as trees
+brew 'yazi'    # Blazing fast terminal file manager based on async I/O
 
-## more useful binaries
-brew 'agg' # Asciicast to GIF converter
-brew 'asciinema' # Record Asciicast terminal sessions
-brew 'awscli' # Official Amazon AWS command-line interface
-brew 'brightness' # Change macOS display brightness from the command-line
-brew 'circleci' # Reproduce the CircleCI environment locally
-brew 'csvkit' # Suite of command-line tools for working with csv data
-brew 'dnsmasq', link: false # Lightweight DNS forwarder and DHCP server
-brew 'dockutil' # Tool for managing dock items
-brew 'duti' # Select default apps for documents and URL schemes on macOS
-brew 'exa'  # Modern replacement for shell `ls` command
-brew 'graphviz' # Graph visualization software from AT&T and Bell Labs
-brew 'highlight' # convert source code to formatted text with syntax highlighting
-brew 'jupyterlab' # Interactive environments for writing and running code
-brew 'librsvg' # Library to render SVG files using Cairo
-brew 'libyaml' # YAML Parser
-brew 'marp-cli' # Convert markdown to slides
-brew 'mosh' # A mobile shell replacement for interactive SSH terminals
-brew 'most' # Powerful paging program
-brew 'neofetch' # command-line system information tool
-brew 'node' # Platform built on V8 to build network applications
-brew 'pandoc' # Swiss-army knife of markup format conversion
-brew 'rcm'  # thoughtbot's management suite for dotfiles
-brew 'rename' # Perl-powered file rename script with many helpful built-ins
-brew 'ssh-copy-id' # Add a public key to a remote machine's authorized_keys file
-brew 'terminal-notifier' # Send macOS User Notifications from the command-line
-brew 'thefuck' # Programmatically correct mistyped console commands
-brew 'trash' # CLI tool that moves files or folder to the trash
-brew 'tree' # Display directories as trees (with optional color/HTML output)
-brew 'webkit2png' # Create screenshots of webpages from the terminal
-brew 'wget' # non-interactive tool to retrieve files using HTTP/HTTPS/FTP/FTPS
+## HTTP clients
+brew 'httpie' # User-friendly cURL replacement
+brew 'wget'   # Non-interactive HTTP/HTTPS/FTP file retrieval
 
-# image processing
-brew 'exiftool' # PERL library for reading and writing EXIF metadata
-brew 'graphicsmagick'
-brew 'imagemagick'
-brew 'jp2a' # utility that converts JPG images to ASCII
-brew 'vips' # Image processing library
+## Containers
+brew 'podman' # Tool for managing OCI containers and pods
 
-# JSON
-brew 'gron' # transform JSON into discrete assignments to make it easier to grep
-brew 'jq' # Lightweight and flexible command-line JSON processor
-brew 'jsonlint' # JSON parser and validator with a CLI
+## Image processing
+brew 'graphicsmagick' # Image processing tools
 
-# Search
-brew 'ack' # Search tool like grep, but optimized for programmers
-brew 'fd' # a simple, fast, and user-friendly alternative to `find`
-brew 'fzf'  # a general-purpose command-line fuzzy finder
-brew 'fzy' # Fast, simple fuzzy text selector with an advanced scoring algorithm
-brew 'pick' # thoughtbot's fuzzy search tool to select an entry from a list
-brew 'ripgrep' # tool to recursively search directories for a regex pattern
-brew 'the_silver_searcher' # Code-search similar to ack! with a focus on speed
+## macOS defaults
+# TODO: Move to mise (github:dsully/macos-defaults) after Apple Silicon migration
+#       — no x86_64 prebuilt binary, Homebrew compiles from source on Intel
+tap 'dsully/tap'
+brew 'macos-defaults' # Manage macOS defaults declaratively via YAML
 
-# Shell tools
-brew 'shellcheck' # shell script static analysis tool
-brew 'starship' # cross-shell prompt
+## macOS utilities
+brew 'duti'              # Select default apps for documents and URL schemes
+brew 'stow'              # Organize files using symlinks
 
-# tool version management
-brew 'mise' # Polyglot runtime manager (asdf rust clone)
-brew 'pyenv' # Python version management (required for Zsh Spaceship Prompt)
+## Runtime and task management
+brew 'mise' # Dev tools, environment, and task manager
 
-## GNU Bourne Again SHell
-brew 'bash' # Bourne-Again SHell, a UNIX command interpreter
-brew 'bash-completion@2'
-brew 'vcprompt' # Provide version control info in shell prompts
-
-## Z Shell
-brew 'zsh' # UNIX shell (command interpreter)
-brew 'zsh-autosuggestions'
-brew 'zsh-completions'
-brew 'zplug'
+## Third-party taps
+tap 'tobi/try https://github.com/tobi/try'
+brew 'try' # Ephemeral workspace manager
