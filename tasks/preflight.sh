@@ -81,7 +81,7 @@ done
 
 # LaunchAgents
 printf "\nLaunchAgents:\n"
-for plist in "$MISE_PROJECT_DIR/LaunchAgents"/local.*.plist; do
+for plist in "$MISE_PROJECT_DIR/system/LaunchAgents"/local.*.plist; do
   [[ -f "$plist" ]] || continue
   name=$(basename "$plist")
   if [[ -f "$HOME/Library/LaunchAgents/$name" ]]; then
@@ -99,7 +99,7 @@ done
 for plist in "$HOME/Library/LaunchAgents"/local.*.plist; do
   [[ -f "$plist" ]] || continue
   name=$(basename "$plist")
-  if [[ ! -f "$MISE_PROJECT_DIR/LaunchAgents/$name" ]]; then
+  if [[ ! -f "$MISE_PROJECT_DIR/system/LaunchAgents/$name" ]]; then
     printf "  ${STATUS_WARN} %s (stale, will remove)\n" "$name"
   fi
 done

@@ -24,28 +24,37 @@ The script bootstraps prerequisites (Xcode CLT, Homebrew, mise), prompts for mac
 ## Architecture
 
 ```
-bootstrap.sh              Thin bootstrap (~80 lines)
-.env                      Machine-specific values (git-ignored, created by bootstrap)
-mise.toml                 Tool versions + task config
-brewfiles/                Declarative package lists (base, casks, fonts, mas)
-defaults/                 macOS defaults as YAML (applied by macos-defaults)
-LaunchAgents/             User LaunchAgents (local.* namespace)
-bin/                      Utility scripts
-lib/output.sh             Shared output functions (info, ok, skip, warn, die)
+bootstrap.sh                Thin bootstrap (~80 lines)
+.env                        Machine-specific values (git-ignored)
+mise.toml                   Tool versions + task config
+
+brewfiles/                  Declarative package lists
+  base, casks, fonts, mas
+
+defaults/                   macOS defaults as YAML (applied by macos-defaults)
+  general, dock, finder, safari, screen, apps, updates
+
+system/                     Files installed onto the machine
+  bin/                      Scripts → $(brew --prefix)/bin/
+  LaunchAgents/             Plists → ~/Library/LaunchAgents/
+  assets/icons/             Notification icons
+
+lib/output.sh               Shared output functions
+
 tasks/
-  setup.sh                Meta-task: orchestrates full setup with logging
-  preflight.sh            Read-only system check (no side effects)
-  install/                Prerequisites
-    xcode.sh              Xcode Command Line Tools
-    homebrew.sh           Homebrew package manager
-    brew.sh               Install packages from a brewfile
-    launch-agents.sh      LaunchAgent lifecycle management
-  configure/              Configuration
-    defaults.sh           macOS system defaults
-    defaults-export.sh    Export current defaults for a domain
-    dotfiles.sh           Clone and setup dotfiles
-    git.sh                Git config + SSH keys
-    shell.sh              Login shells + default shell
+  setup.sh                  Meta-task: orchestrates full setup with logging
+  preflight.sh              Read-only system check (no side effects)
+  install/
+    xcode.sh                Xcode Command Line Tools
+    homebrew.sh             Homebrew package manager
+    brew.sh                 Install packages from a brewfile
+    launch-agents.sh        LaunchAgent lifecycle management
+  configure/
+    defaults.sh             macOS system defaults
+    defaults-export.sh      Export current defaults for a domain
+    dotfiles.sh             Clone and setup dotfiles
+    git.sh                  Git config + SSH keys
+    shell.sh                Login shells + default shell
 ```
 
 Tasks are atomic and idempotent — they are safe to re-run at any time.
@@ -58,7 +67,7 @@ Tasks are atomic and idempotent — they are safe to re-run at any time.
 | How tools are configured | [dotfiles repository](https://github.com/mphstudios/dotfiles) |
 | System preferences | this repository (`defaults/*.yaml`) |
 | Machine identity | this repository (`.env`) |
-| LaunchAgents | this repository (`local.*` namespace) |
+| LaunchAgents | this repository (`system/LaunchAgents/local.*`) |
 
 ## Preflight Check
 

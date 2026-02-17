@@ -19,7 +19,7 @@ fi
 
 # Install consolidated notifier script and icons
 BIN_DIR="$(brew --prefix)/bin/package-updates-notifier"
-BIN_SRC="$MISE_PROJECT_DIR/bin/package-updates-notifier"
+BIN_SRC="$MISE_PROJECT_DIR/system/bin/package-updates-notifier"
 if [[ -f "$BIN_DIR" ]] && diff -q "$BIN_SRC" "$BIN_DIR" >/dev/null 2>&1; then
   skip "package-updates-notifier (current)"
 else
@@ -33,7 +33,7 @@ fi
 ICON_DEST="$(brew --prefix)/share/package-updates-notifier"
 mkdir -p "$ICON_DEST"
 icons_changed=false
-for icon in "$MISE_PROJECT_DIR/assets/icons"/*.png; do
+for icon in "$MISE_PROJECT_DIR/system/assets/icons"/*.png; do
   [[ -f "$icon" ]] || continue
   name=$(basename "$icon")
   if [[ -f "$ICON_DEST/$name" ]] && diff -q "$icon" "$ICON_DEST/$name" >/dev/null 2>&1; then
@@ -50,7 +50,7 @@ fi
 
 # --- LaunchAgent Lifecycle ---
 # Only manages agents in the local.* namespace (never touches system/third-party)
-REPO_AGENTS="$MISE_PROJECT_DIR/LaunchAgents"
+REPO_AGENTS="$MISE_PROJECT_DIR/system/LaunchAgents"
 USER_AGENTS="$HOME/Library/LaunchAgents"
 USER_ID=$(id -u)
 
