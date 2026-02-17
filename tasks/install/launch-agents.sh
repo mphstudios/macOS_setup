@@ -7,9 +7,15 @@ set -euo pipefail
 
 source "${MISE_PROJECT_DIR}/lib/output.sh"
 
-# Install alerter (dependency of the notifier script)
+# Install notification tool (dependency of the notifier script)
+# Prefer alerter (alert-style, stays on screen) but fall back to
+# terminal-notifier on Intel where alerter has no x86_64 binary.
 # @see https://github.com/vjeantet/alerter
-brew install vjeantet/tap/alerter 2>/dev/null || true
+if [[ "$(uname -m)" == "arm64" ]]; then
+  brew install vjeantet/tap/alerter 2>/dev/null || true
+else
+  brew install terminal-notifier 2>/dev/null || true
+fi
 
 # Install consolidated notifier script and icons
 BIN_DIR="$(brew --prefix)/bin/package-updates-notifier"
@@ -26,6 +32,7 @@ fi
 # Install notification icons (used by --appIcon in alerter)
 ICON_DEST="$(brew --prefix)/share/package-updates-notifier"
 mkdir -p "$ICON_DEST"
+icons_changed=false
 for icon in "$MISE_PROJECT_DIR/assets/icons"/*.png; do
   [[ -f "$icon" ]] || continue
   name=$(basename "$icon")
@@ -33,8 +40,13 @@ for icon in "$MISE_PROJECT_DIR/assets/icons"/*.png; do
     continue
   fi
   install -m 644 "$icon" "$ICON_DEST/$name"
+  icons_changed=true
 done
-ok "Notification icons"
+if [[ "$icons_changed" == "true" ]]; then
+  ok "Installed: notification icons"
+else
+  skip "notification icons (current)"
+fi
 
 # --- LaunchAgent Lifecycle ---
 # Only manages agents in the local.* namespace (never touches system/third-party)

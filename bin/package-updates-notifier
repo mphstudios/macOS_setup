@@ -3,27 +3,40 @@
 # Display outdated Homebrew formulae, Mac App Store apps, mise tools,
 # and global npm packages in the Notification Center on macOS.
 #
-# Requires: alerter (available via Homebrew)
+# Requires: alerter or terminal-notifier (available via Homebrew)
 #
 # Homebrew: /opt/homebrew/bin (Apple Silicon), /usr/local/bin (Intel)
 BREW_PREFIX=/opt/homebrew
 [ -d "$BREW_PREFIX" ] || BREW_PREFIX=/usr/local
 PATH=$BREW_PREFIX/bin:$PATH
 
-# alerter is required for all notifications
-command -v alerter > /dev/null 2>&1 || exit 0
+# Prefer alerter (alert-style, stays on screen) with terminal-notifier
+# as fallback on Intel where alerter has no x86_64 binary.
+# Use --help to verify the binary actually runs on this architecture.
+NOTIFIER=""
+if alerter --help > /dev/null 2>&1; then
+  NOTIFIER="alerter"
+elif command -v terminal-notifier > /dev/null 2>&1; then
+  NOTIFIER="terminal-notifier"
+else
+  exit 0
+fi
 
 # Icons installed by tasks/install/launch-agents.sh
 ICON_DIR="$BREW_PREFIX/share/package-updates-notifier"
 
 sleep 10 # give the network a chance to connect on wake from sleep
 
-# Send a macOS alert notification if there is output to display.
-# Uses --group to replace previous notifications in the same group,
-# preventing duplicates across runs. Backgrounded because alerter
-# blocks until the user dismisses or --timeout expires.
-# --appIcon uses a private macOS API; alerter handles fallback gracefully.
+# Send a macOS notification if there is output to display.
+# Uses --group/-group to replace previous notifications in the same group,
+# preventing duplicates across runs.
+#
+# alerter: blocks until dismissed or --timeout expires, so backgrounded.
+#          Supports --appIcon (private macOS API) for per-source icons.
+# terminal-notifier: returns immediately (banner-style, auto-dismisses).
+#
 # @see https://github.com/vjeantet/alerter
+# @see https://github.com/julienXX/terminal-notifier
 notify_if_outdated() {
   title="$1"
   subtitle="$2"
@@ -32,15 +45,24 @@ notify_if_outdated() {
   output="$5"
 
   if [ -n "$output" ]; then
-    icon_flag=""
-    [ -f "$ICON_DIR/$icon" ] && icon_flag="--appIcon $ICON_DIR/$icon"
-    alerter \
-      --title "$title" \
-      --subtitle "$subtitle" \
-      --message "$output" \
-      --group "$group" \
-      --timeout 30 \
-      $icon_flag > /dev/null 2>&1 &
+    if [ "$NOTIFIER" = "alerter" ]; then
+      icon_flag=""
+      [ -f "$ICON_DIR/$icon" ] && icon_flag="--appIcon $ICON_DIR/$icon"
+      alerter \
+        --title "$title" \
+        --subtitle "$subtitle" \
+        --message "$output" \
+        --group "$group" \
+        --timeout 30 \
+        $icon_flag > /dev/null 2>&1 &
+    else
+      terminal-notifier \
+        -title "$title" \
+        -subtitle "$subtitle" \
+        -message "$output" \
+        -group "$group" \
+        -sender com.apple.Terminal > /dev/null 2>&1
+    fi
   fi
 }
 
@@ -67,10 +89,10 @@ if command -v mise > /dev/null 2>&1; then
     "mise-updates" "mise.png" "$mise_outdated"
 fi
 
-# NPM packages
+# npm packages
 if command -v npm > /dev/null 2>&1; then
   npm_outdated=$(npm --global outdated 2>/dev/null | awk '{if (NR!=1) {print $1}}')
-  notify_if_outdated "NPM" "global package updates available" \
+  notify_if_outdated "npm" "global package updates available" \
     "npm-updates" "npm.png" "$npm_outdated"
 fi
 
