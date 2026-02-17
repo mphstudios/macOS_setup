@@ -1,0 +1,124 @@
+---
+description: Mail
+kill: [Mail]
+
+data:
+  com.apple.mail:
+    # Disable send and reply animations
+    DisableReplyAnimations: true
+    DisableSendAnimations: true
+
+    # Copy addresses as "foo@example.com" not "Name <foo@example.com>"
+    AddressesIncludeNameOnPasteboard: false
+
+    # ⌘+Enter sends email
+    NSUserKeyEquivalents:
+      Send: '@\U21a9'
+
+    # Threaded mode, sorted by date
+    DraftsViewerAttributes:
+      DisplayInThreadedMode: "yes"
+      SortedDescending: "no"
+      SortOrder: "received-date"
+
+    # Disable automatic spell checking
+    SpellCheckingBehavior: "NoSpellCheckingEnabled"
+
+---
+description: Terminal
+kill: [Terminal]
+
+data:
+  com.apple.terminal:
+    # UTF-8 only
+    StringEncodings: [4]
+
+    # Secure Keyboard Entry
+    SecureKeyboardEntry: true
+
+    # Disable line marks
+    ShowLineMarks: 0
+
+---
+description: Activity Monitor
+
+data:
+  com.apple.ActivityMonitor:
+    # Show main window on launch
+    OpenMainWindow: true
+
+    # CPU usage in Dock icon
+    IconType: 5
+
+    # Show all processes
+    ShowCategory: 0
+
+    # Sort by CPU usage, descending
+    SortColumn: "CPUUsage"
+    SortDirection: 0
+
+---
+description: TextEdit
+
+data:
+  com.apple.TextEdit:
+    # Plain text mode for new documents
+    RichText: 0
+
+    # UTF-8 for open and save
+    PlainTextEncoding: 4
+    PlainTextEncodingForWrite: 4
+
+---
+description: Disk Utility
+
+data:
+  com.apple.DiskUtility:
+    # Enable debug menu
+    DUDebugMenuEnabled: true
+
+    # Advanced image options
+    advanced-image-options: true
+
+---
+description: QuickTime Player
+
+data:
+  com.apple.QuickTimePlayerX:
+    # Auto-play videos when opened
+    MGPlayMovieOnOpen: true
+
+---
+description: Messages
+kill: [Messages]
+
+data:
+  com.apple.messageshelper.MessageController:
+    SOInputLineSettings:
+      automaticEmojiSubstitutionEnablediMessage: false
+      automaticQuoteSubstitutionEnabled: false
+      continuousSpellCheckingEnabled: false
+
+---
+description: Photos
+current_host: true
+
+data:
+  com.apple.ImageCapture:
+    # Prevent Photos from opening when devices are plugged in
+    disableHotPlug: true
+
+---
+description: Google Chrome
+
+data:
+  com.google.Chrome:
+    # Disable trackpad swipe navigation
+    AppleEnableSwipeNavigateWithScrolls: false
+    AppleEnableMouseSwipeNavigateWithScrolls: false
+
+    # System-native print preview
+    DisablePrintPreview: true
+
+    # Expand print dialog
+    PMPrintingExpandedStateForPrint2: true

@@ -1,0 +1,52 @@
+---
+description: Dock and Mission Control
+kill: [Dock]
+
+data:
+  com.apple.dock:
+    # Highlight hover effect for stack grid view
+    mouse-over-hilite-stack: true
+
+    # Icon size: 36 pixels
+    tilesize: 36
+
+    # Scale effect for minimize/maximize
+    mineffect: "scale"
+
+    # Minimize windows into application icon
+    minimize-to-application: true
+
+    # Spring loading for all Dock items
+    enable-spring-load-actions-on-all-items: true
+
+    # Indicator lights for open applications
+    show-process-indicators: true
+
+    # Do not animate opening applications
+    launchanim: false
+
+    # Fast Mission Control animations
+    expose-animation-duration: 0.1
+
+    # Do not group windows by application in Mission Control
+    expose-group-by-app: false
+
+    # Do not rearrange Spaces based on most recent use
+    mru-spaces: false
+
+    # No auto-hiding delay
+    autohide-delay: 0
+
+    # Hot corners (0=none, 2=Mission Control, 3=App Windows, 4=Desktop, 5=Screen Saver, 6=Disable Screen Saver)
+    # Top left: disable screen saver
+    wvous-tl-corner: 6
+    wvous-tl-modifier: 0
+    # Top right: start screen saver
+    wvous-tr-corner: 5
+    wvous-tr-modifier: 0
+    # Bottom right: application windows
+    wvous-br-corner: 3
+    wvous-br-modifier: 0
+    # Bottom left: desktop
+    wvous-bl-corner: 4
+    wvous-bl-modifier: 0

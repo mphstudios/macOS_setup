@@ -1,0 +1,81 @@
+---
+description: Safari
+kill: [Safari]
+
+data:
+  com.apple.Safari:
+    # Privacy: do not send search queries to Apple
+    UniversalSearchEnabled: false
+    SuppressSearchSuggestions: true
+
+    # Tab highlights each item on a web page
+    WebKitTabToLinksPreferenceKey: true
+    com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks: true
+
+    # Show full URL in address bar
+    ShowFullURLInSmartSearchField: true
+
+    # Home page
+    HomePage: "about:blank"
+
+    # Do not open "safe" files automatically after downloading
+    AutoOpenSafeDownloads: false
+
+    # Backspace navigates back
+    com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled: true
+
+    # Hide sidebar in Top Sites
+    ShowSidebarInTopSites: false
+
+    # Disable thumbnail cache for History and Top Sites
+    DebugSnapshotsUpdatePolicy: 2
+
+    # Enable debug menu
+    IncludeInternalDebugMenu: true
+
+    # Search banners: Contains instead of Starts With
+    FindOnPageMatchesWordStartsOnly: false
+
+    # Remove icons from bookmarks bar
+    ProxiesInBookmarksBar: "()"
+
+    # Enable Develop menu and Web Inspector
+    IncludeDevelopMenu: true
+    WebKitDeveloperExtrasEnabledPreferenceKey: true
+    com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled: true
+
+    # Faster initial page render
+    WebKitInitialTimedLayoutDelay: 0.25
+
+    # Continuous spellchecking
+    WebContinuousSpellCheckingEnabled: true
+
+    # Disable automatic spelling correction
+    WebAutomaticSpellingCorrectionEnabled: false
+
+    # Disable AutoFill
+    AutoFillFromAddressBook: false
+    AutoFillPasswords: false
+    AutoFillCreditCardData: false
+    AutoFillMiscellaneousForms: false
+
+    # Warn about fraudulent websites
+    WarnAboutFraudulentWebsites: true
+
+    # Disable Java
+    WebKitJavaEnabled: false
+    com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled: false
+
+    # Block pop-up windows
+    WebKitJavaScriptCanOpenWindowsAutomatically: false
+    com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically: false
+
+    # Disable inline media playback
+    WebKitMediaPlaybackAllowsInline: false
+    com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback: false
+
+    # Do Not Track
+    SendDoNotTrackHTTPHeader: true
+
+    # Auto-update extensions
+    InstallExtensionUpdatesAutomatically: true

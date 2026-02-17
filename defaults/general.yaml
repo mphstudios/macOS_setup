@@ -1,0 +1,144 @@
+---
+description: General UI/UX
+kill: [SystemUIServer, cfprefsd]
+
+data:
+  NSGlobalDomain:
+    # Sidebar icon size: medium
+    NSTableViewDefaultSizeMode: 2
+
+    # Always show scrollbars (WhenScrolling, Automatic, Always)
+    AppleShowScrollBars: "Always"
+
+    # Disable window opening/closing animations
+    NSAutomaticWindowAnimationsEnabled: false
+
+    # Disable Quick Look animation
+    QLPanelAnimationDuration: 0
+
+    # Disable focus ring animation
+    NSUseAnimatedFocusRing: false
+
+    # Fast window resize for Cocoa applications
+    NSWindowResizeTime: 0.001
+
+    # Expand save panel by default
+    NSNavPanelExpandedStateForSaveMode: true
+    NSNavPanelExpandedStateForSaveMode2: true
+
+    # Expand print panel by default
+    PMPrintingExpandedStateForPrint: true
+    PMPrintingExpandedStateForPrint2: true
+
+    # Save to disk (not iCloud) by default
+    NSDocumentSaveNewDocumentsToCloud: false
+
+    # Display ASCII control characters using caret notation
+    NSTextShowsControlCharacters: true
+
+    # Disable automatic termination of inactive apps
+    NSDisableAutomaticTermination: true
+
+    # Disable automatic capitalization
+    NSAutomaticCapitalizationEnabled: false
+
+    # Disable smart dashes
+    NSAutomaticDashSubstitutionEnabled: false
+
+    # Disable automatic period substitution
+    NSAutomaticPeriodSubstitutionEnabled: false
+
+    # Disable smart quotes
+    NSAutomaticQuoteSubstitutionEnabled: false
+
+    # Disable automatic spelling correction
+    NSAutomaticSpellingCorrectionEnabled: false
+
+    # Enable spring loading for directories
+    com.apple.springing.enabled: true
+
+    # Remove spring loading delay
+    com.apple.springing.delay: 0
+
+    # Font smoothing
+    AppleFontSmoothing: 1
+
+    # Web Inspector in web views
+    WebKitDeveloperExtras: true
+
+  com.apple.systempreferences:
+    # Enable Resume system-wide
+    NSQuitAlwaysKeepsWindows: true
+
+  com.apple.CrashReporter:
+    # Disable crash reporter dialog
+    DialogType: "none"
+
+  com.apple.helpviewer:
+    # Non-floating Help Viewer windows
+    DevMode: true
+
+  com.apple.print.PrintingPrefs:
+    # Auto-quit printer app when print jobs complete
+    "Quit When Finished": true
+
+---
+description: Input — keyboard
+kill: [cfprefsd]
+
+data:
+  NSGlobalDomain:
+    # Disable "natural" scrolling
+    com.apple.swipescrolldirection: false
+
+    # Full keyboard access for all controls (Tab in modal dialogs)
+    AppleKeyboardUIMode: 3
+
+    # Disable press-and-hold for keys in favor of key repeat
+    ApplePressAndHoldEnabled: false
+
+    # Fast keyboard repeat rate
+    KeyRepeat: 1
+    InitialKeyRepeat: 10
+
+---
+description: Input — trackpad (current host)
+current_host: true
+kill: [cfprefsd]
+
+data:
+  NSGlobalDomain:
+    # Trackpad tap-to-click
+    com.apple.mouse.tapBehavior: 1
+
+    # Bottom-right corner right-click
+    com.apple.trackpad.trackpadCornerClickBehavior: 1
+    com.apple.trackpad.enableSecondaryClick: true
+
+---
+description: Input — trackpad (global)
+kill: [cfprefsd]
+
+data:
+  com.apple.driver.AppleBluetoothMultitouch.trackpad:
+    # Tap to click
+    Clicking: true
+
+    # Bottom-right corner right-click
+    TrackpadCornerSecondaryClick: 2
+    TrackpadRightClick: true
+
+  NSGlobalDomain:
+    # Trackpad tap-to-click (global mirror)
+    com.apple.mouse.tapBehavior: 1
+
+---
+description: Locale
+kill: [cfprefsd]
+
+data:
+  NSGlobalDomain:
+    AppleLanguages: ["en", "fr"]
+    AppleLocale: "en_US@currency=USD"
+    AppleMeasurementUnits: "Centimeters"
+    AppleMetricUnits: true

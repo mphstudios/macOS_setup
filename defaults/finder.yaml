@@ -1,0 +1,44 @@
+---
+description: Finder
+kill: [Finder]
+
+data:
+  com.apple.finder:
+    # Disable all animations
+    DisableAllAnimations: true
+
+    # New window opens Home directory (PfLo = path, PfDe = desktop)
+    NewWindowTarget: "PfLo"
+
+    # Show icons on desktop
+    ShowExternalHardDrivesOnDesktop: true
+    ShowHardDrivesOnDesktop: true
+    ShowMountedServersOnDesktop: true
+    ShowRemovableMediaOnDesktop: true
+
+    # Show status bar
+    ShowStatusBar: true
+
+    # Show path bar
+    ShowPathbar: true
+
+    # Keep folders on top when sorting by name
+    _FXSortFoldersFirst: true
+
+    # Search the current folder by default
+    FXDefaultSearchScope: "SCcf"
+
+    # Expand File Info panes
+    FXInfoPanesExpanded:
+      General: true
+      OpenWith: true
+      Privileges: true
+
+  com.apple.desktopservices:
+    # Avoid creating .DS_Store on network and USB volumes
+    DSDontWriteNetworkStores: true
+    DSDontWriteUSBStores: true
+
+  com.apple.NetworkBrowser:
+    # AirDrop over Ethernet and on unsupported Macs
+    BrowseAllInterfaces: true

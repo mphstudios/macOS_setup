@@ -1,0 +1,19 @@
+---
+description: Screenshots and screen saver
+kill: [SystemUIServer]
+
+data:
+  com.apple.screensaver:
+    # Require password immediately after sleep or screen saver
+    askForPassword: 1
+    askForPasswordDelay: 0
+
+  com.apple.screencapture:
+    # Save screenshots to ~/Screenshots
+    location: "~/Screenshots"
+
+    # PNG format
+    type: "png"
+
+    # Disable shadow in screenshots
+    disable-shadow: true

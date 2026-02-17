@@ -1,0 +1,41 @@
+---
+description: App Store and Software Update
+
+data:
+  com.apple.appstore:
+    # Enable WebKit Developer Tools
+    WebKitDeveloperExtras: true
+
+    # Enable debug menu
+    ShowDebugMenu: true
+
+  com.apple.SoftwareUpdate:
+    # Automatic update checks
+    AutomaticCheckEnabled: true
+
+    # Check daily
+    ScheduleFrequency: 1
+
+    # Download updates in background
+    AutomaticDownload: 1
+
+    # Install system data files and security updates
+    CriticalUpdateInstall: 1
+
+    # Download apps purchased on other Macs
+    ConfigDataInstall: 1
+
+  com.apple.commerce:
+    # Auto-update apps
+    AutoUpdate: true
+
+    # Allow reboot for macOS updates
+    AutoUpdateRestartRequired: true
+
+---
+description: Time Machine
+
+data:
+  com.apple.TimeMachine:
+    # Do not prompt to use new hard drives as backup volume
+    DoNotOfferNewDisksForBackup: true
