@@ -62,9 +62,9 @@ brew 'macos-defaults' # Manage macOS defaults declaratively via YAML
 brew 'duti'              # Select default apps for documents and URL schemes
 brew 'stow'              # Organize files using symlinks
 
-## Runtime and task management
-brew 'mise' # Dev tools, environment, and task manager
+## Package management
+brew 'Valkyrie00/homebrew-bbrew/bbrew' # Homebrew terminal user interface
 
-## Third-party taps
-tap 'tobi/try https://github.com/tobi/try'
-brew 'try' # Ephemeral workspace manager
+## Runtime and task management
+brew 'mise'    # Polyglot runtime manager for dev tools, environment, and tasks
+brew 'try-rs'  # Workspace manager for temporary projects and experiments
