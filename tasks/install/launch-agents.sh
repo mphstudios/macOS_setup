@@ -7,19 +7,34 @@ set -euo pipefail
 
 source "${MISE_PROJECT_DIR}/lib/output.sh"
 
-# Install terminal-notifier (dependency of the notifier script)
-brew install terminal-notifier 2>/dev/null || true
+# Install alerter (dependency of the notifier script)
+# @see https://github.com/vjeantet/alerter
+brew install vjeantet/tap/alerter 2>/dev/null || true
 
-# Install consolidated notifier script
-notifier_dest="$(brew --prefix)/bin/package-updates-notifier"
-if [[ -f "$notifier_dest" ]] && diff -q "$MISE_PROJECT_DIR/bin/package-updates-notifier" "$notifier_dest" >/dev/null 2>&1; then
+# Install consolidated notifier script and icons
+BIN_DIR="$(brew --prefix)/bin/package-updates-notifier"
+BIN_SRC="$MISE_PROJECT_DIR/bin/package-updates-notifier"
+if [[ -f "$BIN_DIR" ]] && diff -q "$BIN_SRC" "$BIN_DIR" >/dev/null 2>&1; then
   skip "package-updates-notifier (current)"
 else
   verb="Installed"
-  [[ -f "$notifier_dest" ]] && verb="Updated"
-  install -m 755 "$MISE_PROJECT_DIR/bin/package-updates-notifier" "$notifier_dest"
+  [[ -f "$BIN_DIR" ]] && verb="Updated"
+  install -m 755 "$BIN_SRC" "$BIN_DIR"
   ok "$verb: package-updates-notifier"
 fi
+
+# Install notification icons (used by --appIcon in alerter)
+ICON_DEST="$(brew --prefix)/share/package-updates-notifier"
+mkdir -p "$ICON_DEST"
+for icon in "$MISE_PROJECT_DIR/assets/icons"/*.png; do
+  [[ -f "$icon" ]] || continue
+  name=$(basename "$icon")
+  if [[ -f "$ICON_DEST/$name" ]] && diff -q "$icon" "$ICON_DEST/$name" >/dev/null 2>&1; then
+    continue
+  fi
+  install -m 644 "$icon" "$ICON_DEST/$name"
+done
+ok "Notification icons"
 
 # --- LaunchAgent Lifecycle ---
 # Only manages agents in the local.* namespace (never touches system/third-party)
