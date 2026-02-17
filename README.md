@@ -50,6 +50,7 @@ tasks/
     brew.sh                 Install packages from a brewfile
     launch-agents.sh        LaunchAgent lifecycle management
   configure/
+    hostname.sh             Set computer name and hostname
     defaults.sh             macOS system defaults
     defaults-export.sh      Export current defaults for a domain
     dotfiles.sh             Clone and setup dotfiles

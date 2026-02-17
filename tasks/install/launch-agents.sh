@@ -53,8 +53,17 @@ fi
 REPO_AGENTS="$MISE_PROJECT_DIR/system/LaunchAgents"
 USER_AGENTS="$HOME/Library/LaunchAgents"
 USER_ID=$(id -u)
+BREW_PREFIX="$(brew --prefix)"
 
 mkdir -p "$USER_AGENTS"
+
+# Install a plist, substituting BREW_PREFIX placeholder for the actual path.
+# Plists use __BREW_PREFIX__ so they work on both Intel and Apple Silicon.
+install_plist() {
+  local src="$1" dest="$2"
+  sed "s|__BREW_PREFIX__|$BREW_PREFIX|g" "$src" > "$dest"
+  chmod 644 "$dest"
+}
 
 # Install or update agents from repo
 for plist in "$REPO_AGENTS"/local.*.plist; do
@@ -62,21 +71,20 @@ for plist in "$REPO_AGENTS"/local.*.plist; do
   name=$(basename "$plist")
   label="${name%.plist}"
 
+  # Generate the resolved plist for comparison
+  resolved=$(install_plist "$plist" /dev/stdout)
+
   if [[ -f "$USER_AGENTS/$name" ]]; then
-    # Compare; if changed, bootout → update → bootstrap
-    if ! diff -q "$plist" "$USER_AGENTS/$name" >/dev/null 2>&1; then
+    if [[ "$resolved" != "$(cat "$USER_AGENTS/$name")" ]]; then
       launchctl bootout "gui/$USER_ID/$label" 2>/dev/null || true
-      cp -fX "$plist" "$USER_AGENTS/$name"
-      chmod 644 "$USER_AGENTS/$name"
+      install_plist "$plist" "$USER_AGENTS/$name"
       launchctl bootstrap "gui/$USER_ID" "$USER_AGENTS/$name"
       ok "Updated: $name"
     else
       skip "$name (current)"
     fi
   else
-    # New agent
-    cp -fX "$plist" "$USER_AGENTS/$name"
-    chmod 644 "$USER_AGENTS/$name"
+    install_plist "$plist" "$USER_AGENTS/$name"
     launchctl bootstrap "gui/$USER_ID" "$USER_AGENTS/$name"
     ok "Installed: $name"
   fi

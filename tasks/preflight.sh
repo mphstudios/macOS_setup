@@ -81,11 +81,14 @@ done
 
 # LaunchAgents
 printf "\nLaunchAgents:\n"
+BREW_PREFIX="$(brew --prefix 2>/dev/null || echo /opt/homebrew)"
 for plist in "$MISE_PROJECT_DIR/system/LaunchAgents"/local.*.plist; do
   [[ -f "$plist" ]] || continue
   name=$(basename "$plist")
+  # Resolve __BREW_PREFIX__ placeholder to match what install would produce
+  resolved=$(sed "s|__BREW_PREFIX__|$BREW_PREFIX|g" "$plist")
   if [[ -f "$HOME/Library/LaunchAgents/$name" ]]; then
-    if diff -q "$plist" "$HOME/Library/LaunchAgents/$name" &>/dev/null; then
+    if [[ "$resolved" == "$(cat "$HOME/Library/LaunchAgents/$name")" ]]; then
       printf "  ${STATUS_OK} %s (current)\n" "$name"
     else
       printf "  ${STATUS_INFO} %s (will update)\n" "$name"
@@ -125,8 +128,9 @@ fi
 # Setup overview
 printf "\nSetup steps (mise run setup):\n"
 printf "  1. Install Homebrew packages   (brewfiles/base, casks, fonts, mas)\n"
-printf "  2. Configure git and SSH keys  (configure:git)\n"
-printf "  3. Clone and link dotfiles     (configure:dotfiles)\n"
-printf "  4. Configure login shells      (configure:shell)\n"
-printf "  5. Apply macOS defaults        (configure:defaults)\n"
-printf "  6. Sync LaunchAgents           (install:launch-agents)\n"
+printf "  2. Set computer name           (configure:hostname)\n"
+printf "  3. Configure git and SSH keys  (configure:git)\n"
+printf "  4. Clone and link dotfiles     (configure:dotfiles)\n"
+printf "  5. Configure login shells      (configure:shell)\n"
+printf "  6. Apply macOS defaults        (configure:defaults)\n"
+printf "  7. Sync LaunchAgents           (install:launch-agents)\n"

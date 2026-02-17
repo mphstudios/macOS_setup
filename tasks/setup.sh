@@ -19,6 +19,7 @@ for brewfile in base casks fonts mas; do
 done
 
 # Configure
+mise run configure:hostname
 mise run configure:git
 mise run configure:dotfiles
 mise run configure:shell
