@@ -1,0 +1,62 @@
+#!/bin/sh
+#
+# Display outdated Homebrew formulae, Mac App Store apps, mise tools,
+# and global npm packages in the Notification Center on macOS.
+#
+# Requires: terminal-notifier (available via Homebrew)
+#
+# Homebrew: /opt/homebrew/bin (Apple Silicon), /usr/local/bin (Intel)
+PATH=/opt/homebrew/bin:/usr/local/bin:$PATH
+
+# terminal-notifier is required for all notifications
+command -v terminal-notifier > /dev/null 2>&1 || exit 0
+
+sleep 10 # give the network a chance to connect on wake from sleep
+
+notify_if_outdated() {
+  title="$1"
+  subtitle="$2"
+  group="$3"
+  command="$4"
+  output="$5"
+
+  if [ -n "$output" ]; then
+    terminal-notifier \
+      -title "$title" \
+      -subtitle "$subtitle" \
+      -message "$output" \
+      -group "$group" \
+      -sender com.apple.Terminal \
+      -execute "$command" > /dev/null 2>&1
+  fi
+}
+
+# Homebrew formulae
+if command -v brew > /dev/null 2>&1; then
+  brew update > /dev/null 2>&1
+  homebrew_outdated=$(brew outdated | sort)
+  notify_if_outdated "Homebrew" "updates available" \
+    "homebrew-updates" "brew upgrade" "$homebrew_outdated"
+  brew cleanup > /dev/null 2>&1
+fi
+
+# Mac App Store applications
+if command -v mas > /dev/null 2>&1; then
+  mas_outdated=$(mas outdated 2>/dev/null | sed 's/^[0-9]* //; s/ ([^)]*)//')
+  notify_if_outdated "Mac App Store" "updates available" \
+    "mas-updates" "mas upgrade" "$mas_outdated"
+fi
+
+# Mise tools
+if command -v mise > /dev/null 2>&1; then
+  mise_outdated=$(mise outdated 2>/dev/null | awk 'NR!=1 {print $1}')
+  notify_if_outdated "Mise" "tool updates available" \
+    "mise-updates" "mise upgrade" "$mise_outdated"
+fi
+
+# NPM packages
+if command -v npm > /dev/null 2>&1; then
+  npm_outdated=$(npm --global outdated 2>/dev/null | awk '{if (NR!=1) {print $1}}')
+  notify_if_outdated "NPM" "global package updates available" \
+    "npm-updates" "npm update --global" "$npm_outdated"
+fi
