@@ -24,3 +24,7 @@ Icon
 .AppleDesktop
 Network Trash Folder
 Temporary Items
+
+# Machine-specific config
+.env
+mise.local.toml
