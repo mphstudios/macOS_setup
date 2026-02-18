@@ -68,3 +68,6 @@ brew 'Valkyrie00/homebrew-bbrew/bbrew' # Homebrew terminal user interface
 ## Runtime and task management
 brew 'mise'    # Polyglot runtime manager for dev tools, environment, and tasks
 brew 'try-rs'  # Workspace manager for temporary projects and experiments
+
+## Security
+brew 'gnupgp'  # GNU Privacy Guard (OpenPGP)
