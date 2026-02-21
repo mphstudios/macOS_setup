@@ -46,8 +46,10 @@ brew 'yazi'    # Blazing fast terminal file manager based on async I/O
 brew 'httpie' # User-friendly cURL replacement
 brew 'wget'   # Non-interactive HTTP/HTTPS/FTP file retrieval
 
-## Containers
-brew 'podman' # Tool for managing OCI containers and pods
+## Container
+brew 'podman'         # Tool for managing OCI containers and pods
+brew 'podman-compose' # Isolated development environments podman
+brew 'podman-tui'     # Podman Terminal User Interface
 
 ## Image processing
 brew 'graphicsmagick' # Image processing tools
