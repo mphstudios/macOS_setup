@@ -71,5 +71,10 @@ brew 'Valkyrie00/homebrew-bbrew/bbrew' # Homebrew terminal user interface
 brew 'mise'    # Polyglot runtime manager for dev tools, environment, and tasks
 brew 'try-rs'  # Workspace manager for temporary projects and experiments
 
+## AI, LLM, and Machine Learning
+brew 'mlx'      # Array framework for Apple Silicon machine learning
+brew 'ollama'   # Create, run, and share large language models (LLMs)
+brew 'opencode' # AI coding agent, built for the terminal
+
 ## Security
 brew 'gnupgp'  # GNU Privacy Guard (OpenPGP)
