@@ -4,7 +4,7 @@
 <plist version="1.0">
   <dict>
     <key>Label</key>
-    <string>local.UserKeyMapping.PrintScreen</string>
+    <string>local.user-key-mapping.print-screen</string>
     <key>Description</key>
     <string>Remap "Print Screen" key to be non-operational</string>
     <key>ProgramArguments</key>
@@ -17,7 +17,7 @@
           "UserKeyMapping": [
             {
               "HIDKeyboardModifierMappingSrc": 0x700000046,
-              "HIDKeyboardModifierMappingDst": 0x0
+              "HIDKeyboardModifierMappingDst": 0x700000000
             }
           ]
         }
