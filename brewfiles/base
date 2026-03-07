@@ -29,7 +29,8 @@ brew 'rsync' # Fast incremental file transfer utility
 ## Git
 brew 'git'     # Distributed version control system
 brew 'git-lfs' # Git large file storage
-brew 'gh'      # GitHub command-line tool
+brew 'gh'      # GitHub official command-line tool
+brew 'diffnav' # GitHub git diff pager based on delta but with a file tree
 
 ## Files and search
 brew 'bat'     # cat with syntax highlighting and Git integration

@@ -7,6 +7,10 @@ set -euo pipefail
 
 source "${MISE_PROJECT_DIR}/lib/output.sh"
 
+# Install GitHub CLI extensions
+gh extension install dlvhdr/gh-dash
+gh extension install dlvhdr/gh-enhance
+
 # Configure git
 git config --global credential.helper osxkeychain
 git config --global user.name "${GIT_USER_NAME}"
