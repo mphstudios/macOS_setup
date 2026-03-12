@@ -37,9 +37,9 @@ cask 'sketch' # digital design application
 
 ## Development
 cask 'dash'            # API documentation browser and code snippet manager
-cask 'docker'          # OS virtualization using containers
 cask 'kaleidoscope'    # diff tool for code and images
 cask 'ngrok'           # secure introspectable tunnels to localhost
+cask 'orbstack'        # replacement for Docker Desktop
 cask 'podman-desktop'  # browse, manage, inspect containers and images
 cask 'tower'           # Git client and GUI
 
