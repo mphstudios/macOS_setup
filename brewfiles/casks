@@ -9,8 +9,10 @@ cask_args appdir: '/Applications'
 ## AI, LLM, and Machine Learning
 cask 'claude'           # Anthropic's official Claude AI desktop app
 cask 'claude-code'      # Anthropic's terminal-based AI coding assistant
+cask 'cursor-cli'       # Command-line agent for Cursor
 cask 'lm-studio'        # Discover, download, and run local LLMs
 cask 'opencode-desktop' # OpenCode AI coding agent desktop client
+cask 'repo-prompt'      # Prompt generation for automated context pipelines
 
 ## Backup
 cask 'arq'                 # encrypted online backup utility
@@ -18,7 +20,9 @@ cask 'carbon-copy-cloner'  # hard disk backup and cloning utility
 cask 'chronosync'          # synchronisation and backup tool
 
 ## Code editors and terminal emulators
-cask 'coderunner'         # programming editor
+cask 'cmux'               # terminal designed for working with AI coding agents
+cask 'coderunner'         # lightweight, multi-language, programming editor
+cask 'cursor'             # integrated dev environment for coding with AI agents
 cask 'ghostty'            # terminal emulator with GPU acceleration
 cask 'sublime-text'       # text editor
 cask 'visual-studio-code' # Microsoft Visual Studio Code
@@ -28,8 +32,6 @@ cask 'zed'                # Multiplayer code editor
 cask 'basecamp'       # all-in-one toolkit for working remotely
 cask 'linear-linear'  # manage software development and track bugs
 cask 'miro'           # collaborative whiteboard platform
-cask 'slack'          # team communication and collaboration software
-cask 'zoom'           # video communication and virtual meeting platform
 
 ## Design
 cask 'figma'  # collaborative design software
@@ -71,3 +73,6 @@ cask 'protonvpn'          # client for Proton VPN
 cask 'appcleaner' # thoroughly uninstall unwanted apps
 cask 'cocktail'   # macOS maintenance tools
 cask 'daisydisk'  # disk usage analyzer
+
+## Window management
+cask 'nikitabobko/tap/aerospace' # AeroSpace tiling window manager for macOS
