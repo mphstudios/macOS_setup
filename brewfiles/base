@@ -33,15 +33,18 @@ brew 'gh'      # GitHub official command-line tool
 brew 'diffnav' # GitHub git diff pager based on delta but with a file tree
 
 ## Files and search
-brew 'bat'     # cat with syntax highlighting and Git integration
-brew 'eza'     # Modern replacement for ls
-brew 'fd'      # Simple, fast alternative to find
-brew 'fzf'     # General-purpose command-line fuzzy finder
-brew 'ripgrep' # Recursively search directories for a regex pattern
-brew 'tlrc'    # Official tldr client written in Rust
-brew 'trash'   # Move files to the Trash via the CLI
-brew 'tree'    # Display directories as trees
-brew 'yazi'    # Blazing fast terminal file manager based on async I/O
+brew 'bat'        # cat with syntax highlighting and Git integration
+brew 'eza'        # Modern replacement for ls
+brew 'fd'         # Simple, fast alternative to find
+brew 'fzf'        # General-purpose command-line fuzzy finder
+brew 'helix'      # post-Vim modal editor
+brew 'mole'       # macOS clean and optimize tools
+brew 'ripgrep'    # Recursively search directories for a regex pattern
+brew 'television' # General purpose fuzzy finder TUI
+brew 'tlrc'       # Official tldr client written in Rust
+brew 'trash'      # Move files to the Trash via the CLI
+brew 'tree'       # Display directories as trees
+brew 'yazi'       # Blazing fast terminal file manager based on async I/O
 
 ## HTTP clients
 brew 'httpie' # User-friendly cURL replacement
@@ -62,8 +65,9 @@ tap 'dsully/tap'
 brew 'macos-defaults' # Manage macOS defaults declaratively via YAML
 
 ## macOS utilities
-brew 'duti'              # Select default apps for documents and URL schemes
-brew 'stow'              # Organize files using symlinks
+brew 'duti'           # Select default apps for documents and URL schemes
+brew 'macchina'       # System information fetcher
+brew 'stow'           # Organize files using symlinks
 
 ## Package management
 brew 'Valkyrie00/homebrew-bbrew/bbrew' # Homebrew terminal user interface
@@ -73,9 +77,10 @@ brew 'mise'    # Polyglot runtime manager for dev tools, environment, and tasks
 brew 'try-rs'  # Workspace manager for temporary projects and experiments
 
 ## AI, LLM, and Machine Learning
-brew 'mlx'      # Array framework for Apple Silicon machine learning
-brew 'ollama'   # Create, run, and share large language models (LLMs)
-brew 'opencode' # AI coding agent, built for the terminal
+brew 'langgraph-cli'  # Command-line interface for the LangGraph platform
+brew 'mlx'            # Array framework for Apple Silicon machine learning
+brew 'ollama'         # Create, run, and share large language models (LLMs)
+brew 'opencode'       # AI coding agent, built for the terminal
 
 ## Security
 brew 'gnupgp'  # GNU Privacy Guard (OpenPGP)
