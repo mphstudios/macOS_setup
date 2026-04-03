@@ -33,11 +33,11 @@ _configure() {
   LOCK_SCREEN_MESSAGE=${input:-${LOCK_SCREEN_MESSAGE:-We have achieved normality}}
 
   printf '%s\n' \
-    "COMPUTER_NAME=$COMPUTER_NAME" \
+    "COMPUTER_NAME=\"$COMPUTER_NAME\"" \
     "DOTFILES_REPO=$DOTFILES_REPO" \
     "GIT_USER_EMAIL=$GIT_USER_EMAIL" \
     "GIT_USER_NAME=$GIT_USER_NAME" \
-    "LOCK_SCREEN_MESSAGE=$LOCK_SCREEN_MESSAGE" \
+    "LOCK_SCREEN_MESSAGE=\"$LOCK_SCREEN_MESSAGE\"" \
     > .env
   printf "\n.env written.\n\n"
 }
@@ -45,11 +45,11 @@ _configure() {
 if [[ -f .env ]]; then
   source .env
   printf "Current configuration:\n"
-  printf "  Computer name:     %s\n" "$COMPUTER_NAME"
+  printf "  Computer name:     %s\n" "\"$COMPUTER_NAME\""
   printf "  Dotfiles repo:     %s\n" "$DOTFILES_REPO"
   printf "  Git email:         %s\n" "$GIT_USER_EMAIL"
   printf "  Git user name:     %s\n" "$GIT_USER_NAME"
-  printf "  Lock screen:       %s\n" "${LOCK_SCREEN_MESSAGE:-}"
+  printf "  Lock screen:       %s\n" "\"${LOCK_SCREEN_MESSAGE:-}\""
   printf "\n"
   read -rp "Keep current configuration? [Y/n]: " keep
   if [[ "${keep:-Y}" =~ ^[Nn] ]]; then
