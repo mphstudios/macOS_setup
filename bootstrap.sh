@@ -5,6 +5,7 @@ set -euo pipefail
 # Installs prerequisites that mise needs, then hands off to mise tasks.
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+export MISE_PROJECT_DIR="$SCRIPT_DIR"
 source "$SCRIPT_DIR/lib/output.sh"
 
 # Abort if not macOS
@@ -83,38 +84,12 @@ if [[ "$(uname -m)" == "arm64" ]]; then
 fi
 
 # Install Xcode Command Line Tools
-if ! xcode-select -p &>/dev/null; then
-  info "Installing Xcode Command Line Tools..."
-  xcode-select --install
-  # Poll until installed (the UI installer runs asynchronously)
-  # Timeout after 30 minutes in case the dialog is dismissed
-  elapsed=0
-  until xcode-select -p &>/dev/null; do
-    sleep 5
-    elapsed=$((elapsed + 5))
-    if [[ $elapsed -ge 1800 ]]; then
-      die "Xcode CLT installation timed out. Install manually: xcode-select --install"
-    fi
-  done
-  ok "Xcode CLT installed"
-else
-  skip "Xcode CLT"
-fi
+bash "$SCRIPT_DIR/tasks/install/xcode.sh"
 
 # Install Homebrew
-if ! command -v brew &>/dev/null; then
-  info "Installing Homebrew..."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  # Add Homebrew to PATH for this session
-  if [[ "$(uname -m)" == "arm64" ]]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-  else
-    eval "$(/usr/local/bin/brew shellenv)"
-  fi
-  ok "Homebrew installed"
-else
-  skip "Homebrew"
-fi
+bash "$SCRIPT_DIR/tasks/install/homebrew.sh"
+# Reload PATH from /etc/paths.d after install to pick up Homebrew bin directory
+eval "$(/usr/libexec/path_helper)"
 
 # Install mise
 if ! command -v mise &>/dev/null; then
