@@ -8,3 +8,4 @@ includes = ["tasks"]
 
 [tools]
 usage = "latest"
+gum = "latest"
