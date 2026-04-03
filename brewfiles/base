@@ -88,4 +88,4 @@ brew 'ollama'         # Create, run, and share large language models (LLMs)
 brew 'opencode'       # AI coding agent, built for the terminal
 
 ## Security
-brew 'gnupgp'  # GNU Privacy Guard (OpenPGP)
+brew 'gnupg'  # GNU Privacy Guard (OpenPGP)
