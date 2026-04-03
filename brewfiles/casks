@@ -61,7 +61,7 @@ cask 'suspicious-package' # inspect installer packages
 cask 'syntax-highlight'   # syntax highlighting for source code, JSON, CSV, patch files
 
 ## Security and privacy
-cask '1password7'         # password manager v7
+cask '1password@7'        # password manager v7
 cask 'nordvpn'            # NordVPN client
 cask 'proton-drive'       # client for Proton Drive
 cask 'proton-mail'        # client for Proton Mail and Proton Calendar
