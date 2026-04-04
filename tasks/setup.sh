@@ -13,16 +13,16 @@ fi
 # Label and command are co-located so adding, removing, or reordering tasks
 # requires changing only one line.
 tasks=(
-  "Packages  ›  Homebrew formulae|install:brew -- brewfiles/base"
-  "Packages  ›  Homebrew casks|install:brew -- brewfiles/casks"
-  "Packages  ›  Homebrew fonts|install:brew -- brewfiles/fonts"
-  "Packages  ›  Mac App Store|install:mas"
+  "Packages   ›  Homebrew formulae|install:brew -- brewfiles/base"
+  "Packages   ›  Homebrew casks|install:brew -- brewfiles/casks"
+  "Packages   ›  Homebrew fonts|install:brew -- brewfiles/fonts"
+  "Packages   ›  Mac App Store|install:mas"
   "Configure  ›  hostname|configure:hostname"
   "Configure  ›  git|configure:git"
   "Configure  ›  dotfiles|configure:dotfiles"
   "Configure  ›  shell|configure:shell"
   "Configure  ›  macOS defaults|configure:defaults"
-  "Services  ›  launch agents|install:launch-agents"
+  "Services   ›  launch agents|install:launch-agents"
 )
 
 task_labels=()
