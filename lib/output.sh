@@ -1,21 +1,14 @@
 # Shared output functions and symbols for mise tasks
 # Usage: source "${MISE_PROJECT_DIR}/lib/output.sh"
-# Respects NO_COLOR (https://no-color.org)
+# Respects NO_COLOR (https://no-color.org) and FORCE_COLOR
 
-# Ensure Homebrew is on PATH (Apple Silicon installs to /opt/homebrew)
-if ! command -v brew &>/dev/null; then
-  if [[ -x /opt/homebrew/bin/brew ]]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-  elif [[ -x /usr/local/bin/brew ]]; then
-    eval "$(/usr/local/bin/brew shellenv)"
-  fi
-fi
-
-if [[ -t 1 ]] && [[ -z "${NO_COLOR-}" ]]; then
+if [[ -t 1 ]] || [[ -n "${FORCE_COLOR:-}" ]]; then
   GREEN=$'\033[32m' BLUE=$'\033[34m' YELLOW=$'\033[33m' RED=$'\033[31m' RESET=$'\033[0m'
 else
   GREEN='' BLUE='' YELLOW='' RED='' RESET=''
 fi
+
+[[ -n "${NO_COLOR:-}" ]] && GREEN='' BLUE='' YELLOW='' RED='' RESET=''
 
 # Coloured symbols — usable directly in printf
 STATUS_FAIL="${RED}✖${RESET}"
