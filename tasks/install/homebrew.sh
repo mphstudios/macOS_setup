@@ -12,7 +12,7 @@ if command -v brew &>/dev/null; then
 fi
 
 spin "Installing Homebrew..." \
-  bash -c '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
+  bash -c 'curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash'
 
 # Persist Homebrew in PATH via /etc/paths.d (read by path_helper for all shells)
 # Only needed on Apple Silicon (/usr/local/bin is already in the default PATH on Intel)
