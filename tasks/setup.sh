@@ -2,7 +2,6 @@
 set -euo pipefail
 
 #MISE description="Run full macOS setup"
-#MISE depends=["install:xcode", "install:homebrew"]
 
 source "${MISE_PROJECT_DIR}/lib/output.sh"
 
@@ -10,31 +9,26 @@ if [[ ! -f "${MISE_PROJECT_DIR}/.env" ]]; then
   die ".env not found — run 'mise run configure:env' first"
 fi
 
-task_labels=(
-  "Packages  ›  Homebrew formulae"
-  "Packages  ›  Homebrew casks"
-  "Packages  ›  Homebrew fonts"
-  "Packages  ›  Mac App Store"
-  "Configure  ›  hostname"
-  "Configure  ›  git"
-  "Configure  ›  dotfiles"
-  "Configure  ›  shell"
-  "Configure  ›  macOS defaults"
-  "Services  ›  launch agents"
+# Each entry is "Human label|mise task command"
+# Label and command are co-located so adding, removing, or reordering tasks
+# requires changing only one line.
+tasks=(
+  "Packages  ›  Homebrew formulae|install:brew -- brewfiles/base"
+  "Packages  ›  Homebrew casks|install:brew -- brewfiles/casks"
+  "Packages  ›  Homebrew fonts|install:brew -- brewfiles/fonts"
+  "Packages  ›  Mac App Store|install:mas"
+  "Configure  ›  hostname|configure:hostname"
+  "Configure  ›  git|configure:git"
+  "Configure  ›  dotfiles|configure:dotfiles"
+  "Configure  ›  shell|configure:shell"
+  "Configure  ›  macOS defaults|configure:defaults"
+  "Services  ›  launch agents|install:launch-agents"
 )
 
-task_commands=(
-  "install:brew -- brewfiles/base"
-  "install:brew -- brewfiles/casks"
-  "install:brew -- brewfiles/fonts"
-  "install:mas"
-  "configure:hostname"
-  "configure:git"
-  "configure:dotfiles"
-  "configure:shell"
-  "configure:defaults"
-  "install:launch-agents"
-)
+task_labels=()
+for task in "${tasks[@]}"; do
+  task_labels+=("${task%%|*}")
+done
 
 all_selected=$(IFS=,; printf '%s' "${task_labels[*]}")
 
@@ -48,7 +42,10 @@ if [[ -z "$selected" ]]; then
   exit 0
 fi
 
-# Start logging after task selection so gum UI output is not captured in the log
+# Preserve colour output through the log redirect: after exec stdout is a pipe
+# so [[ -t 1 ]] returns false. FORCE_COLOR tells output.sh to keep colours on.
+[[ -t 1 ]] && export FORCE_COLOR=1
+
 LOG_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/macOS_setup"
 mkdir -p "$LOG_DIR"
 LOG="$LOG_DIR/setup_$(date +%Y%m%d_%H%M%S).log"
@@ -57,10 +54,12 @@ exec > >(tee -a "$LOG") 2>&1
 printf "\nmacOS setup started at %s\n" "$(date)"
 printf "macOS version: %s\n\n" "$(sw_vers -productVersion)"
 
-for i in "${!task_labels[@]}"; do
-  if grep -qxF "${task_labels[$i]}" <<< "$selected"; then
-    read -ra cmd <<< "${task_commands[$i]}"
-    mise run "${cmd[@]}"
+for task in "${tasks[@]}"; do
+  label="${task%%|*}"
+  cmd="${task#*|}"
+  if grep -qxF "$label" <<< "$selected"; then
+    read -ra args <<< "$cmd"
+    mise run "${args[@]}"
   fi
 done
 
