@@ -42,6 +42,20 @@ if [[ -z "$selected" ]]; then
   exit 0
 fi
 
+# Export XDG base dirs and tool-specific home dirs for this session so that
+# tools install to the correct locations before the dotfiles are available.
+# Values must stay in sync with local.xdg-basedir.plist and dotfiles repository.
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/Library/Caches}"
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
+export CARGO_HOME="${CARGO_HOME:-$HOME/.local/share/cargo}"
+export DOCKER_CONFIG="${DOCKER_CONFIG:-$HOME/.config/docker}"
+export GNUPGHOME="${GNUPGHOME:-$HOME/.config/gnupg}"
+export NPM_CONFIG_CACHE="$NPM_CONFIG_CACHE:-$HOME/.cache/npm}"
+export NPM_CONFIG_USERCONFIG="$NPM_CONFIG_USERCONFIG:-$HOME/.config/npm/npmrc}"
+export RUSTUP_HOME="${RUSTUP_HOME:-$HOME/.local/share/rustup}"
+
 # Preserve colour output through the log redirect: after exec stdout is a pipe
 # so [[ -t 1 ]] returns false. FORCE_COLOR tells output.sh to keep colours on.
 [[ -t 1 ]] && export FORCE_COLOR=1
