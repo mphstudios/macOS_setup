@@ -24,11 +24,11 @@ STATUS_OK="${GREEN}✔${RESET}"
 STATUS_SKIP="${BLUE}⊘${RESET}"
 STATUS_WARN="${YELLOW}⚠${RESET}"
 
-die()     { printf "  ${STATUS_FAIL} %s\n" "$1" >&2; exit 1; }
-info()    { printf "  ${STATUS_INFO} %s\n" "$1"; }
-ok()      { printf "  ${STATUS_OK} %s\n" "$1"; }
-skip()    { printf "  ${STATUS_SKIP} %s (skipped)\n" "$1"; }
-warn()    { printf "  ${STATUS_WARN} %s\n" "$1" >&2; }
+die()     { printf "  %s %s\n" "${STATUS_FAIL}" "$1" >&2; exit 1; }
+info()    { printf "  %s %s\n" "${STATUS_INFO}" "$1"; }
+ok()      { printf "  %s %s\n" "${STATUS_OK}" "$1"; }
+skip()    { printf "  %s %s (skipped)\n" "${STATUS_SKIP}" "$1"; }
+warn()    { printf "  %s %s\n" "${STATUS_WARN}" "$1" >&2; }
 
 # spin TITLE CMD [ARGS…]
 # Shows a gum spinner while running CMD; falls back to running CMD directly if gum is unavailable.
