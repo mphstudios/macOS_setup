@@ -2,7 +2,6 @@
 set -euo pipefail
 
 #MISE description="Write macOS system defaults"
-#MISE confirm="Write system defaults?"
 
 source "${MISE_PROJECT_DIR}/lib/output.sh"
 

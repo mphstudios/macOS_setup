@@ -2,7 +2,6 @@
 set -euo pipefail
 
 #MISE description="Configure Git and SSH keys"
-#MISE confirm="Configure Git?"
 
 source "${MISE_PROJECT_DIR}/lib/output.sh"
 

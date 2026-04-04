@@ -2,7 +2,6 @@
 set -euo pipefail
 
 #MISE description="Sync LaunchAgents and install notifier scripts"
-#MISE confirm="Sync LaunchAgents?"
 
 source "${MISE_PROJECT_DIR}/lib/output.sh"
 

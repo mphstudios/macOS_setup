@@ -2,7 +2,6 @@
 set -euo pipefail
 
 #MISE description="Install dotfiles"
-#MISE confirm="Install dotfiles?"
 
 source "${MISE_PROJECT_DIR}/lib/output.sh"
 
