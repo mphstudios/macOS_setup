@@ -49,9 +49,10 @@ fi
 mise trust --yes "$SCRIPT_DIR"
 mise install
 
-# Configure environment (writes .env via gum input)
 printf "\nBootstrap complete.\n\n"
-bash "$SCRIPT_DIR/tasks/configure/env.sh"
+# Configure environment (writes .env via gum input)
+# mise exec injects mise tool PATH (which has gum) without activating interactive shell hooks
+mise exec -- bash "$SCRIPT_DIR/tasks/configure/env.sh"
 
 # Apply lock screen message from .env now that it has been written
 source "$SCRIPT_DIR/.env" 2>/dev/null || true
