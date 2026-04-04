@@ -3,10 +3,10 @@ set -euo pipefail
 
 #MISE description="Sync LaunchAgents and install notifier scripts"
 #MISE confirm="Sync LaunchAgents?"
-#MISE depends=["install:homebrew"]
 
 source "${MISE_PROJECT_DIR}/lib/output.sh"
 
+command -v brew &>/dev/null || die "Homebrew is required — run 'mise run install:homebrew'"
 # Install notification tool (dependency of the notifier script)
 # Prefer alerter (alert-style, stays on screen) but fall back to
 # terminal-notifier on Intel where alerter has no x86_64 binary.

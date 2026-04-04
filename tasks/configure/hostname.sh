@@ -2,10 +2,10 @@
 set -euo pipefail
 
 #MISE description="Set computer name and hostname"
-#MISE depends=["install:homebrew"]
 
 source "${MISE_PROJECT_DIR}/lib/output.sh"
 
+[[ -n "${COMPUTER_NAME:-}" ]] || die "COMPUTER_NAME not set — run 'mise run configure:env' first"
 current=$(scutil --get ComputerName 2>/dev/null || echo "")
 
 if [[ "$current" == "$COMPUTER_NAME" ]]; then

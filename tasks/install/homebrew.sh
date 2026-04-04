@@ -2,9 +2,10 @@
 set -euo pipefail
 
 #MISE description="Install Homebrew package manager"
-#MISE depends=["install:xcode"]
 
 source "${MISE_PROJECT_DIR}/lib/output.sh"
+
+xcode-select -p &>/dev/null || die "Xcode CLT is required — run 'mise run install:xcode'"
 
 if command -v brew &>/dev/null; then
   skip "Homebrew"

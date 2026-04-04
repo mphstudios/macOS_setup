@@ -2,10 +2,10 @@
 set -euo pipefail
 
 #MISE description="Configure login shells"
-#MISE depends=["install:homebrew"]
 
 source "${MISE_PROJECT_DIR}/lib/output.sh"
 
+command -v brew &>/dev/null || die "Homebrew is required — run 'mise run install:homebrew'"
 BREW_PREFIX=$(brew --prefix)
 
 # Add Homebrew-installed shells to /etc/shells (idempotent)

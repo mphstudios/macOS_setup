@@ -3,10 +3,10 @@ set -euo pipefail
 
 #MISE description="Configure Git and SSH keys"
 #MISE confirm="Configure Git?"
-#MISE depends=["install:homebrew"]
 
 source "${MISE_PROJECT_DIR}/lib/output.sh"
 
+command -v gh &>/dev/null || die "GitHub CLI is required — run 'mise run install:brew -- brewfiles/base'"
 # Install GitHub CLI extensions
 gh extension install dlvhdr/gh-dash
 gh extension install dlvhdr/gh-enhance

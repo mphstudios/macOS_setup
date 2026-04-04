@@ -3,10 +3,10 @@ set -euo pipefail
 
 #MISE description="Write macOS system defaults"
 #MISE confirm="Write system defaults?"
-#MISE depends=["install:homebrew"]
 
 source "${MISE_PROJECT_DIR}/lib/output.sh"
 
+command -v macos-defaults &>/dev/null || die "macos-defaults is required — run 'mise run install:brew -- brewfiles/base'"
 osascript -e 'tell application "System Preferences" to quit' 2>/dev/null || true
 sudo -v
 

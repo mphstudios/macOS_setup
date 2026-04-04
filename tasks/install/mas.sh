@@ -2,9 +2,10 @@
 set -euo pipefail
 
 #MISE description="Install Mac App Store applications"
-#MISE depends=["install:homebrew"]
 
 source "${MISE_PROJECT_DIR}/lib/output.sh"
+
+command -v brew &>/dev/null || die "Homebrew is required — run 'mise run install:homebrew'"
 
 # Ensure mas is available before checking authentication
 if ! command -v mas &>/dev/null; then

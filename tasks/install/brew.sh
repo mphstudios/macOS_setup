@@ -2,13 +2,14 @@
 set -euo pipefail
 
 #MISE description="Install packages from a Homebrew brewfile"
-#MISE depends=["install:homebrew"]
 
 #USAGE arg "<brewfile>" help="Path to a brewfile (relative to project root)"
 #USAGE flag "-q --quiet" help="Suppress brew bundle output"
 #USAGE flag "-v --verbose" help="Show detailed brew bundle output"
 
 source "${MISE_PROJECT_DIR}/lib/output.sh"
+
+command -v brew &>/dev/null || die "Homebrew is required — run 'mise run install:homebrew'"
 
 brewfile="${usage_brewfile}"
 
