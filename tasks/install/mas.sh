@@ -31,6 +31,7 @@ fi
 
 ok "App Store signed in as $apple_id"
 
-brew bundle --file="$MISE_PROJECT_DIR/brewfiles/mas"
+spin "Installing Mac App Store apps..." \
+  brew bundle --file="$MISE_PROJECT_DIR/brewfiles/mas"
 brew cleanup
 ok "Mac App Store apps"
