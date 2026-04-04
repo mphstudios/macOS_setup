@@ -3,7 +3,6 @@ set -euo pipefail
 
 #MISE description="Run full macOS setup"
 #MISE depends=["install:xcode", "install:homebrew"]
-#MISE confirm="Run full macOS setup? (This will install packages, configure git, dotfiles, shells, defaults, and LaunchAgents)"
 
 LOG_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/macOS_setup"
 mkdir -p "$LOG_DIR"
@@ -11,22 +10,51 @@ LOG="$LOG_DIR/setup_$(date +%Y%m%d_%H%M%S).log"
 exec > >(tee -a "$LOG") 2>&1
 
 printf "\nmacOS setup started at %s\n" "$(date)"
-printf "macOS version: %s\n" "$(sw_vers -productVersion)"
+printf "macOS version: %s\n\n" "$(sw_vers -productVersion)"
 
-# Install packages
-for brewfile in base casks fonts mas; do
-  mise run install:brew -- "brewfiles/$brewfile"
+task_labels=(
+  "Packages  ›  Homebrew formulae"
+  "Packages  ›  Homebrew casks"
+  "Packages  ›  Homebrew fonts"
+  "Packages  ›  Mac App Store"
+  "Configure  ›  hostname"
+  "Configure  ›  git"
+  "Configure  ›  dotfiles"
+  "Configure  ›  shell"
+  "Configure  ›  macOS defaults"
+  "Services  ›  launch agents"
+)
+
+task_commands=(
+  "install:brew -- brewfiles/base"
+  "install:brew -- brewfiles/casks"
+  "install:brew -- brewfiles/fonts"
+  "install:brew -- brewfiles/mas"
+  "configure:hostname"
+  "configure:git"
+  "configure:dotfiles"
+  "configure:shell"
+  "configure:defaults"
+  "install:launch-agents"
+)
+
+all_selected=$(IFS=,; printf '%s' "${task_labels[*]}")
+
+selected=$(gum choose --no-limit \
+  --header "Select tasks to run (space to toggle, enter to confirm):" \
+  --selected="$all_selected" \
+  "${task_labels[@]}")
+
+if [[ -z "$selected" ]]; then
+  printf "No tasks selected — exiting.\n"
+  exit 0
+fi
+
+for i in "${!task_labels[@]}"; do
+  if grep -qxF "${task_labels[$i]}" <<< "$selected"; then
+    mise run ${task_commands[$i]}
+  fi
 done
-
-# Configure
-mise run configure:hostname
-mise run configure:git
-mise run configure:dotfiles
-mise run configure:shell
-mise run configure:defaults
-
-# Install services
-mise run install:launch-agents
 
 printf "\n✔ Setup complete.\n"
 printf "  Log saved to %s\n" "$LOG"
