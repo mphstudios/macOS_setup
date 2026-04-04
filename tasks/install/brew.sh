@@ -35,7 +35,13 @@ elif [[ "${usage_verbose:-false}" == "true" ]]; then
   bundle_flags+=(--verbose)
 fi
 
-info "Installing packages from $(basename "$brewfile")..."
-brew bundle --file="$brewfile" "${bundle_flags[@]}"
+# Use a spinner in default/quiet mode; show live output in verbose mode
+if [[ "${usage_verbose:-false}" == "true" ]]; then
+  info "Installing packages from $(basename "$brewfile")..."
+  brew bundle --file="$brewfile" "${bundle_flags[@]}"
+else
+  spin "Installing packages from $(basename "$brewfile")..." \
+    brew bundle --file="$brewfile" "${bundle_flags[@]}"
+fi
 brew cleanup
 ok "$(basename "$brewfile")"
