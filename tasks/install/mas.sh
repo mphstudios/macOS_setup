@@ -32,7 +32,9 @@ fi
 
 ok "App Store signed in as $apple_id"
 
-spin "Installing Mac App Store apps..." \
-  brew bundle --file="$MISE_PROJECT_DIR/brewfiles/mas"
+if ! gum spin --spinner dot --show-output --title "Installing Mac App Store apps..." -- \
+    brew bundle --file="$MISE_PROJECT_DIR/brewfiles/mas"; then
+  warn "Some App Store apps failed to install — re-run with 'mise run install:mas' for details"
+fi
 brew cleanup
 ok "Mac App Store apps"

@@ -28,12 +28,18 @@ fi
 # Ensure node/npm install properly via Homebrew
 unset -v NODE_PATH
 
+# brew bundle failures (unavailable formulae, network errors) are non-fatal:
+# a missing font or cask should not abort hostname, dotfiles, and defaults steps.
+# --show-output surfaces brew's error output only on failure.
+name=$(basename "$brewfile")
 if [[ "${usage_verbose:-false}" == "true" ]]; then
-  info "Installing packages from $(basename "$brewfile")..."
-  brew bundle --file="$brewfile" --verbose
+  info "Installing packages from $name..."
+  brew bundle --file="$brewfile" --verbose || warn "Some packages from $name failed to install — review output above"
 else
-  spin "Installing packages from $(basename "$brewfile")..." \
-    brew bundle --file="$brewfile"
+  if ! gum spin --spinner dot --show-output --title "Installing packages from $name..." -- \
+      brew bundle --file="$brewfile"; then
+    warn "Some packages from $name failed to install — re-run with --verbose for details"
+  fi
 fi
 brew cleanup
-ok "$(basename "$brewfile")"
+ok "$name"
