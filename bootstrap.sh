@@ -45,6 +45,13 @@ else
   skip "mise"
 fi
 
+# Activate mise in the current shell session
+eval "$(mise activate bash)"
+
+# Trust the project and install mise tools (usage, gum) so tasks are available
+mise trust --yes "$SCRIPT_DIR"
+mise install
+
 # Configure environment (writes .env via gum input)
 printf "\nBootstrap complete.\n\n"
 mise run configure:env
