@@ -119,7 +119,7 @@ if [[ $yaml_count -gt 0 ]]; then
   if command -v macos-defaults &>/dev/null; then
     macos-defaults apply --dry-run "$MISE_PROJECT_DIR/defaults/" 2>&1 | sed 's/^/  /'
   else
-    printf "  %s macos-defaults not installed (install via: brew install dsully/tap/macos-defaults)\n" "${STATUS_WARN}"
+    printf "  %s macos-defaults not installed (install via: mise install)\n" "${STATUS_WARN}"
   fi
 else
   printf "  %s No YAML files in defaults/ — defaults will not be applied\n" "${STATUS_WARN}"

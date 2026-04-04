@@ -63,11 +63,6 @@ brew 'podman-tui'     # Podman Terminal User Interface
 ## Image processing
 brew 'graphicsmagick' # Image processing tools
 
-## macOS defaults
-# TODO: Move to mise (github:dsully/macos-defaults) after Apple Silicon migration
-#       — no x86_64 prebuilt binary, Homebrew compiles from source on Intel
-tap 'dsully/tap'
-brew 'macos-defaults' # Manage macOS defaults declaratively via YAML
 
 ## macOS utilities
 brew 'duti'           # Select default apps for documents and URL schemes
