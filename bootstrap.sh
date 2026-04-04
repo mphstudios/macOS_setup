@@ -39,7 +39,7 @@ eval "$(/usr/libexec/path_helper)"
 # Install mise
 if ! command -v mise &>/dev/null; then
   info "Installing mise..."
-  spin "Installing mise..." brew install mise
+  brew install mise
   ok "mise installed"
 else
   skip "mise"
