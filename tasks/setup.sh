@@ -52,7 +52,8 @@ fi
 
 for i in "${!task_labels[@]}"; do
   if grep -qxF "${task_labels[$i]}" <<< "$selected"; then
-    mise run ${task_commands[$i]}
+    read -ra cmd <<< "${task_commands[$i]}"
+    mise run "${cmd[@]}"
   fi
 done
 
