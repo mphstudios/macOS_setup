@@ -11,7 +11,6 @@ if command -v brew &>/dev/null; then
   exit 0
 fi
 
-info "Installing Homebrew..."
 spin "Installing Homebrew..." \
   bash -c '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
 
