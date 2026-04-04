@@ -17,12 +17,6 @@ fi
 sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-# Set lock screen message
-if [[ -n "${LOCK_SCREEN_MESSAGE:-}" ]]; then
-  sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "$LOCK_SCREEN_MESSAGE"
-  ok "Lock screen message set"
-fi
-
 # Install Rosetta 2 on Apple Silicon
 if [[ "$(uname -m)" == "arm64" ]]; then
   if ! pkgutil --pkg-info=com.apple.pkg.RosettaUpdateAuto > /dev/null 2>&1; then
@@ -45,13 +39,21 @@ eval "$(/usr/libexec/path_helper)"
 # Install mise
 if ! command -v mise &>/dev/null; then
   info "Installing mise..."
-  brew install mise
+  spin "Installing mise..." brew install mise
   ok "mise installed"
 else
   skip "mise"
 fi
 
-# Configure environment then run setup
+# Configure environment (writes .env via gum input)
 printf "\nBootstrap complete.\n\n"
 mise run configure:env
+
+# Apply lock screen message from .env now that it has been written
+source "$SCRIPT_DIR/.env" 2>/dev/null || true
+if [[ -n "${LOCK_SCREEN_MESSAGE:-}" ]]; then
+  sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "$LOCK_SCREEN_MESSAGE"
+  ok "Lock screen message set"
+fi
+
 mise run setup
