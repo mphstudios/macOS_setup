@@ -4,8 +4,7 @@ set -euo pipefail
 #MISE description="Install packages from a Homebrew brewfile"
 
 #USAGE arg "<brewfile>" help="Path to a brewfile (relative to project root)"
-#USAGE flag "-q --quiet" help="Suppress brew bundle output"
-#USAGE flag "-v --verbose" help="Show detailed brew bundle output"
+#USAGE flag "-v --verbose" help="Show live brew bundle output instead of a spinner"
 
 source "${MISE_PROJECT_DIR}/lib/output.sh"
 
@@ -29,20 +28,12 @@ fi
 # Ensure node/npm install properly via Homebrew
 unset -v NODE_PATH
 
-bundle_flags=()
-if [[ "${usage_quiet:-false}" == "true" ]]; then
-  bundle_flags+=(--quiet)
-elif [[ "${usage_verbose:-false}" == "true" ]]; then
-  bundle_flags+=(--verbose)
-fi
-
-# Use a spinner in default/quiet mode; show live output in verbose mode
 if [[ "${usage_verbose:-false}" == "true" ]]; then
   info "Installing packages from $(basename "$brewfile")..."
-  brew bundle --file="$brewfile" "${bundle_flags[@]}"
+  brew bundle --file="$brewfile" --verbose
 else
   spin "Installing packages from $(basename "$brewfile")..." \
-    brew bundle --file="$brewfile" "${bundle_flags[@]}"
+    brew bundle --file="$brewfile"
 fi
 brew cleanup
 ok "$(basename "$brewfile")"
