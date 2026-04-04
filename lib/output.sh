@@ -29,3 +29,14 @@ info()    { printf "  ${STATUS_INFO} %s\n" "$1"; }
 ok()      { printf "  ${STATUS_OK} %s\n" "$1"; }
 skip()    { printf "  ${STATUS_SKIP} %s (skipped)\n" "$1"; }
 warn()    { printf "  ${STATUS_WARN} %s\n" "$1" >&2; }
+
+# spin TITLE CMD [ARGS…]
+# Shows a gum spinner while running CMD; falls back to running CMD directly if gum is unavailable.
+spin() {
+  local title="$1"; shift
+  if command -v gum &>/dev/null; then
+    gum spin --spinner dot --title "$title" -- "$@"
+  else
+    "$@"
+  fi
+}
