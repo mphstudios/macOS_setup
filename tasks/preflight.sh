@@ -10,31 +10,31 @@ printf "macOS %s (%s)\n\n" "$(sw_vers -productVersion)" "$(uname -m)"
 # Rosetta 2 (Apple Silicon only)
 if [[ "$(uname -m)" == "arm64" ]]; then
   if /usr/bin/pgrep -q oahd 2>/dev/null; then
-    printf "  ${STATUS_OK} Rosetta 2 installed\n"
+    printf "  %s Rosetta 2 installed\n" "${STATUS_OK}"
   else
-    printf "  ${STATUS_INFO} Rosetta 2 will be installed\n"
+    printf "  %s Rosetta 2 will be installed\n" "${STATUS_INFO}"
   fi
 fi
 
 # Xcode CLT
 if xcode-select -p &>/dev/null; then
-  printf "  ${STATUS_OK} Xcode CLT installed\n"
+  printf "  %s Xcode CLT installed\n" "${STATUS_OK}"
 else
-  printf "  ${STATUS_INFO} Xcode CLT will be installed\n"
+  printf "  %s Xcode CLT will be installed\n" "${STATUS_INFO}"
 fi
 
 # Homebrew
 if command -v brew &>/dev/null; then
-  printf "  ${STATUS_OK} Homebrew installed (%s)\n" "$(brew --prefix)"
+  printf "  %s Homebrew installed (%s)\n" "${STATUS_OK}" "$(brew --prefix)"
 else
-  printf "  ${STATUS_INFO} Homebrew will be installed\n"
+  printf "  %s Homebrew will be installed\n" "${STATUS_INFO}"
 fi
 
 # mise
 if command -v mise &>/dev/null; then
-  printf "  ${STATUS_OK} mise installed (%s)\n" "$(mise --version)"
+  printf "  %s mise installed (%s)\n" "${STATUS_OK}" "$(mise --version)"
 else
-  printf "  ${STATUS_INFO} mise will be installed\n"
+  printf "  %s mise will be installed\n" "${STATUS_INFO}"
 fi
 
 # .env
@@ -47,26 +47,26 @@ if [[ -f "$MISE_PROJECT_DIR/.env" ]]; then
     fi
   done < "$MISE_PROJECT_DIR/.env.example"
   if [[ ${#missing[@]} -eq 0 ]]; then
-    printf "  ${STATUS_OK} .env exists (all variables set)\n"
+    printf "  %s .env exists (all variables set)\n" "${STATUS_OK}"
   else
-    printf "  ${STATUS_WARN} .env exists but missing: %s\n" "${missing[*]}"
+    printf "  %s .env exists but missing: %s\n" "${STATUS_WARN}" "${missing[*]}"
   fi
 else
-  printf "  ${STATUS_INFO} .env will be created (interactive prompts)\n"
+  printf "  %s .env will be created (interactive prompts)\n" "${STATUS_INFO}"
 fi
 
 # SSH keys
 if [[ -f "$HOME/.ssh/github_ed25519" ]]; then
-  printf "  ${STATUS_OK} SSH key exists\n"
+  printf "  %s SSH key exists\n" "${STATUS_OK}"
 else
-  printf "  ${STATUS_INFO} SSH key will be generated\n"
+  printf "  %s SSH key will be generated\n" "${STATUS_INFO}"
 fi
 
 # Dotfiles
 if [[ -d "$HOME/Code/dotfiles" ]]; then
-  printf "  ${STATUS_OK} Dotfiles cloned\n"
+  printf "  %s Dotfiles cloned\n" "${STATUS_OK}"
 else
-  printf "  ${STATUS_INFO} Dotfiles will be cloned\n"
+  printf "  %s Dotfiles will be cloned\n" "${STATUS_INFO}"
 fi
 
 # Homebrew bundles
@@ -89,12 +89,12 @@ for plist in "$MISE_PROJECT_DIR/system/LaunchAgents"/local.*.plist; do
   resolved=$(sed "s|__BREW_PREFIX__|$BREW_PREFIX|g" "$plist")
   if [[ -f "$HOME/Library/LaunchAgents/$name" ]]; then
     if [[ "$resolved" == "$(cat "$HOME/Library/LaunchAgents/$name")" ]]; then
-      printf "  ${STATUS_OK} %s (current)\n" "$name"
+      printf "  %s %s (current)\n" "${STATUS_OK}" "$name"
     else
-      printf "  ${STATUS_INFO} %s (will update)\n" "$name"
+      printf "  %s %s (will update)\n" "${STATUS_INFO}" "$name"
     fi
   else
-    printf "  ${STATUS_INFO} %s (will install)\n" "$name"
+    printf "  %s %s (will install)\n" "${STATUS_INFO}" "$name"
   fi
 done
 
@@ -103,7 +103,7 @@ for plist in "$HOME/Library/LaunchAgents"/local.*.plist; do
   [[ -f "$plist" ]] || continue
   name=$(basename "$plist")
   if [[ ! -f "$MISE_PROJECT_DIR/system/LaunchAgents/$name" ]]; then
-    printf "  ${STATUS_WARN} %s (stale, will remove)\n" "$name"
+    printf "  %s %s (stale, will remove)\n" "${STATUS_WARN}" "$name"
   fi
 done
 
@@ -115,14 +115,14 @@ for yaml in "$MISE_PROJECT_DIR/defaults"/*.yaml; do
   yaml_count=$((yaml_count + 1))
 done
 if [[ $yaml_count -gt 0 ]]; then
-  printf "  ${STATUS_OK} %s YAML file(s) in defaults/\n" "$yaml_count"
+  printf "  %s %s YAML file(s) in defaults/\n" "${STATUS_OK}" "$yaml_count"
   if command -v macos-defaults &>/dev/null; then
     macos-defaults apply --dry-run "$MISE_PROJECT_DIR/defaults/" 2>&1 | sed 's/^/  /'
   else
-    printf "  ${STATUS_WARN} macos-defaults not installed (install via: brew install dsully/tap/macos-defaults)\n"
+    printf "  %s macos-defaults not installed (install via: brew install dsully/tap/macos-defaults)\n" "${STATUS_WARN}"
   fi
 else
-  printf "  ${STATUS_WARN} No YAML files in defaults/ — defaults will not be applied\n"
+  printf "  %s No YAML files in defaults/ — defaults will not be applied\n" "${STATUS_WARN}"
 fi
 
 # Setup overview
