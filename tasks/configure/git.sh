@@ -21,7 +21,7 @@ identity_file="$HOME/.ssh/github_ed25519"
 ssh_config="$HOME/.ssh/config"
 
 if [[ -f "$identity_file" ]]; then
-  skip "SSH key"
+  verified "SSH key"
 else
   info "Generating SSH key for GitHub..."
   mkdir -p "$HOME/.ssh"

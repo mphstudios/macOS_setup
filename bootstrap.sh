@@ -24,7 +24,7 @@ if [[ "$(uname -m)" == "arm64" ]]; then
     softwareupdate --install-rosetta --agree-to-license
     ok "Rosetta 2"
   else
-    skip "Rosetta 2"
+    verified "Rosetta 2"
   fi
 fi
 
@@ -42,7 +42,7 @@ if ! command -v mise &>/dev/null; then
   brew install mise
   ok "mise installed"
 else
-  skip "mise"
+  verified "mise"
 fi
 
 # Trust the project and install mise tools (usage, gum) so tasks are available

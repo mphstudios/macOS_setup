@@ -8,7 +8,7 @@ source "${MISE_PROJECT_DIR}/lib/output.sh"
 dotfiles_dir="$HOME/Code/dotfiles"
 
 if [[ -d "$dotfiles_dir" ]]; then
-  skip "Dotfiles"
+  verified "Dotfiles"
   exit 0
 fi
 

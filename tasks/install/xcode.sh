@@ -6,7 +6,7 @@ set -euo pipefail
 source "${MISE_PROJECT_DIR}/lib/output.sh"
 
 if xcode-select --print-path &>/dev/null; then
-  skip "Xcode CLT"
+  verified "Xcode CLT"
 else
   info "Installing Xcode Command Line Tools..."
   xcode-select --install

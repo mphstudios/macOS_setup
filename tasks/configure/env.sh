@@ -21,7 +21,7 @@ if [[ -f "$env_file" ]]; then
     "  Lock screen     ${LOCK_SCREEN_MESSAGE:-}"
 
   if gum confirm "Keep current configuration?"; then
-    skip "Configuration"
+    verified "Configuration"
     exit 0
   fi
   printf "\n"

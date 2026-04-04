@@ -20,7 +20,7 @@ fi
 BIN_DIR="$(brew --prefix)/bin/package-updates-notifier"
 BIN_SRC="$MISE_PROJECT_DIR/system/bin/package-updates-notifier"
 if [[ -f "$BIN_DIR" ]] && diff -q "$BIN_SRC" "$BIN_DIR" >/dev/null 2>&1; then
-  skip "package-updates-notifier (current)"
+  verified "package-updates-notifier"
 else
   verb="Installed"
   [[ -f "$BIN_DIR" ]] && verb="Updated"
@@ -44,7 +44,7 @@ done
 if [[ "$icons_changed" == "true" ]]; then
   ok "Installed: notification icons"
 else
-  skip "notification icons (current)"
+  verified "notification icons"
 fi
 
 # --- LaunchAgent Lifecycle ---
@@ -80,7 +80,7 @@ for plist in "$REPO_AGENTS"/local.*.plist; do
       launchctl bootstrap "gui/$USER_ID" "$USER_AGENTS/$name"
       ok "Updated: $name"
     else
-      skip "$name (current)"
+      verified "$name"
     fi
   else
     install_plist "$plist" "$USER_AGENTS/$name"

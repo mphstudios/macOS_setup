@@ -8,7 +8,7 @@ source "${MISE_PROJECT_DIR}/lib/output.sh"
 xcode-select -p &>/dev/null || die "Xcode CLT is required — run 'mise run install:xcode'"
 
 if command -v brew &>/dev/null; then
-  skip "Homebrew"
+  verified "Homebrew"
   exit 0
 fi
 

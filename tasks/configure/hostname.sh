@@ -9,7 +9,7 @@ source "${MISE_PROJECT_DIR}/lib/output.sh"
 current=$(scutil --get ComputerName 2>/dev/null || echo "")
 
 if [[ "$current" == "$COMPUTER_NAME" ]]; then
-  skip "Computer name ($COMPUTER_NAME)"
+  verified "Computer name ($COMPUTER_NAME)"
 else
   sudo scutil --set ComputerName "$COMPUTER_NAME"
   sudo scutil --set HostName "$COMPUTER_NAME"

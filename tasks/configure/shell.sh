@@ -15,7 +15,7 @@ for shell in bash zsh nu; do
     echo "$shell_path" | sudo tee -a /etc/shells >/dev/null
     ok "Added $shell_path to /etc/shells"
   else
-    skip "$shell_path"
+    verified "$shell_path"
   fi
 done
 
@@ -24,5 +24,5 @@ if [[ "$SHELL" != "$BREW_PREFIX/bin/nu" ]]; then
   chsh -s "$BREW_PREFIX/bin/nu"
   ok "Default shell set to nushell"
 else
-  skip "Default shell"
+  verified "Default shell"
 fi

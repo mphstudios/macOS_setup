@@ -20,7 +20,8 @@ STATUS_WARN="${YELLOW}⚠${RESET}"
 die()     { printf "  %s %s\n" "${STATUS_FAIL}" "$1" >&2; exit 1; }
 info()    { printf "  %s %s\n" "${STATUS_INFO}" "$1"; }
 ok()      { printf "  %s %s\n" "${STATUS_OK}" "$1"; }
-skip()    { printf "  %s %s (skipped)\n" "${STATUS_SKIP}" "$1"; }
+skip()     { printf "  %s %s (skipped)\n"  "${STATUS_SKIP}" "$1"; }
+verified() { printf "  %s %s (verified)\n" "${STATUS_OK}"   "$1"; }
 warn()    { printf "  %s %s\n" "${STATUS_WARN}" "$1" >&2; }
 
 # spin TITLE CMD [ARGS…]
