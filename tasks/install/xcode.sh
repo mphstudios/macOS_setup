@@ -10,14 +10,17 @@ if xcode-select --print-path &>/dev/null; then
 else
   info "Installing Xcode Command Line Tools..."
   xcode-select --install
-  elapsed=0
-  until xcode-select --print-path &>/dev/null; do
-    sleep 5
-    elapsed=$((elapsed + 5))
-    if [[ $elapsed -ge 1800 ]]; then
-      die "Xcode CLT installation timed out. Install manually: xcode-select --install"
-    fi
-  done
+  if ! spin "Waiting for Xcode CLT installer..." \
+    bash -c '
+      elapsed=0
+      until xcode-select --print-path &>/dev/null; do
+        sleep 5
+        elapsed=$((elapsed + 5))
+        [[ $elapsed -lt 1800 ]] || exit 1
+      done
+    '; then
+    die "Xcode CLT installation timed out. Install manually: xcode-select --install"
+  fi
   ok "Xcode CLT installed"
 fi
 
