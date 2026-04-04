@@ -13,6 +13,7 @@ fi
 # Label and command are co-located so adding, removing, or reordering tasks
 # requires changing only one line.
 tasks=(
+  "Services   ›  launch agents|install:launch-agents"
   "Packages   ›  Homebrew formulae|install:brew -- brewfiles/base"
   "Packages   ›  Homebrew casks|install:brew -- brewfiles/casks"
   "Packages   ›  Homebrew fonts|install:brew -- brewfiles/fonts"
@@ -22,7 +23,6 @@ tasks=(
   "Configure  ›  dotfiles|configure:dotfiles"
   "Configure  ›  shell|configure:shell"
   "Configure  ›  macOS defaults|configure:defaults"
-  "Services   ›  launch agents|install:launch-agents"
 )
 
 task_labels=()
