@@ -29,7 +29,7 @@ task_commands=(
   "install:brew -- brewfiles/base"
   "install:brew -- brewfiles/casks"
   "install:brew -- brewfiles/fonts"
-  "install:brew -- brewfiles/mas"
+  "install:mas"
   "configure:hostname"
   "configure:git"
   "configure:dotfiles"
