@@ -1,0 +1,12 @@
+# Default shell for files sourced without a shebang (e.g. lib/output.sh)
+shell=bash
+
+# SC1090: Cannot follow non-constant source — paths use $MISE_PROJECT_DIR / $SCRIPT_DIR throughout
+# SC1091: Not following source — sourced files (.env, lib/output.sh) are not passed as shellcheck input
+disable=SC1090,SC1091
+
+# SC2016: Expressions do not expand in single quotes — intentional in bash -c '...' wrappers
+disable=SC2016
+
+# SC2154: Variable referenced but not assigned — usage_* variables are injected by mise at runtime
+disable=SC2154
