@@ -15,7 +15,7 @@ if [[ -f "$env_file" ]]; then
     --border rounded --border-foreground 240 \
     --padding "0 1" --margin "1 0" \
     "  Computer name   ${COMPUTER_NAME:-}" \
-    "  Dotfiles repo   ${DOTFILES_REPO:-}" \
+    "  Dotfiles repo   ${DOTFILES_REPOSITORY:-}" \
     "  Git user name   ${GIT_USER_NAME:-}" \
     "  Git email       ${GIT_USER_EMAIL:-}" \
     "  Lock screen     ${LOCK_SCREEN_MESSAGE:-}"
@@ -34,9 +34,9 @@ COMPUTER_NAME=$(gum input \
   --prompt "  Computer name   " \
   --value "${COMPUTER_NAME:-$system_computer}")
 
-DOTFILES_REPO=$(gum input \
+DOTFILES_REPOSITORY=$(gum input \
   --prompt "  Dotfiles repo   " \
-  --value "${DOTFILES_REPO:-https://github.com/mphstudios/dotfiles.git}")
+  --value "${DOTFILES_REPOSITORY:-https://github.com/mphstudios/dotfiles.git}")
 
 GIT_USER_NAME=$(gum input \
   --prompt "  Git user name   " \
@@ -66,7 +66,7 @@ esc() { printf '%s' "${1//\"/\\\"}"; }
 tmp=$(mktemp)
 printf '%s\n' \
   "COMPUTER_NAME=\"$(esc "$COMPUTER_NAME")\"" \
-  "DOTFILES_REPO=\"$(esc "$DOTFILES_REPO")\"" \
+  "DOTFILES_REPOSITORY=\"$(esc "$DOTFILES_REPOSITORY")\"" \
   "GIT_USER_EMAIL=\"$(esc "$GIT_USER_EMAIL")\"" \
   "GIT_USER_NAME=\"$(esc "$GIT_USER_NAME")\"" \
   "LOCK_SCREEN_MESSAGE=\"$(esc "$LOCK_SCREEN_MESSAGE")\"" \

@@ -13,7 +13,7 @@ if [[ -d "$dotfiles_dir" ]]; then
 fi
 
 info "Cloning dotfiles..."
-git clone "${DOTFILES_REPO:-https://github.com/mphstudios/dotfiles.git}" "$dotfiles_dir"
+git clone "${DOTFILES_REPOSITORY:-https://github.com/mphstudios/dotfiles.git}" "$dotfiles_dir"
 
 info "Running dotfiles setup..."
 if ! (cd "$dotfiles_dir" && ./setup); then
