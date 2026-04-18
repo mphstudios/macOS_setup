@@ -4,12 +4,17 @@
   <dict>
     <key>Disabled</key>
     <false/>
+    <key>EnvironmentVariables</key>
+    <dict>
+      <key>PATH</key>
+      <string>${BREW_PREFIX}/bin:${BREW_PREFIX}/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
     <key>ExitTimeOut</key>
     <integer>60</integer>
     <key>Label</key>
     <string>local.notify.package-updates</string>
     <key>Program</key>
-    <string>${BREW_PREFIX}/bin/package-updates-notifier</string>
+    <string>${HOME}/.local/bin/package-updates-notifier</string>
     <key>RunAtLoad</key>
     <true/>
     <key>ServiceDescription</key>

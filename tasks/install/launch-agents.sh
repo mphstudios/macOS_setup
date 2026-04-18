@@ -18,28 +18,29 @@ else
 fi
 
 # Install consolidated notifier script and icons
-BIN_DIR="$(brew --prefix)/bin/package-updates-notifier"
+BIN_PATH="$HOME/.local/bin/package-updates-notifier"
 BIN_SRC="$MISE_PROJECT_DIR/system/bin/package-updates-notifier"
-if [[ -f "$BIN_DIR" ]] && diff -q "$BIN_SRC" "$BIN_DIR" >/dev/null 2>&1; then
+mkdir -p "$(dirname "$BIN_PATH")"
+if [[ -f "$BIN_PATH" ]] && diff -q "$BIN_SRC" "$BIN_PATH" >/dev/null 2>&1; then
   verified "package-updates-notifier"
 else
   verb="Installed"
-  [[ -f "$BIN_DIR" ]] && verb="Updated"
-  install -m 755 "$BIN_SRC" "$BIN_DIR"
+  [[ -f "$BIN_PATH" ]] && verb="Updated"
+  install -m 755 "$BIN_SRC" "$BIN_PATH"
   ok "$verb: package-updates-notifier"
 fi
 
 # Install notification icons (used by --appIcon in alerter)
-ICON_DEST="$(brew --prefix)/share/package-updates-notifier"
-mkdir -p "$ICON_DEST"
+ICONS_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/package-updates-notifier/icons"
+mkdir -p "$ICONS_DIR"
 icons_changed=false
 for icon in "$MISE_PROJECT_DIR/system/assets/icons"/*.png; do
   [[ -f "$icon" ]] || continue
   name=$(basename "$icon")
-  if [[ -f "$ICON_DEST/$name" ]] && diff -q "$icon" "$ICON_DEST/$name" >/dev/null 2>&1; then
+  if [[ -f "$ICONS_DIR/$name" ]] && diff -q "$icon" "$ICONS_DIR/$name" >/dev/null 2>&1; then
     continue
   fi
-  install -m 644 "$icon" "$ICON_DEST/$name"
+  install -m 644 "$icon" "$ICONS_DIR/$name"
   icons_changed=true
 done
 if [[ "$icons_changed" == "true" ]]; then
