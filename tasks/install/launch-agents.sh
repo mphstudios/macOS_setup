@@ -11,9 +11,9 @@ command -v brew &>/dev/null || die "Homebrew is required — run 'mise run insta
 # terminal-notifier on Intel where alerter has no x86_64 binary.
 # @see https://github.com/vjeantet/alerter
 if [[ "$(uname -m)" == "arm64" ]]; then
-  brew install vjeantet/tap/alerter 2>/dev/null || true
+  brew install vjeantet/tap/alerter 2>/dev/null
 else
-  brew install terminal-notifier 2>/dev/null || true
+  brew install terminal-notifier 2>/dev/null
 fi
 
 # Install consolidated notifier script and icons
@@ -49,12 +49,12 @@ fi
 
 # --- LaunchAgent Lifecycle ---
 # Only manages agents in the local.* namespace (never touches system/third-party)
-REPO_AGENTS="$MISE_PROJECT_DIR/system/LaunchAgents"
-USER_AGENTS="$HOME/Library/LaunchAgents"
+REPO_LAUNCH_AGENTS="$MISE_PROJECT_DIR/system/LaunchAgents"
+USER_LAUNCH_AGENTS="$HOME/Library/LaunchAgents"
 USER_ID=$(id -u)
 BREW_PREFIX="$(brew --prefix)"
 
-mkdir -p "$USER_AGENTS"
+mkdir -p "$USER_LAUNCH_AGENTS"
 
 # Install a plist, substituting BREW_PREFIX placeholder for the actual path.
 # Plists use __BREW_PREFIX__ so they work on both Intel and Apple Silicon.
@@ -64,37 +64,50 @@ install_plist() {
   chmod 644 "$dest"
 }
 
-# Install or update agents from repo
-for plist in "$REPO_AGENTS"/local.*.plist; do
+# Install or update agents using this repository as the source, outcomes:
+#   verified  → installed agent matches source; nothing to do
+#   updated   → installed and source differ; bootout, rewrite, bootstrap agent
+#   installed → no installed copy; write and bootstrap agent
+for plist in "$REPO_LAUNCH_AGENTS"/local.*.plist; do
   [[ -f "$plist" ]] || continue
   name=$(basename "$plist")
   label="${name%.plist}"
-
-  # Generate the resolved plist for comparison
+  dest="$USER_LAUNCH_AGENTS/$name"
   resolved=$(install_plist "$plist" /dev/stdout)
 
-  if [[ -f "$USER_AGENTS/$name" ]]; then
-    if [[ "$resolved" != "$(cat "$USER_AGENTS/$name")" ]]; then
-      launchctl bootout "gui/$USER_ID/$label" 2>/dev/null || true
-      install_plist "$plist" "$USER_AGENTS/$name"
-      launchctl bootstrap "gui/$USER_ID" "$USER_AGENTS/$name"
-      ok "Updated: $name"
-    else
-      verified "$name"
-    fi
-  else
-    install_plist "$plist" "$USER_AGENTS/$name"
-    launchctl bootstrap "gui/$USER_ID" "$USER_AGENTS/$name"
-    ok "Installed: $name"
+  # Skip if the installed copy already matches the resolved source.
+  if [[ -f "$dest" && "$resolved" == "$(cat "$dest")" ]]; then
+    verified "$name"
+    continue
   fi
+
+  # Unload the existing agent so bootstrap doesn't collide with its label.
+  # `|| true` absorbs the "not loaded" error when the label isn't registered.
+  if [[ -f "$dest" ]]; then
+    launchctl bootout "gui/$USER_ID/$label" 2>/dev/null || true
+    verb="Updated"
+  else
+    verb="Installed"
+  fi
+
+  install_plist "$plist" "$dest"
+
+  # Surface bootstrap errors with context since set -e would otherwise dump an
+  # opaque "Bootstrap failed: <errno>" with no indication of which plist
+  # failed or that its file was already written to disk.
+  if ! err=$(launchctl bootstrap "gui/$USER_ID" "$dest" 2>&1); then
+    die "$name: file written to $dest but launchctl bootstrap failed — $err"
+  fi
+
+  ok "$verb: $name"
 done
 
-# Remove stale agents not in repo
-for plist in "$USER_AGENTS"/local.*.plist; do
+# Remove any stale agents that are no longer in this repository
+for plist in "$USER_LAUNCH_AGENTS"/local.*.plist; do
   [[ -f "$plist" ]] || continue
   name=$(basename "$plist")
   label="${name%.plist}"
-  if [[ ! -f "$REPO_AGENTS/$name" ]]; then
+  if [[ ! -f "$REPO_LAUNCH_AGENTS/$name" ]]; then
     launchctl bootout "gui/$USER_ID/$label" 2>/dev/null || true
     rm -f "$plist"
     ok "Removed stale: $name"
