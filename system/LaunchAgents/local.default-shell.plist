@@ -12,7 +12,7 @@
       <string>/bin/launchctl</string>
       <string>setenv</string>
       <string>SHELL</string>
-      <string>__BREW_PREFIX__/bin/nu</string>
+      <string>${BREW_PREFIX}/bin/nu</string>
     </array>
     <key>RunAtLoad</key>
     <true/>

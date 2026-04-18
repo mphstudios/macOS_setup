@@ -9,7 +9,7 @@
     <key>Label</key>
     <string>local.notify.package-updates</string>
     <key>Program</key>
-    <string>__BREW_PREFIX__/bin/package-updates-notifier</string>
+    <string>${BREW_PREFIX}/bin/package-updates-notifier</string>
     <key>RunAtLoad</key>
     <true/>
     <key>ServiceDescription</key>

@@ -85,8 +85,8 @@ BREW_PREFIX="$(brew --prefix 2>/dev/null || echo /opt/homebrew)"
 for plist in "$MISE_PROJECT_DIR/system/LaunchAgents"/local.*.plist; do
   [[ -f "$plist" ]] || continue
   name=$(basename "$plist")
-  # Resolve __BREW_PREFIX__ placeholder to match what install would produce
-  resolved=$(sed "s|__BREW_PREFIX__|$BREW_PREFIX|g" "$plist")
+  # Resolve placeholders to match what install would produce
+  resolved=$(BREW_PREFIX="$BREW_PREFIX" envsubst '${BREW_PREFIX} ${HOME}' < "$plist")
   if [[ -f "$HOME/Library/LaunchAgents/$name" ]]; then
     if [[ "$resolved" == "$(cat "$HOME/Library/LaunchAgents/$name")" ]]; then
       printf "  %s %s (current)\n" "${STATUS_OK}" "$name"

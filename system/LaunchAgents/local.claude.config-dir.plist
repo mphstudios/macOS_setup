@@ -11,7 +11,8 @@
     <array>
       <string>/bin/sh</string>
       <string>-c</string>
-      <string>launchctl setenv CLAUDE_CONFIG_DIR "$XDG_CONFIG_HOME/claude"</string>
+      <!-- Harcoded path expansion of XDG_CONFIG_HOME => $HOME/.config -->
+      <string>launchctl setenv CLAUDE_CONFIG_DIR "${HOME}/.config/claude"</string>
     </array>
     <key>RunAtLoad</key>
     <true/>

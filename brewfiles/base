@@ -24,9 +24,10 @@ brew 'zellij'     # Terminal workspace and multiplexer
 brew 'zoxide'     # Shell extension to navigate the filesystem faster
 
 ## Core utils (newer than macOS-bundled versions)
-brew 'curl'  # Get a file from an HTTP, HTTPS or FTP server
-brew 'grep'  # GNU grep, egrep and fgrep
-brew 'rsync' # Fast incremental file transfer utility
+brew 'curl'    # Get a file from an HTTP, HTTPS or FTP server
+brew 'gettext' # Provides envsubst, used by tasks/install/launch-agents.sh
+brew 'grep'    # GNU grep, egrep and fgrep
+brew 'rsync'   # Fast incremental file transfer utility
 
 ## Git
 brew 'git'     # Distributed version control system

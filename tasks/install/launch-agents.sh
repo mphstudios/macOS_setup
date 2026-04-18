@@ -6,6 +6,7 @@ set -euo pipefail
 source "${MISE_PROJECT_DIR}/lib/output.sh"
 
 command -v brew &>/dev/null || die "Homebrew is required — run 'mise run install:homebrew'"
+command -v envsubst &>/dev/null || die "envsubst is required (via gettext) — 'brew install gettext'"
 # Install notification tool (dependency of the notifier script)
 # Prefer alerter (alert-style, stays on screen) but fall back to
 # terminal-notifier on Intel where alerter has no x86_64 binary.
@@ -52,16 +53,15 @@ fi
 REPO_LAUNCH_AGENTS="$MISE_PROJECT_DIR/system/LaunchAgents"
 USER_LAUNCH_AGENTS="$HOME/Library/LaunchAgents"
 USER_ID=$(id -u)
-BREW_PREFIX="$(brew --prefix)"
 
 mkdir -p "$USER_LAUNCH_AGENTS"
 
-# Install a plist, substituting BREW_PREFIX placeholder for the actual path.
-# Plists use __BREW_PREFIX__ so they work on both Intel and Apple Silicon.
+# Install a plist, substituting placeholders for install-time values via envsubst.
+# Approved list so that only ${BREW_PREFIX} and ${HOME} expand; any other
+# $VAR references in plists are left literal for shell runtime expansion.
 install_plist() {
   local src="$1" dest="$2"
-  sed "s|__BREW_PREFIX__|$BREW_PREFIX|g" "$src" > "$dest"
-  chmod 644 "$dest"
+  BREW_PREFIX="$(brew --prefix)" envsubst '${BREW_PREFIX} ${HOME}' < "$src" > "$dest"
 }
 
 # Install or update agents using this repository as the source, outcomes:

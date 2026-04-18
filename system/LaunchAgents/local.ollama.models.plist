@@ -11,7 +11,8 @@
     <array>
       <string>/bin/sh</string>
       <string>-c</string>
-      <string>launchctl setenv OLLAMA_MODELS "$XDG_DATA_HOME/ollama"</string>
+      <!-- Harcoded path expansion of XDG_DATA_HOME => $HOME/.local/share -->
+      <string>launchctl setenv OLLAMA_MODELS "${HOME}/.local/share/ollama"</string>
     </array>
     <key>RunAtLoad</key>
     <true/>
