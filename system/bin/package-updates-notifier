@@ -5,13 +5,9 @@
 #
 # Requires: alerter or terminal-notifier (available via Homebrew)
 #
-# Homebrew: /opt/homebrew/bin (Apple Silicon), /usr/local/bin (Intel)
-BREW_PREFIX=/opt/homebrew
-[ -d "$BREW_PREFIX" ] || BREW_PREFIX=/usr/local
-PATH=$BREW_PREFIX/bin:$PATH
 
-# Prefer alerter (alert-style, stays on screen) with terminal-notifier
-# as fallback on Intel where alerter has no x86_64 binary.
+# Prefer alerter (alert-style, stays on screen) and use terminal-notifier
+# on Intel where alerter has no x86_64 binary.
 # Use --help to verify the binary actually runs on this architecture.
 NOTIFIER=""
 if alerter --help > /dev/null 2>&1; then
@@ -22,8 +18,8 @@ else
   exit 0
 fi
 
-# Icons installed by tasks/install/launch-agents.sh
-ICON_DIR="$BREW_PREFIX/share/package-updates-notifier"
+# Notification icons installed by tasks/install/launch-agents.sh
+ICONS_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/package-updates-notifier/icons"
 
 sleep 10 # give the network a chance to connect on wake from sleep
 
@@ -37,31 +33,33 @@ sleep 10 # give the network a chance to connect on wake from sleep
 #
 # @see https://github.com/vjeantet/alerter
 # @see https://github.com/julienXX/terminal-notifier
-notify_if_outdated() {
+notification() {
   title="$1"
   subtitle="$2"
   group="$3"
   icon="$4"
-  output="$5"
+  message="$5"
 
-  if [ -n "$output" ]; then
+  if [ -n "$message" ]; then
     if [ "$NOTIFIER" = "alerter" ]; then
-      icon_flag=""
-      [ -f "$ICON_DIR/$icon" ] && icon_flag="--appIcon $ICON_DIR/$icon"
       alerter \
+        --message "$message" \
+        --group "$group" \
         --title "$title" \
         --subtitle "$subtitle" \
-        --message "$output" \
-        --group "$group" \
+        --sender com.apple.Terminal \
+        --actions "Dismiss" \
+        --app-icon "$ICONS_DIR/$icon" \
         --timeout 30 \
-        $icon_flag > /dev/null 2>&1 &
+        > /dev/null 2>&1 &
     else
       terminal-notifier \
+        -message "$message" \
+        -group "$group" \
         -title "$title" \
         -subtitle "$subtitle" \
-        -message "$output" \
-        -group "$group" \
-        -sender com.apple.Terminal > /dev/null 2>&1
+        -sender com.apple.Terminal \
+        > /dev/null 2>&1
     fi
   fi
 }
@@ -69,31 +67,31 @@ notify_if_outdated() {
 # Homebrew formulae
 if command -v brew > /dev/null 2>&1; then
   brew update > /dev/null 2>&1
-  homebrew_outdated=$(brew outdated | sort)
-  notify_if_outdated "Homebrew" "updates available" \
-    "homebrew-updates" "homebrew.png" "$homebrew_outdated"
+  outdated=$(brew outdated | sort)
+  notification "Homebrew" "updates available" \
+    "homebrew-updates" "homebrew.png" "$outdated"
   brew cleanup > /dev/null 2>&1
 fi
 
 # Mac App Store applications
 if command -v mas > /dev/null 2>&1; then
-  mas_outdated=$(mas outdated 2>/dev/null | sed 's/^[0-9]* //; s/ ([^)]*)//')
-  notify_if_outdated "Mac App Store" "updates available" \
-    "mas-updates" "appstore.png" "$mas_outdated"
+  outdated=$(mas outdated 2>/dev/null | sed 's/^[0-9]* //; s/ ([^)]*)//')
+  notification "Mac App Store" "updates available" \
+    "mas-updates" "appstore.png" "$outdated"
 fi
 
 # Mise tools
 if command -v mise > /dev/null 2>&1; then
-  mise_outdated=$(mise outdated 2>/dev/null | awk 'NR!=1 {print $1}')
-  notify_if_outdated "Mise" "tool updates available" \
-    "mise-updates" "mise.png" "$mise_outdated"
+  outdated=$(mise outdated 2>/dev/null | awk 'NR!=1 {print $1}')
+  notification "Mise" "tool updates available" \
+    "mise-updates" "mise.png" "$outdated"
 fi
 
 # npm packages
 if command -v npm > /dev/null 2>&1; then
-  npm_outdated=$(npm --global outdated 2>/dev/null | awk '{if (NR!=1) {print $1}}')
-  notify_if_outdated "npm" "global package updates available" \
-    "npm-updates" "npm.png" "$npm_outdated"
+  outdated=$(npm --global outdated 2>/dev/null | awk '{if (NR!=1) {print $1}}')
+  notification "npm" "global package updates available" \
+    "npm-updates" "npm.png" "$outdated"
 fi
 
 # Wait for all backgrounded alerter processes to finish
