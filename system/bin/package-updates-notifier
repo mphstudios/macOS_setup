@@ -21,6 +21,20 @@ fi
 # Notification icons installed by tasks/install/launch-agents.sh
 ICONS_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/package-updates-notifier/icons"
 
+# Activate the user's default handler for .sh files (Ghostty, Terminal, ...).
+# Falls back to Terminal.app when duti is unavailable or returns no match.
+open_terminal() {
+  bundle=""
+  if command -v duti > /dev/null 2>&1; then
+    bundle=$(duti -x sh 2>/dev/null | awk 'NR==3')
+  fi
+  if [ -n "$bundle" ]; then
+    open -b "$bundle"
+  else
+    open -a Terminal
+  fi
+}
+
 sleep 10 # give the network a chance to connect on wake from sleep
 
 # Send a macOS notification if there is output to display.
@@ -28,7 +42,7 @@ sleep 10 # give the network a chance to connect on wake from sleep
 # preventing duplicates across runs.
 #
 # alerter: blocks until dismissed or --timeout expires, so backgrounded.
-#          Supports --appIcon (private macOS API) for per-source icons.
+#          Supports --app-icon (private macOS API) for per-source icons.
 # terminal-notifier: returns immediately (banner-style, auto-dismisses).
 #
 # @see https://github.com/vjeantet/alerter
@@ -42,16 +56,25 @@ notification() {
 
   if [ -n "$message" ]; then
     if [ "$NOTIFIER" = "alerter" ]; then
-      alerter \
-        --message "$message" \
-        --group "$group" \
-        --title "$title" \
-        --subtitle "$subtitle" \
-        --sender com.apple.Terminal \
-        --actions "Dismiss" \
-        --app-icon "$ICONS_DIR/$icon" \
-        --timeout 30 \
-        > /dev/null 2>&1 &
+      (
+        result=$(alerter \
+          --message "$message" \
+          --group "$group" \
+          --title "$title" \
+          --subtitle "$subtitle" \
+          --sender com.apple.Terminal \
+          --close-label "Dismiss" \
+          --actions "Open Terminal" \
+          --app-icon "$ICONS_DIR/$icon" \
+          --timeout 30)
+        # Any click other than the close button or a timeout foregrounds the
+        # default terminal. Covers the default action button, notification body
+        # clicks (@CONTENTCLICKED), and any future action alerter might emit.
+        case "$result" in
+          @TIMEOUT|@CLOSED) ;;
+          *) open_terminal ;;
+        esac
+      ) > /dev/null 2>&1 &
     else
       terminal-notifier \
         -message "$message" \
