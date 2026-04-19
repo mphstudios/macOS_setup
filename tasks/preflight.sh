@@ -82,19 +82,25 @@ done
 # LaunchAgents
 printf "\nLaunchAgents:\n"
 BREW_PREFIX="$(brew --prefix 2>/dev/null || echo /opt/homebrew)"
+resolved=$(mktemp)
+trap 'rm -f "$resolved"' EXIT
+
 for plist in "$MISE_PROJECT_DIR/system/LaunchAgents"/local.*.plist; do
   [[ -f "$plist" ]] || continue
   name=$(basename "$plist")
+  dest="$HOME/Library/LaunchAgents/$name"
   # Resolve placeholders to match what install would produce
-  resolved=$(BREW_PREFIX="$BREW_PREFIX" envsubst '${BREW_PREFIX} ${HOME}' < "$plist")
-  if [[ -f "$HOME/Library/LaunchAgents/$name" ]]; then
-    if [[ "$resolved" == "$(cat "$HOME/Library/LaunchAgents/$name")" ]]; then
-      printf "  %s %s (current)\n" "${STATUS_OK}" "$name"
-    else
-      printf "  %s %s (will update)\n" "${STATUS_INFO}" "$name"
-    fi
-  else
+  BREW_PREFIX="$BREW_PREFIX" envsubst '${BREW_PREFIX} ${HOME}' < "$plist" > "$resolved"
+
+  if [[ ! -f "$dest" ]]; then
+    # destination file does not yet exist, resolved source will be installed
     printf "  %s %s (will install)\n" "${STATUS_INFO}" "$name"
+  elif cmp -s "$resolved" "$dest"; then
+    # OK - copy at destination is a byte-exact match of the resolved source
+    printf "  %s %s (current)\n" "${STATUS_OK}" "$name"
+  else
+    # copy at destination does not match and will be replaced by resolved source
+    printf "  %s %s (will update)\n" "${STATUS_INFO}" "$name"
   fi
 done
 

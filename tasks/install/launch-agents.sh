@@ -69,15 +69,18 @@ install_plist() {
 #   verified  → installed agent matches source; nothing to do
 #   updated   → installed and source differ; bootout, rewrite, bootstrap agent
 #   installed → no installed copy; write and bootstrap agent
+resolved=$(mktemp)
+trap 'rm -f "$resolved"' EXIT
+
 for plist in "$REPO_LAUNCH_AGENTS"/local.*.plist; do
   [[ -f "$plist" ]] || continue
   name=$(basename "$plist")
   label="${name%.plist}"
   dest="$USER_LAUNCH_AGENTS/$name"
-  resolved=$(install_plist "$plist" /dev/stdout)
+  install_plist "$plist" "$resolved"
 
-  # Skip if the installed copy already matches the resolved source.
-  if [[ -f "$dest" && "$resolved" == "$(cat "$dest")" ]]; then
+  # Skip if the installed copy is a byte-exact match of the resolved source.
+  if [[ -f "$dest" ]] && cmp -s "$resolved" "$dest"; then
     verified "$name"
     continue
   fi
@@ -91,7 +94,7 @@ for plist in "$REPO_LAUNCH_AGENTS"/local.*.plist; do
     verb="Installed"
   fi
 
-  install_plist "$plist" "$dest"
+  cp "$resolved" "$dest"
 
   # Surface bootstrap errors with context since set -e would otherwise dump an
   # opaque "Bootstrap failed: <errno>" with no indication of which plist
