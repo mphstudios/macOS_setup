@@ -35,7 +35,7 @@ defaults/                   macOS defaults as YAML (applied by macos-defaults)
   general, dock, finder, safari, screen, apps, updates
 
 system/                     Files installed onto the machine
-  bin/                      Scripts → $(brew --prefix)/bin/
+  bin/                      Scripts → ~/.local/bin/
   LaunchAgents/             Plists → ~/Library/LaunchAgents/
   assets/icons/             Notification icons
 
