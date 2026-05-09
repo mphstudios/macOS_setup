@@ -11,6 +11,7 @@ cask 'claude'           # Anthropic's official Claude AI desktop app
 cask 'claude-code'      # Anthropic's terminal-based AI coding assistant
 cask 'cursor-cli'       # Command-line agent for Cursor
 cask 'lm-studio'        # Discover, download, and run local LLMs
+cask 'ollama-app'       # Ollama desktop app for running large language models
 cask 'opencode-desktop' # OpenCode AI coding agent desktop client
 cask 'repo-prompt'      # Prompt generation for automated context pipelines
 
@@ -20,22 +21,12 @@ cask 'carbon-copy-cloner'  # hard disk backup and cloning utility
 cask 'chronosync'          # synchronisation and backup tool
 
 ## Code editors and terminal emulators
-cask 'cmux'               # terminal designed for working with AI coding agents
 cask 'coderunner'         # lightweight, multi-language, programming editor
 cask 'cursor'             # integrated dev environment for coding with AI agents
 cask 'ghostty'            # terminal emulator with GPU acceleration
 cask 'sublime-text'       # text editor
 cask 'visual-studio-code' # Microsoft Visual Studio Code
 cask 'zed'                # Multiplayer code editor
-
-## Collaboration
-cask 'basecamp'       # all-in-one toolkit for working remotely
-cask 'linear-linear'  # manage software development and track bugs
-cask 'miro'           # collaborative whiteboard platform
-
-## Design
-cask 'figma'  # collaborative design software
-cask 'sketch' # digital design application
 
 ## Development
 cask 'dash'            # API documentation browser and code snippet manager
@@ -46,8 +37,8 @@ cask 'podman-desktop'  # browse, manage, inspect containers and images
 cask 'tower'           # Git client and GUI
 
 ## Documents and notes
-cask 'atuin-desktop' # runbook editor for terminal workflows
 cask 'bike'          # record and process ideas
+cask 'obsidian'      # local knowledge base
 cask 'taskpaper'     # plain text to-do lists
 
 ## File management
@@ -65,7 +56,8 @@ cask '1password@7'        # password manager v7
 cask 'nordvpn'            # NordVPN client
 cask 'proton-drive'       # client for Proton Drive
 cask 'proton-mail'        # client for Proton Mail and Proton Calendar
-cask 'proton-mail-bridge' # bridges Proton Mail with Apple Mail
+cask 'proton-mail-bridge' # email application client bridge
+cask 'proton-meet'        # confidential video conferencing
 cask 'proton-pass'        # desktop client for Proton Pass
 cask 'protonvpn'          # client for Proton VPN
 

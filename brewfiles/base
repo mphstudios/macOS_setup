@@ -17,9 +17,7 @@ brew 'atuin'      # Improved shell history for bash, zsh, fish, and nushell
 brew 'carapace'   # Multi-shell multi-command argument completer
 brew 'sheldon'    # Cross-shell plugin manager
 brew 'shellcheck' # Static analysis tool for shell scripts
-brew 'sesh'       # Smart session manager for the terminal
 brew 'starship'   # Cross-shell prompt
-brew 'tmux'       # Terminal multiplexer
 brew 'zellij'     # Terminal workspace and multiplexer
 brew 'zoxide'     # Shell extension to navigate the filesystem faster
 
@@ -29,14 +27,18 @@ brew 'gettext' # Provides envsubst, used by tasks/install/launch-agents.sh
 brew 'grep'    # GNU grep, egrep and fgrep
 brew 'rsync'   # Fast incremental file transfer utility
 
+## Database tools
+brew 'pgcli'      # Postgres CLI with auto-completion and syntax highlighting
+
 ## Git
-brew 'git'     # Distributed version control system
-brew 'git-lfs' # Git large file storage
-brew 'gh'      # GitHub official command-line tool
-brew 'diffnav' # GitHub git diff pager based on delta but with a file tree
+brew 'git'      # Distributed version control system
+brew 'git-lfs'  # Git large file storage
+brew 'gh'       # GitHub official command-line tool
+brew 'diffnav'  # GitHub git diff pager based on delta but with a file tree
+brew 'lazygit'  # Simple terminal UI for git commands
 
-brew 'forgejo-cli' # CLI tool for interacting with Forgejo
-
+brew 'forgejo-cli'  # CLI tool for interacting with Forgejo
+brew 'worktrunk'    # CLI for Git worktree management
 
 ## Files and search
 brew 'bat'        # cat with syntax highlighting and Git integration
@@ -56,14 +58,17 @@ brew 'yazi'       # Blazing fast terminal file manager based on async I/O
 brew 'httpie' # User-friendly cURL replacement
 brew 'wget'   # Non-interactive HTTP/HTTPS/FTP file retrieval
 
-## Container
+## Container orchestration tools
 brew 'podman'         # Tool for managing OCI containers and pods
-brew 'podman-compose' # Isolated development environments podman
+brew 'podman-compose' # Isolated development environments podmanl
 brew 'podman-tui'     # Podman Terminal User Interface
+
+## Kubernetes cluster tools
+brew 'kubectl'        # Kubernetes command-line interface
+brew 'minikube'       # local Kubernetes cluster
 
 ## Image processing
 brew 'graphicsmagick' # Image processing tools
-
 
 ## macOS utilities
 brew 'duti'           # Select default apps for documents and URL schemes
@@ -78,6 +83,7 @@ brew 'mise'    # Polyglot runtime manager for dev tools, environment, and tasks
 brew 'try-rs'  # Workspace manager for temporary projects and experiments
 
 ## AI, LLM, and Machine Learning
+brew 'charmbracelet/tap/crush' # terminal-based AI assistant for developers
 brew 'langgraph-cli'  # Command-line interface for the LangGraph platform
 brew 'mlx'            # Array framework for Apple Silicon machine learning
 brew 'ollama'         # Create, run, and share large language models (LLMs)
@@ -85,3 +91,7 @@ brew 'opencode'       # AI coding agent, built for the terminal
 
 ## Security
 brew 'gnupg'  # GNU Privacy Guard (OpenPGP)
+
+## Window management
+brew 'felixKratz/formulae/borders'    # A window border system for macOS
+brew 'felixKratz/formulae/sketchybar' # Custom macOS statusbar

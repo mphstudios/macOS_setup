@@ -19,7 +19,7 @@ cd ~/Code/macOS_setup
 ./bootstrap.sh
 ```
 
-The script bootstraps prerequisites (Xcode CLT, Homebrew, mise), prompts for machine-specific values on first run, then hands off to `mise run setup`.
+The script bootstraps prerequisites (Xcode Command Line Tools, Homebrew, `mise`), prompts for machine-specific values on first run, then hands off to the `mise` `setup` task.
 
 ## Architecture
 
